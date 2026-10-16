@@ -1,0 +1,147 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog
+        id="dialogEditarUsuario"
+        title="{i18n>EditarUsuario}"
+        contentWidth="50%"
+        draggable="true"
+    >
+        <content>
+            <l:Grid class="sapUiTinyMargin">
+                <l:content>
+                    <VBox class="sapUiTinyMarginBottom">
+                        <Label
+                            text="{i18n>Nombres}:"
+                            textAlign="Begin"
+                        />
+                        <Input
+                            id="txtNombreED"
+                            value="{local>/Nombre}"
+                            liveChange=".onChangeInput"
+                            required="true"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </VBox>
+                    <VBox class="sapUiTinyMarginBottom">
+                        <Label
+                            text="{i18n>ApellidoPat}:"
+                            textAlign="Begin"
+                        />
+                        <Input
+                            id="txtApepatED"
+                            value="{local>/Apepat}"
+                            required="true"
+                            liveChange=".onChangeInput"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL6 L6 M12 S12" />
+                        </layoutData>
+                    </VBox>
+                    <VBox class="sapUiTinyMarginBottom">
+                        <Label
+                            text="{i18n>ApellidoMat}:"
+                            textAlign="Begin"
+                        />
+                        <Input
+                            id="txtApematED"
+                            value="{local>/Apemat}"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL6 L6 M12 S12" />
+                        </layoutData>
+                    </VBox>
+                    <VBox class="sapUiTinyMarginBottom">
+                        <Label
+                            text="{i18n>CorreoElec}:"
+                            textAlign="Begin"
+                        />
+                        <Input
+                            id="txtCorreoED"
+                            type="Email"
+                            value="{local>/Correo}"
+                            liveChange=".onChangeCorreo"
+                            required="true"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL6 L6 M12 S12" />
+                        </layoutData>
+                    </VBox>
+                    <VBox class="sapUiTinyMarginBottom">
+                        <Label
+                            text="{i18n>Usuario}:"
+                            textAlign="Begin"
+                        />
+                        <Input
+                            id="txtUsuarioED"
+                            value="{local>/Usuario}"
+                            liveChange=".onChangeInput"
+                            required="true"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL6 L6 M12 S12" />
+                        </layoutData>
+                    </VBox>
+                    <VBox class="sapUiTinyMarginBottom">
+                        <Label
+                            text="{i18n>Rol}:"
+                            textAlign="Begin"
+                        />
+                        <!-- <ComboBox
+                            id="cbxRolED"
+                            items="{oDataRoles>/}"
+                            selectedKey="{local>/Idrol}"
+                            required="true"
+                            change=".onChangeInput"
+                            width="100%"
+                        >
+                            <core:Item
+                                key="{oDataRoles>Id}"
+                                text="{oDataRoles>Nombre}"
+                            />
+                        </ComboBox> -->
+                        <Select
+                            id="selRolED"
+                            items="{oDataRoles>/}"
+                            selectedKey="{local>/Idrol}"
+                            required="true"
+                            change=".onChangeRol"
+                            width="100%"
+                        >
+                            <core:Item
+                                key="{oDataRoles>Id}"
+                                text="{oDataRoles>Nombre}"
+                            />
+                        </Select>
+                        <layoutData>
+                            <l:GridData span="XL6 L6 M12 S12" />
+                        </layoutData>
+                    </VBox>
+                </l:content>
+            </l:Grid>
+        </content>
+        <beginButton>
+            <Button
+                type="Default"
+                icon="sap-icon://decline"
+                text="{i18n>Cancelar}"
+                press=".onCloseDialog($event ,'dialogEditarUsuario')"
+                width="6rem"
+            />
+        </beginButton>
+        <endButton>
+            <Button
+                type="Success"
+                icon="sap-icon://save"
+                text="{i18n>Guardar}"
+                press=".onSaveEditarUsuario"
+                width="6rem"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

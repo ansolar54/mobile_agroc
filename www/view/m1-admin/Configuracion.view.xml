@@ -1,0 +1,30 @@
+<mvc:View
+    controllerName="com.axelera.pe.gestioncomercial.controller.m1-admin.Configuracion"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:t="sap.ui.table"
+    xmlns:core="sap.ui.core"
+>
+    <Panel accessibleRole="Region">
+        <headerToolbar>
+            <OverflowToolbar>
+                <Title text="ConfCambioClave" />
+            </OverflowToolbar>
+        </headerToolbar>
+        <content>
+            <HBox>
+                <Input
+                    value="180"
+                    width="10em"
+                    class="sapUiTinyMarginEnd"
+                />
+                <Button
+                    id="btnGuardar"
+                    text="{i18n>Guardar}"
+                />
+            </HBox>
+        </content>
+    </Panel>
+</mvc:View>

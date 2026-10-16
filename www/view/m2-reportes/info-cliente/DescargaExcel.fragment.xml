@@ -1,0 +1,55 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog
+        id="dialogExcelIC"
+        title="{i18n>DescargarExcel}"
+        draggable="true"
+    >
+        <content>
+            <l:Grid class="sapUiTinyMarginTop sapUiTinyMarginBottom">
+                <l:content>
+                    <HBox
+                        alignItems="Center"
+                        alignContent="Center"
+                    >
+                        <Label
+                            text="{i18n>Nombre}:"
+                            textAlign="Begin"
+                            width="80px"
+                            class="sapUiTinyMargin"
+                        />
+                        <Input
+                            id="txtNombreArchivoIC"
+                            value="{local>/Excel/FileText}"
+                            valueStateText="El nombre de archivo es obligatorio."
+                            required="true"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </HBox>
+                </l:content>
+            </l:Grid>
+        </content>
+        <beginButton>
+            <Button
+                type="Reject"
+                icon="sap-icon://decline"
+                text="{i18n>Cancelar}"
+                press=".onCancelPress($event, 'dialogExcelIC')"
+            />
+        </beginButton>
+        <endButton>
+            <Button
+                type="Success"
+                icon="sap-icon://save"
+                text="{i18n>Guardar}"
+                press=".onDescargar"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

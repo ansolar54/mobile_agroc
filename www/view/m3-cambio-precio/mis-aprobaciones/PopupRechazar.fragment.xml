@@ -1,0 +1,42 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:t="sap.ui.table"
+    xmlns:l="sap.ui.layout"
+>
+    <Dialog
+        id="dialogRechazarMA"
+        title="Rechazar Solicitud"
+        contentHeight="30%"
+        contentWidth="30%"
+        draggable="true"
+    >
+        <VBox class="sapUiTinyMargin">
+            <Label text="Motivo de rechazo:" />
+            <TextArea
+                value="{local>/Rechazo/Motivo}"
+                placeholder="Ingrese el motivo del rechazo"
+                rows="4"
+                width="100%"
+            />
+        </VBox>
+        <beginButton>
+            <Button
+                type="Default"
+                icon="sap-icon://decline"
+                text="{i18n>Cancelar}"
+                press=".onCancelPress($event, 'dialogRechazarMA')"
+            />
+        </beginButton>
+        <endButton>
+            <Button
+                type="Success"
+                icon="sap-icon://accept"
+                text="{i18n>Ok}"
+                press=".onOkPress($event, 'dialogRechazarMA')"
+                width="6rem"
+                class="sapUiTinyMarginEnd"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

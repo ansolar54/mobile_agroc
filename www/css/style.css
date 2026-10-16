@@ -1,0 +1,165 @@
+
+.loginButton .sapMBtnInner {
+  /* width: 288px;
+  height: 2.5rem; */
+  border-radius: 0.25rem;
+  cursor: pointer;
+  padding: 0 0.75rem;
+}
+
+.custButtonEmphasized .sapMBtnInner {
+  color: #ffffff;
+  background-color: #5496cd;
+  border: 1px solid #367db8;
+  /* text-shadow: 0 1px #000000; */
+}
+
+.custBackgroundColor {
+  /* background-color: white; */
+}
+
+.custBGColor1 .sapMInputBaseInner {
+  background-color: rgb(251, 252, 189) !important;
+  color: rgb(1, 1, 126); /* ajuste modo oscuro */
+}
+
+.custBGColor2 .sapMInputBaseInner {
+  background-color: rgb(247, 188, 161) !important;
+}
+
+.custBold {
+  font-weight: bold;
+}
+
+.rowCPBloquedado{	
+  background:   #fab5b9!important;
+}
+
+.colorInfoCliVencidosLight {
+  color: #b00;
+}
+
+.colorChkTextLight .sapMLabel {
+  color: #b00;
+}
+
+.colorInfoCliVencidosDark {
+  color: rgb(250, 93, 93);
+}
+
+.colorChkTextDark .sapMLabel {
+  color: rgb(250, 93, 93);
+}
+
+/*{+@ES20250320*/
+/* .bgSwitchTheme .sapMSwt.sapMSwtOff {
+  background: hsl(0, 0%, 3%);
+  border: .0625rem solid #080808;
+  box-sizing: border-box;
+}
+
+.bgSwitchTheme .sapMSwt.sapMSwtOn {
+  background: #0dad4a;
+  border: .0625rem solid #0dad4a;
+  box-sizing: border-box;
+}
+
+.bgSwitchTheme .sapMSwt.sapMSwtOn .sapMSwtHandle {
+  box-sizing: border-box;
+  background: #fff;
+  border-color: #fff;
+  height: 1.25rem;
+  width: 1.25rem;
+  left: 1.88rem;
+} */
+
+.bgSwitchTheme .sapMSwt.sapMSwtOn .sapMSwtHandle {
+  border-color: #fff;
+} 
+/*}+@ES20250320*/
+
+/* .myCenteredView {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+/* @media (max-width: 600px) {
+  .myCenteredView {
+      padding: 10px;
+  }
+
+  .myCenteredView .sapUiTinyMarginBottom {
+      width: 100%;
+  }
+} */
+div[id*='formCrearPedidos'] div h5 {   
+  display: none !important;
+}
+
+/* Clase CSS personalizada para cambiar el fondo del Input */
+.myCustBgY .sapMInputBaseInner {
+  background-color: #FFD700 !important; /* Cambia el color aquí */
+}
+
+.sapUiTableContentRow.sapUiTableRowSel {
+  background-color: #f5b041 !important;
+}
+
+/*@JR*/
+.smallLabel {
+  font-size: 10px;
+}
+
+.sapUiRespGrid.sapUiRespGridVSpace1>div {
+  margin-bottom: 0rem;
+}
+
+/*Manejar tamaño de input dentro de grid @JZ*/
+.responsiveCbox,
+.responsiveInput {
+  width: 83% !important;
+}
+
+.responsiveMatchcode {
+  width: 40% !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .responsiveMatchcode,
+  .responsiveCbox,
+  .responsiveInput {
+      width: 100% !important;
+  }
+}
+
+.bgColorResumenLastRowLight { 
+  background-color: #b5ecca !important; 
+}
+
+.bgColorResumenLastRowDark { 
+  background-color: #559b70 !important; 
+}
+
+.redText {
+  color: red;
+}
+
+/* INFO CLIENTE FORM */
+.sapUiFormCLContainer{
+  padding: 2px;
+}
+
+.sapUiFormEdit .sapUiFormCLSmallColumns .sapUiFormCLElement {
+  padding-top: 0;
+}
+
+.sapTntNLIWithExpander.sapTntNLITwoClickAreas .sapUiIcon:last-of-type {
+  border-left: none;
+}
+
+.customTextLeft {
+  display: flex;
+  justify-content: left;
+  align-items: left;
+}

@@ -1,0 +1,21 @@
+<core:FragmentDefinition
+    xmlns="sap.ui.comp.valuehelpdialog"
+    xmlns:m="sap.m"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+>
+    <ValueHelpDialog
+        id="dialogMultiClasePedidoCO"
+        title="{i18n>ClasePed}"
+        ok=".onOkPress($event, 'dialogMultiClasePedidoCO')"
+        cancel=".onCancelPress($event, 'dialogMultiClasePedidoCO')"
+        afterClose=".onAfterClose($event, 'dialogMultiClasePedidoCO')"
+        supportRanges="true"
+        supportRangesOnly="true"
+        key="Auart"
+        descriptionKey="Denominacion"
+        draggable="true"
+    />
+</core:FragmentDefinition>

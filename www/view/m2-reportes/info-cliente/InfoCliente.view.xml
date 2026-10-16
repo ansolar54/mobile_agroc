@@ -1,0 +1,1476 @@
+<mvc:View
+    controllerName="com.axelera.pe.gestioncomercial.controller.m2-reportes.InfoCliente"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:t="sap.ui.table"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+>
+    <!-- WEB -->
+    <Panel
+        accessibleRole="Region"
+        headerText="{i18n>HeaderR04}"
+        class="custBackgroundColor"
+        visible="{=!${local>/IsMobile}}"
+    >
+        <content>
+            <l:Grid class="sapUiTinyMarginBottom">
+                <l:content>
+                    <!-- COD.CLIENTE -->
+                    <HBox
+                        alignItems="Center"
+                        alignContent="Center"
+                    >
+                        <Label
+                            text="{i18n>CodCliente}:"
+                            textAlign="Begin"
+                            width="120px"
+                            class="sapUiTinyMargin"
+                        />
+                        <Input
+                            value="{local>/Cliente}"
+                            submit=".onBuscar"
+                            showValueHelp="true"
+                            valueHelpRequest=".onMatchcodeCliente"
+                            liveChange="onChange($event, 'Cliente')"
+                            showClearIcon="true"
+                            width="10rem"
+                        />
+                    </HBox>
+                    <HBox
+                        alignItems="Start"
+                        alignContent="Center"
+                        class="sapUiTinyMarginTop sapUiTinyMarginBottom"
+                    >
+                        <Button
+                            id="btnBuscarIC"
+                            type="Success"
+                            icon="sap-icon://search"
+                            text="{i18n>Buscar}"
+                            press="onBuscar"
+                            width="12rem"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <Button
+                            type="Success"
+                            icon="sap-icon://clear-all"
+                            text="{i18n>LimpiarCampos}"
+                            press=".onLimpiarCampos"
+                            width="12rem"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </HBox>
+                    <HBox alignItems="Center">
+                        <Label
+                            text="{i18n>NombreCliente}:"
+                            textAlign="Begin"
+                            width="120px"
+                            class="sapUiTinyMargin"
+                        />
+                        <!-- <Input
+                            value="{local>/NomCliente}"
+                            width="25rem"
+                            editable="false"
+                        /> -->
+                        <Text text="{local>/NomCliente}" />
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </HBox>
+                    <HBox
+                        alignItems="Center"
+                        visible="{local>/Estado}"
+                    >
+                        <Label
+                            text=""
+                            textAlign="Begin"
+                            width="120px"
+                            class="sapUiTinyMargin"
+                        />
+                        <CheckBox
+                            id="chkInfoCliente"
+                            selected="{local>/Estado}"
+                            text="{local>/EstadoDesc}"
+                            valueState="{local>/EstadoAux}"
+                            select=".onSelectCheck"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </HBox>
+                    <HBox alignItems="Center">
+                        <Label
+                            text="{i18n>CanalDistrib}:"
+                            textAlign="Begin"
+                            width="120px"
+                            class="sapUiTinyMargin"
+                        />
+                        <!-- <Input
+                            value="{local>/CanalDistri}"
+                            width="25rem"
+                            editable="false"
+                        /> -->
+                        <Text text="{local>/CanalDistri}" />
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </HBox>
+                    <!--CREADO EL-->
+                    <HBox
+                        alignItems="Center"
+                        visible="false"
+                    >
+                        <Label
+                            text="{i18n>CreadoEl}:"
+                            textAlign="Begin"
+                            width="120px"
+                            class="sapUiTinyMargin"
+                        />
+                        <DatePicker
+                            placeholder="{i18n>FormatoFecha1}"
+                            displayFormat="dd/MM/yyyy"
+                            valueFormat="yyyyMMdd"
+                            value="{ path: 'local>/CreadoEl'}"
+                            width="25rem"
+                            editable="false"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL6 L6 M12 S12" />
+                        </layoutData>
+                    </HBox>
+                    <!--RESPONSABLE DE CUENTA-->
+                    <HBox alignItems="Center">
+                        <Label
+                            text="{i18n>RespCuenta1}:"
+                            textAlign="Begin"
+                            width="120px"
+                            class="sapUiTinyMargin"
+                        />
+                        <!-- <Input
+                            value="{local>/RespCuenta} {local>/RespCuentaTxt}"
+                            width="25rem"
+                            editable="false"
+                        /> -->
+                        <Text
+                            text="{local>/RespCuenta} {local>/RespCuentaTxt}"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </HBox>
+                </l:content>
+            </l:Grid>
+            <l:Grid class="sapUiTinyMarginBottom">
+                <l:content>
+                    <!-- AREA DE VENTAS -->
+                    <VBox>
+                        <HBox>
+                            <Title
+                                text="{i18n>AreaVentas}"
+                                class="sapUiTinyMarginTop sapUiTinyMarginBottom"
+                            />
+                        </HBox>
+                        <HBox visible="{local>/CondicionLP/Fila1/Cx}">
+                            <Input
+                                value="{local>/CondicionLP/Fila1/Lbl}"
+                                editable="false"
+                                class="sapUiTinyMarginEnd"
+                            >
+                                <layoutData>
+                                    <FlexItemData growFactor="1" />
+                                </layoutData>
+                            </Input>
+                        </HBox>
+                        <HBox visible="{local>/CondicionLP/Fila2/Cx}">
+                            <Input
+                                value="{local>/CondicionLP/Fila2/Lbl}"
+                                editable="false"
+                                class="sapUiTinyMarginEnd"
+                            >
+                                <layoutData>
+                                    <FlexItemData growFactor="1" />
+                                </layoutData>
+                            </Input>
+                        </HBox>
+                        <HBox visible="{local>/CondicionLP/Fila3/Cx}">
+                            <Input
+                                value="{local>/CondicionLP/Fila3/Lbl}"
+                                editable="false"
+                                class="sapUiTinyMarginEnd"
+                            >
+                                <layoutData>
+                                    <FlexItemData growFactor="1" />
+                                </layoutData>
+                            </Input>
+                        </HBox>
+                        <HBox visible="{local>/CondicionLP/Fila4/Cx}">
+                            <Input
+                                value="{local>/CondicionLP/Fila4/Lbl}"
+                                editable="false"
+                                class="sapUiTinyMarginEnd"
+                            >
+                                <layoutData>
+                                    <FlexItemData growFactor="1" />
+                                </layoutData>
+                            </Input>
+                        </HBox>
+                        <layoutData>
+                            <l:GridData span="XL2 L2 M2 S12" />
+                        </layoutData>
+                    </VBox>
+                    <!-- LISTA PRECIOS -->
+                    <VBox>
+                        <HBox>
+                            <Title
+                                text="{i18n>ListaPrecios}"
+                                class="sapUiTinyMarginTop sapUiTinyMarginBottom"
+                            />
+                        </HBox>
+                        <HBox visible="{local>/CondicionLP/Fila1/LPx}">
+                            <Input
+                                value="{local>/CondicionLP/Fila1/LP}"
+                                editable="false"
+                            >
+                                <layoutData>
+                                    <FlexItemData growFactor="1" />
+                                </layoutData>
+                            </Input>
+                        </HBox>
+                        <HBox visible="{local>/CondicionLP/Fila2/LPx}">
+                            <Input
+                                value="{local>/CondicionLP/Fila2/LP}"
+                                editable="false"
+                            >
+                                <layoutData>
+                                    <FlexItemData growFactor="1" />
+                                </layoutData>
+                            </Input>
+                        </HBox>
+                        <HBox visible="{local>/CondicionLP/Fila3/LPx}">
+                            <Input
+                                value="{local>/CondicionLP/Fila3/LP}"
+                                editable="false"
+                            >
+                                <layoutData>
+                                    <FlexItemData growFactor="1" />
+                                </layoutData>
+                            </Input>
+                        </HBox>
+                        <HBox visible="{local>/CondicionLP/Fila4/LPx}">
+                            <Input
+                                value="{local>/CondicionLP/Fila4/LP}"
+                                editable="false"
+                            >
+                                <layoutData>
+                                    <FlexItemData growFactor="1" />
+                                </layoutData>
+                            </Input>
+                        </HBox>
+                        <layoutData>
+                            <l:GridData span="XL2 L2 M2 S12" />
+                        </layoutData>
+                    </VBox>
+                    <!-- CONDICION DE PAGO -->
+                    <VBox>
+                        <HBox>
+                            <Title
+                                text="{i18n>CondicionPago}"
+                                class="sapUiTinyMarginTop sapUiTinyMarginBottom"
+                            />
+                        </HBox>
+                        <HBox visible="{local>/CondicionLP/Fila1/Cx}">
+                            <Input
+                                value="{local>/CondicionLP/Fila1/C}"
+                                editable="false"
+                            >
+                                <layoutData>
+                                    <FlexItemData growFactor="1" />
+                                </layoutData>
+                            </Input>
+                        </HBox>
+                        <HBox visible="{local>/CondicionLP/Fila2/Cx}">
+                            <Input
+                                value="{local>/CondicionLP/Fila2/C}"
+                                editable="false"
+                            >
+                                <layoutData>
+                                    <FlexItemData growFactor="1" />
+                                </layoutData>
+                            </Input>
+                        </HBox>
+                        <HBox visible="{local>/CondicionLP/Fila3/Cx}">
+                            <Input
+                                value="{local>/CondicionLP/Fila3/C}"
+                                editable="false"
+                            >
+                                <layoutData>
+                                    <FlexItemData growFactor="1" />
+                                </layoutData>
+                            </Input>
+                        </HBox>
+                        <HBox visible="{local>/CondicionLP/Fila4/Cx}">
+                            <Input
+                                value="{local>/CondicionLP/Fila4/C}"
+                                editable="false"
+                            >
+                                <layoutData>
+                                    <FlexItemData growFactor="1" />
+                                </layoutData>
+                            </Input>
+                        </HBox>
+                        <layoutData>
+                            <l:GridData span="XL8 L8 M8 S12" />
+                        </layoutData>
+                    </VBox>
+                </l:content>
+            </l:Grid>
+            <Panel
+                accessibleRole="Region"
+                expandable="true"
+                expanded="true"
+                visible="false"
+            >
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title
+                            text="{i18n>SubTitle-InfoVentas}"
+                            class="custBold"
+                        />
+                    </OverflowToolbar>
+                </headerToolbar>
+                <content>
+                    <FlexBox
+                        alignItems="Center"
+                        justifyContent="Center"
+                    >
+                        <HBox alignItems="Center">
+                            <Button
+                                type="Success"
+                                icon="sap-icon://inspection"
+                                text="{i18n>VerPedAAnt}"
+                                press=".onShowPedidoAnio('ANTERIOR')"
+                                class="sapUiTinyMarginEnd"
+                            />
+                            <Button
+                                type="Success"
+                                icon="sap-icon://inspection"
+                                text="{i18n>VerPedAAct}"
+                                press=".onShowPedidoAnio('ACTUAL')"
+                            />
+                        </HBox>
+                    </FlexBox>
+                </content>
+            </Panel>
+            <Panel
+                accessibleRole="Region"
+                expandable="true"
+                expanded="true"
+            >
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title
+                            text="{i18n>SubTitle-InfoLCGU}"
+                            class="custBold"
+                        />
+                    </OverflowToolbar>
+                </headerToolbar>
+                <content>
+                    <t:Table
+                        rowActionCount="1"
+                        rows="{oDataInfoCliente>/reporte_infocred_nav/results}"
+                        selectionMode="None"
+                        visibleRowCount="{local>/ResumenCount}"
+                        enableBusyIndicator="true"
+                        class="sapUiResponsiveMarginTop"
+                        rowsUpdated=".onRowsUpdated"
+                    >
+                        <t:columns>
+                            <t:Column
+                                width="12rem"
+                                showSortMenuEntry="true"
+                                sortProperty="Klimk"
+                                filterProperty="Klimk"
+                                autoResizable="false"
+                                hAlign="Center"
+                            >
+                                <Label text="{i18n>LineaCredito}" />
+                                <t:template>
+                                    <Text
+                                        text="{ path: 'oDataInfoCliente>Klimk',
+                                            formatter : '.formatter.formatNumber' }"
+                                        wrapping="false"
+                                    />
+                                </t:template>
+                            </t:Column>
+                            <t:Column
+                                width="12rem"
+                                showSortMenuEntry="true"
+                                sortProperty="KlimuVig"
+                                filterProperty="KlimuVig"
+                                headerSpan="2"
+                                hAlign="Center"
+                            >
+                                <t:multiLabels>
+                                    <Label
+                                        text="{i18n>LineaCreditoUtilizada}"
+                                        textAlign="Center"
+                                        width="100%"
+                                        class="tableHeaderWrap"
+                                    />
+                                    <Label
+                                        text="{i18n>Vigente}"
+                                        textAlign="Center"
+                                        width="100%"
+                                    />
+                                </t:multiLabels>
+                                <t:template>
+                                    <Text
+                                        text="{ path: 'oDataInfoCliente>KlimuVig',
+                                            formatter : '.formatter.formatNumber' }"
+                                        wrapping="false"
+                                    />
+                                </t:template>
+                            </t:Column>
+                            <t:Column
+                                width="12rem"
+                                showSortMenuEntry="true"
+                                sortProperty="KlimuVen"
+                                filterProperty="KlimuVen"
+                                hAlign="Center"
+                            >
+                                <t:multiLabels>
+                                    <!-- <Label text="Línea de crédito utilizada" textAlign="Center"
+                                width="100%" class="tableHeaderWrap"/> -->
+                                    <Label
+                                        text="{i18n>Vencida}"
+                                        textAlign="Center"
+                                        width="100%"
+                                    />
+                                    <Label
+                                        text="{i18n>Vencida}"
+                                        textAlign="Center"
+                                        width="100%"
+                                    />
+                                </t:multiLabels>
+                                <t:template>
+                                    <Text
+                                        text="{ path: 'oDataInfoCliente>KlimuVen',
+                                            formatter : '.formatter.formatNumber' }"
+                                        wrapping="false"
+                                    />
+                                </t:template>
+                            </t:Column>
+                            <t:Column
+                                width="12rem"
+                                showSortMenuEntry="true"
+                                sortProperty="Klimd"
+                                filterProperty="Klimd"
+                                hAlign="Center"
+                            >
+                                <Label text="{i18n>LineaDisponible}" />
+                                <t:template>
+                                    <Text
+                                        text="{ path: 'oDataInfoCliente>Klimd',
+                                            formatter : '.formatter.formatNumber' }"
+                                        wrapping="false"
+                                    />
+                                </t:template>
+                            </t:Column>
+                            <t:Column
+                                width="12rem"
+                                showSortMenuEntry="true"
+                                sortProperty="SAfavor"
+                                filterProperty="SAfavor"
+                                hAlign="Center"
+                            >
+                                <Label text="{i18n>SaldoFavor}" />
+                                <t:template>
+                                    <Text
+                                        text="{ path: 'oDataInfoCliente>SAfavor',
+                                            formatter : '.formatter.formatNumber' }"
+                                        wrapping="false"
+                                    />
+                                </t:template>
+                            </t:Column>
+                            <t:Column
+                                width="12rem"
+                                showSortMenuEntry="true"
+                                sortProperty="Waerk"
+                                filterProperty="Waerk"
+                                hAlign="Center"
+                            >
+                                <Label text="{i18n>Moneda}" />
+                                <t:template>
+                                    <Text
+                                        text="{oDataInfoCliente>Waerk}"
+                                        wrapping="false"
+                                    />
+                                </t:template>
+                            </t:Column>
+                        </t:columns>
+                    </t:Table>
+                </content>
+            </Panel>
+            <Panel
+                accessibleRole="Region"
+                expandable="true"
+                expanded="true"
+            >
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title
+                            text="{i18n>SubTitle-InfoCPDV}"
+                            class="custBold"
+                        />
+                    </OverflowToolbar>
+                </headerToolbar>
+                <content>
+                    <t:Table
+                        rowActionCount="1"
+                        rows="{oDataInfoCliente>/reporte_ncuentap_nav/results}"
+                        selectionMode="None"
+                        visibleRowCount="{local>/DetalleCount}"
+                        enableBusyIndicator="true"
+                        busy="{local>/loadingTbl}"
+                        class="sapUiResponsiveMarginTop"
+                        rowsUpdated=".onRowsUpdated"
+                    >
+                        <t:columns>
+                            <t:Column
+                                width="10rem"
+                                autoResizable="true"
+                                headerSpan="2"
+                                hAlign="Center"
+                            >
+                                <t:multiLabels>
+                                    <Label
+                                        text="{i18n>Vigente}"
+                                        textAlign="Center"
+                                        width="100%"
+                                        class="tableHeaderWrap"
+                                    />
+                                    <Label
+                                        text="{i18n>NoVencido}"
+                                        textAlign="Center"
+                                        width="100%"
+                                    />
+                                </t:multiLabels>
+                                <t:template>
+                                    <Text
+                                        text="{ path: 'oDataInfoCliente>NoVencido',
+                                            formatter : '.formatter.formatNumber' }"
+                                        wrapping="false"
+                                    />
+                                </t:template>
+                            </t:Column>
+                            <t:Column
+                                width="10rem"
+                                autoResizable="true"
+                                hAlign="Center"
+                            >
+                                <t:multiLabels>
+                                    <Label
+                                        text="{i18n>Vcdo-1-8-d}"
+                                        textAlign="Center"
+                                        width="100%"
+                                    />
+                                    <Label
+                                        text="{i18n>Vcdo-1-8-d}"
+                                        textAlign="Center"
+                                        width="100%"
+                                    />
+                                </t:multiLabels>
+                                <t:template>
+                                    <Text
+                                        text="{ path: 'oDataInfoCliente>Deu18',
+                                            formatter : '.formatter.formatNumber' }"
+                                        wrapping="false"
+                                    />
+                                </t:template>
+                            </t:Column>
+                            <t:Column
+                                width="10rem"
+                                headerSpan="4"
+                                autoResizable="true"
+                                hAlign="Center"
+                            >
+                                <t:multiLabels>
+                                    <Label
+                                        text="{i18n>Vencido}"
+                                        textAlign="Center"
+                                        width="100%"
+                                        class="tableHeaderWrap"
+                                    />
+                                    <Label
+                                        text="{i18n>Vcdo-9-30-d}"
+                                        textAlign="Center"
+                                        width="100%"
+                                    />
+                                </t:multiLabels>
+                                <t:template>
+                                    <Text
+                                        text="{ path: 'oDataInfoCliente>Deu930',
+                                            formatter : '.formatter.formatNumber' }"
+                                        wrapping="false"
+                                    />
+                                </t:template>
+                            </t:Column>
+                            <t:Column
+                                width="10rem"
+                                hAlign="Center"
+                                autoResizable="true"
+                            >
+                                <t:multiLabels>
+                                    <Label
+                                        text="{i18n>Vcdo-31-60-d}"
+                                        textAlign="Center"
+                                        width="100%"
+                                    />
+                                    <Label
+                                        text="{i18n>Vcdo-31-60-d}"
+                                        textAlign="Center"
+                                        width="100%"
+                                    />
+                                </t:multiLabels>
+                                <t:template>
+                                    <Text
+                                        text="{ path: 'oDataInfoCliente>Deu3160',
+                                            formatter : '.formatter.formatNumber' }"
+                                        wrapping="false"
+                                    />
+                                </t:template>
+                            </t:Column>
+                            <t:Column
+                                width="10rem"
+                                hAlign="Center"
+                                autoResizable="true"
+                            >
+                                <t:multiLabels>
+                                    <Label
+                                        text="{i18n>Vcdo-61-90-d}"
+                                        textAlign="Center"
+                                        width="100%"
+                                    />
+                                    <Label
+                                        text="{i18n>Vcdo-61-90-d}"
+                                        textAlign="Center"
+                                        width="100%"
+                                    />
+                                </t:multiLabels>
+                                <t:template>
+                                    <Text
+                                        text="{ path: 'oDataInfoCliente>Deu6190',
+                                            formatter : '.formatter.formatNumber' }"
+                                        wrapping="false"
+                                    />
+                                </t:template>
+                            </t:Column>
+                            <t:Column
+                                width="10rem"
+                                hAlign="Center"
+                                autoResizable="true"
+                            >
+                                <t:multiLabels>
+                                    <Label
+                                        text="{i18n>Vcdo-90-d}"
+                                        textAlign="Center"
+                                        width="100%"
+                                    />
+                                    <Label
+                                        text="{i18n>Vcdo-90-d}"
+                                        textAlign="Center"
+                                        width="100%"
+                                    />
+                                </t:multiLabels>
+                                <t:template>
+                                    <Text
+                                        text="{ path: 'oDataInfoCliente>Deu91',
+                                            formatter : '.formatter.formatNumber' }"
+                                        wrapping="false"
+                                    />
+                                </t:template>
+                            </t:Column>
+                            <t:Column
+                                width="10rem"
+                                hAlign="Center"
+                                autoResizable="true"
+                            >
+                                <Label text="{i18n>SaldoFavor}" />
+                                <t:template>
+                                    <Text
+                                        text="{ path: 'oDataInfoCliente>SaldoAfavor',
+                                            formatter : '.formatter.formatNumber' }"
+                                        wrapping="false"
+                                    />
+                                </t:template>
+                            </t:Column>
+                            <t:Column
+                                width="10rem"
+                                hAlign="Center"
+                                autoResizable="true"
+                            >
+                                <Label text="{i18n>Total}" />
+                                <t:template>
+                                    <Text
+                                        text="{ path: 'oDataInfoCliente>Total',
+                                            formatter : '.formatter.formatNumber' }"
+                                        wrapping="false"
+                                    />
+                                </t:template>
+                            </t:Column>
+                            <t:Column
+                                width="10rem"
+                                hAlign="Center"
+                                autoResizable="true"
+                                resizable="true"
+                            >
+                                <Label text="{i18n>Moneda}" />
+                                <t:template>
+                                    <Text
+                                        text="{oDataInfoCliente>Waers}"
+                                        wrapping="false"
+                                    />
+                                </t:template>
+                            </t:Column>
+                        </t:columns>
+                    </t:Table>
+                </content>
+            </Panel>
+        </content>
+    </Panel>
+
+    <!-- MOBILE -->
+    <Panel
+        accessibleRole="Region"
+        headerText="{i18n>HeaderR04}"
+        class="custBackgroundColor"
+        visible="{=${local>/IsMobile}}"
+    >
+        <content>
+            <VBox>
+                <f:Form editable="true">
+                    <!-- <f:title>
+                        <core:Title text="{i18n>HeaderR04}" />
+                    </f:title> -->
+                    <f:layout>
+                        <f:ColumnLayout
+                            columnsM="1"
+                            columnsL="1"
+                            columnsXL="1"
+                        />
+                    </f:layout>
+                    <f:formContainers>
+                        <f:FormContainer>
+                            <f:formElements>
+                                <!-- COD. CLIENTE -->
+                                <f:FormElement label="{i18n>CodCliente}">
+                                    <f:fields>
+                                        <Input
+                                            value="{local>/Cliente}"
+                                            submit=".onBuscar"
+                                            showValueHelp="true"
+                                            valueHelpRequest=".onMatchcodeCliente"
+                                            liveChange="onChange($event, 'Cliente')"
+                                            showClearIcon="true"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                            </f:formElements>
+                        </f:FormContainer>
+                    </f:formContainers>
+                </f:Form>
+                <!-- BOTONES -->
+                <l:Grid class="sapUiTinyMarginBottom">
+                    <l:content>
+                        <HBox alignItems="Center">
+                            <Button
+                                id="btnBuscarICMob"
+                                type="Success"
+                                icon="sap-icon://search"
+                                text="{i18n>Buscar}"
+                                press=".onBuscar"
+                                width="100%"
+                                class="sapUiTinyMarginEnd"
+                            >
+                                <layoutData>
+                                    <FlexItemData growFactor="1" />
+                                </layoutData>
+                            </Button>
+                            <layoutData>
+                                <l:GridData span="L6 M6 S6" />
+                            </layoutData>
+                        </HBox>
+                        <HBox alignItems="Center">
+                            <Button
+                                type="Success"
+                                icon="sap-icon://clear-all"
+                                text="{i18n>LimpiarCampos}"
+                                press=".onLimpiarCampos"
+                                width="100%"
+                                class="sapUiTinyMarginEnd"
+                            >
+                                <layoutData>
+                                    <FlexItemData growFactor="1" />
+                                </layoutData>
+                            </Button>
+                            <layoutData>
+                                <l:GridData span="L6 M6 S6" />
+                            </layoutData>
+                        </HBox>
+                    </l:content>
+                </l:Grid>
+                <!-- DATOS -->
+                <f:Form editable="true">
+                    <!-- <f:title>
+                <core:Title text="{i18n>HeaderR04}" />
+            </f:title> -->
+                    <f:layout>
+                        <f:ColumnLayout
+                            columnsM="1"
+                            columnsL="1"
+                            columnsXL="1"
+                        />
+                    </f:layout>
+                    <f:formContainers>
+                        <f:FormContainer>
+                            <f:formElements>
+                                <!-- NOMBRE CLIENTE -->
+                                <f:FormElement label="{i18n>NombreCliente}">
+                                    <f:fields>
+                                        <!-- <Input
+                                    value="{local>/NomCliente}"
+                                    editable="false"
+                                /> -->
+                                        <Text text="{local>/NomCliente}" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <!-- CHECKBOX -->
+                                <f:FormElement
+                                    label=""
+                                    visible="{local>/Estado}"
+                                >
+                                    <f:fields>
+                                        <CheckBox
+                                            selected="{local>/Estado}"
+                                            text="{local>/EstadoDesc}"
+                                            valueState="{local>/EstadoAux}"
+                                            select=".onSelectCheck"
+                                            class="colorChkText"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                                <!-- CANAL DISTRIBUCION -->
+                                <f:FormElement label="{i18n>CanalDistrib}">
+                                    <f:fields>
+                                        <!-- <Input
+                                    value="{local>/CanalDistri}"
+                                    editable="false"
+                                /> -->
+                                        <Text text="{local>/CanalDistri}" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <!-- CREADO EL -->
+                                <f:FormElement
+                                    label="{i18n>CreadoEl}"
+                                    visible="false"
+                                >
+                                    <f:fields>
+                                        <DatePicker
+                                            placeholder="{i18n>FormatoFecha1}"
+                                            displayFormat="dd/MM/yyyy"
+                                            valueFormat="yyyyMMdd"
+                                            value="{ path: 'local>/CreadoEl'}"
+                                            editable="false"
+                                            class="sapUiTinyMarginEnd"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                                <!-- RESPONSABLE DE CUENTA -->
+                                <f:FormElement label="{i18n>RespCuenta1}">
+                                    <f:fields>
+                                        <!-- <Input
+                                    value="{local>/RespCuenta} {local>/RespCuentaTxt}"
+                                    editable="false"
+                                /> -->
+                                        <Text
+                                            text="{local>/RespCuenta} {local>/RespCuentaTxt}"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                            </f:formElements>
+                        </f:FormContainer>
+                    </f:formContainers>
+                </f:Form>
+                <!-- AREA DE VENTAS -->
+                <f:Form editable="true">
+                    <f:title>
+                        <core:Title text="{i18n>AreaVentas}" />
+                    </f:title>
+                    <f:layout>
+                        <f:ColumnLayout
+                            columnsM="1"
+                            columnsL="1"
+                            columnsXL="1"
+                        />
+                    </f:layout>
+                    <f:formContainers>
+                        <f:FormContainer>
+                            <f:formElements>
+                                <f:FormElement visible="{local>/CondicionLP/Fila1/Cx}">
+                                    <f:fields>
+                                        <Text
+                                            text="{local>/CondicionLP/Fila1/Lbl}"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement visible="{local>/CondicionLP/Fila2/Cx}">
+                                    <f:fields>
+                                        <Text
+                                            text="{local>/CondicionLP/Fila2/Lbl}"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement
+                                    visible="{local>/CondicionLP/Fila3/Cx}"
+                                >
+                                    <f:fields>
+                                        <Text
+                                            text="{local>/CondicionLP/Fila3/Lbl}"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement visible="{local>/CondicionLP/Fila4/Cx}">
+                                    <f:fields>
+                                        <Text
+                                            text="{local>/CondicionLP/Fila4/Lbl}"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                            </f:formElements>
+                        </f:FormContainer>
+                    </f:formContainers>
+                </f:Form>
+                <!-- LISTA PRECIOS -->
+                <f:Form editable="true">
+                    <f:title>
+                        <core:Title text="{i18n>ListaPrecios}" />
+                    </f:title>
+                    <f:layout>
+                        <f:ColumnLayout
+                            columnsM="1"
+                            columnsL="1"
+                            columnsXL="1"
+                        />
+                    </f:layout>
+                    <f:formContainers>
+                        <f:FormContainer>
+                            <f:formElements>
+                                <!-- LISTA PRECIO 1 -->
+                                <f:FormElement visible="{local>/CondicionLP/Fila1/LPx}">
+                                    <f:fields>
+                                        <Text
+                                            text="{local>/CondicionLP/Fila1/LP}"
+                                        >
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+                                        </Text>
+                                    </f:fields>
+                                </f:FormElement>
+                                <!-- LISTA PRECIO 2 -->
+                                <f:FormElement visible="{local>/CondicionLP/Fila2/LPx}">
+                                    <f:fields>
+                                        <Text
+                                            text="{local>/CondicionLP/Fila2/LP}"
+                                        >
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+                                        </Text>
+                                    </f:fields>
+                                </f:FormElement>
+                                <!-- LISTA PRECIO 3 -->
+                                <f:FormElement
+                                    visible="{local>/CondicionLP/Fila3/LPx}"
+                                >
+                                    <f:fields>
+                                        <Text
+                                            text="{local>/CondicionLP/Fila3/LP}"
+                                        >
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+                                        </Text>
+                                    </f:fields>
+                                </f:FormElement>
+                                <!-- LISTA PRECIO 4 -->
+                                <f:FormElement visible="{local>/CondicionLP/Fila4/LPx}">
+                                    <f:fields>
+                                        <Text
+                                            text="{local>/CondicionLP/Fila4/LP}"
+                                        >
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+                                        </Text>
+                                    </f:fields>
+                                </f:FormElement>
+                            </f:formElements>
+                        </f:FormContainer>
+                    </f:formContainers>
+                </f:Form>
+                <!-- CONDICION DE PAGO -->
+                <f:Form editable="true">
+                    <f:title>
+                        <core:Title text="{i18n>CondicionPago}" />
+                    </f:title>
+                    <f:layout>
+                        <f:ColumnLayout
+                            columnsM="1"
+                            columnsL="1"
+                            columnsXL="1"
+                        />
+                    </f:layout>
+                    <f:formContainers>
+                        <f:FormContainer>
+                            <f:formElements>
+                                <!-- CONDICION 1 -->
+                                <f:FormElement visible="{local>/CondicionLP/Fila1/Cx}">
+                                    <f:fields>
+                                        <Text
+                                            text="{local>/CondicionLP/Fila1/C}"
+                                        >
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+                                        </Text>
+                                    </f:fields>
+                                </f:FormElement>
+                                <!-- CONDICION 2 -->
+                                <f:FormElement visible="{local>/CondicionLP/Fila2/Cx}">
+                                    <f:fields>
+                                        <Text
+                                            text="{local>/CondicionLP/Fila2/C}"
+                                        >
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+                                        </Text>
+                                    </f:fields>
+                                </f:FormElement>
+                                <!-- CONDICION 3 -->
+                                <f:FormElement
+                                    visible="{local>/CondicionLP/Fila3/Cx}"
+                                >
+                                    <f:fields>
+                                        <Text
+                                            text="{local>/CondicionLP/Fila3/C}"
+                                        >
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+                                        </Text>
+                                    </f:fields>
+                                </f:FormElement>
+                                <!-- CONDICION 4 -->
+                                <f:FormElement visible="{local>/CondicionLP/Fila4/Cx}">
+                                    <f:fields>
+                                        <Text
+                                            text="{local>/CondicionLP/Fila4/C}"
+                                        >
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+                                        </Text>
+                                    </f:fields>
+                                </f:FormElement>
+                            </f:formElements>
+                        </f:FormContainer>
+                    </f:formContainers>
+                </f:Form>
+                <!-- INFO. LINEA DE CREDITO Y GRADO USO -->
+                <Panel
+                    accessibleRole="Region"
+                    expandable="true"
+                    expanded="true"
+                >
+                    <headerToolbar>
+                        <OverflowToolbar>
+                            <Title
+                                text="{i18n>SubTitle-InfoLCGU}"
+                                class="custBold"
+                            />
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <content>
+                        <t:Table
+                            rowActionCount="1"
+                            rows="{oDataInfoCliente>/reporte_infocred_nav/results}"
+                            selectionMode="None"
+                            visibleRowCount="{local>/ResumenCount}"
+                            enableBusyIndicator="true"
+                            class="sapUiResponsiveMarginTop"
+                            rowsUpdated=".onRowsUpdated"
+                        >
+                            <t:columns>
+                                <t:Column
+                                    width="12rem"
+                                    showSortMenuEntry="true"
+                                    sortProperty="Klimk"
+                                    filterProperty="Klimk"
+                                    autoResizable="false"
+                                    hAlign="Center"
+                                >
+                                    <Label text="{i18n>LineaCredito}" />
+                                    <t:template>
+                                        <Text
+                                            text="{ path: 'oDataInfoCliente>Klimk',
+                                        formatter : '.formatter.formatNumber' }"
+                                            wrapping="false"
+                                        />
+                                    </t:template>
+                                </t:Column>
+                                <t:Column
+                                    width="12rem"
+                                    showSortMenuEntry="true"
+                                    sortProperty="KlimuVig"
+                                    filterProperty="KlimuVig"
+                                    headerSpan="2"
+                                    hAlign="Center"
+                                >
+                                    <t:multiLabels>
+                                        <Label
+                                            text="{i18n>LineaCreditoUtilizada}"
+                                            textAlign="Center"
+                                            width="100%"
+                                            class="tableHeaderWrap"
+                                        />
+                                        <Label
+                                            text="{i18n>Vigente}"
+                                            textAlign="Center"
+                                            width="100%"
+                                        />
+                                    </t:multiLabels>
+                                    <t:template>
+                                        <Text
+                                            text="{ path: 'oDataInfoCliente>KlimuVig',
+                                        formatter : '.formatter.formatNumber' }"
+                                            wrapping="false"
+                                        />
+                                    </t:template>
+                                </t:Column>
+                                <t:Column
+                                    width="12rem"
+                                    showSortMenuEntry="true"
+                                    sortProperty="KlimuVen"
+                                    filterProperty="KlimuVen"
+                                    hAlign="Center"
+                                >
+                                    <t:multiLabels>
+                                        <!-- <Label text="Línea de crédito utilizada" textAlign="Center"
+                            width="100%" class="tableHeaderWrap"/> -->
+                                        <Label
+                                            text="{i18n>Vencida}"
+                                            textAlign="Center"
+                                            width="100%"
+                                        />
+                                        <Label
+                                            text="{i18n>Vencida}"
+                                            textAlign="Center"
+                                            width="100%"
+                                        />
+                                    </t:multiLabels>
+                                    <t:template>
+                                        <Text
+                                            text="{ path: 'oDataInfoCliente>KlimuVen',
+                                        formatter : '.formatter.formatNumber' }"
+                                            wrapping="false"
+                                        />
+                                    </t:template>
+                                </t:Column>
+                                <t:Column
+                                    width="12rem"
+                                    showSortMenuEntry="true"
+                                    sortProperty="Klimd"
+                                    filterProperty="Klimd"
+                                    hAlign="Center"
+                                >
+                                    <Label text="{i18n>LineaDisponible}" />
+                                    <t:template>
+                                        <Text
+                                            text="{ path: 'oDataInfoCliente>Klimd',
+                                        formatter : '.formatter.formatNumber' }"
+                                            wrapping="false"
+                                        />
+                                    </t:template>
+                                </t:Column>
+                                <t:Column
+                                    width="12rem"
+                                    showSortMenuEntry="true"
+                                    sortProperty="SAfavor"
+                                    filterProperty="SAfavor"
+                                    hAlign="Center"
+                                >
+                                    <Label text="{i18n>SaldoFavor}" />
+                                    <t:template>
+                                        <Text
+                                            text="{ path: 'oDataInfoCliente>SAfavor',
+                                        formatter : '.formatter.formatNumber' }"
+                                            wrapping="false"
+                                        />
+                                    </t:template>
+                                </t:Column>
+                                <t:Column
+                                    width="12rem"
+                                    showSortMenuEntry="true"
+                                    sortProperty="Waerk"
+                                    filterProperty="Waerk"
+                                    hAlign="Center"
+                                >
+                                    <Label text="{i18n>Moneda}" />
+                                    <t:template>
+                                        <Text
+                                            text="{oDataInfoCliente>Waerk}"
+                                            wrapping="false"
+                                        />
+                                    </t:template>
+                                </t:Column>
+                            </t:columns>
+                        </t:Table>
+                    </content>
+                </Panel>
+                <!-- INFO. CUENTAS POR PAGAR Y DIAS VENCIMIENTO -->
+                <Panel
+                    accessibleRole="Region"
+                    expandable="true"
+                    expanded="true"
+                >
+                    <headerToolbar>
+                        <OverflowToolbar>
+                            <Title
+                                text="{i18n>SubTitle-InfoCPDV}"
+                                class="custBold"
+                            />
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <content>
+                        <t:Table
+                            rowActionCount="1"
+                            rows="{oDataInfoCliente>/reporte_ncuentap_nav/results}"
+                            selectionMode="None"
+                            visibleRowCount="{local>/DetalleCount}"
+                            enableBusyIndicator="true"
+                            busy="{local>/loadingTbl}"
+                            class="sapUiResponsiveMarginTop"
+                            rowsUpdated=".onRowsUpdated"
+                        >
+                            <t:columns>
+                                <t:Column
+                                    width="10rem"
+                                    autoResizable="true"
+                                    headerSpan="2"
+                                    hAlign="Center"
+                                >
+                                    <t:multiLabels>
+                                        <Label
+                                            text="{i18n>Vigente}"
+                                            textAlign="Center"
+                                            width="100%"
+                                            class="tableHeaderWrap"
+                                        />
+                                        <Label
+                                            text="{i18n>NoVencido}"
+                                            textAlign="Center"
+                                            width="100%"
+                                        />
+                                    </t:multiLabels>
+                                    <t:template>
+                                        <Text
+                                            text="{ path: 'oDataInfoCliente>NoVencido',
+                                        formatter : '.formatter.formatNumber' }"
+                                            wrapping="false"
+                                        />
+                                    </t:template>
+                                </t:Column>
+                                <t:Column
+                                    width="10rem"
+                                    autoResizable="true"
+                                    hAlign="Center"
+                                >
+                                    <t:multiLabels>
+                                        <Label
+                                            text="{i18n>Vcdo-1-8-d}"
+                                            textAlign="Center"
+                                            width="100%"
+                                        />
+                                        <Label
+                                            text="{i18n>Vcdo-1-8-d}"
+                                            textAlign="Center"
+                                            width="100%"
+                                        />
+                                    </t:multiLabels>
+                                    <t:template>
+                                        <Text
+                                            text="{ path: 'oDataInfoCliente>Deu18',
+                                        formatter : '.formatter.formatNumber' }"
+                                            wrapping="false"
+                                        />
+                                    </t:template>
+                                </t:Column>
+                                <t:Column
+                                    width="10rem"
+                                    headerSpan="4"
+                                    autoResizable="true"
+                                    hAlign="Center"
+                                >
+                                    <t:multiLabels>
+                                        <Label
+                                            text="{i18n>Vencido}"
+                                            textAlign="Center"
+                                            width="100%"
+                                            class="tableHeaderWrap"
+                                        />
+                                        <Label
+                                            text="{i18n>Vcdo-9-30-d}"
+                                            textAlign="Center"
+                                            width="100%"
+                                        />
+                                    </t:multiLabels>
+                                    <t:template>
+                                        <Text
+                                            text="{ path: 'oDataInfoCliente>Deu930',
+                                        formatter : '.formatter.formatNumber' }"
+                                            wrapping="false"
+                                        />
+                                    </t:template>
+                                </t:Column>
+                                <t:Column
+                                    width="10rem"
+                                    hAlign="Center"
+                                    autoResizable="true"
+                                >
+                                    <t:multiLabels>
+                                        <Label
+                                            text="{i18n>Vcdo-31-60-d}"
+                                            textAlign="Center"
+                                            width="100%"
+                                        />
+                                        <Label
+                                            text="{i18n>Vcdo-31-60-d}"
+                                            textAlign="Center"
+                                            width="100%"
+                                        />
+                                    </t:multiLabels>
+                                    <t:template>
+                                        <Text
+                                            text="{ path: 'oDataInfoCliente>Deu3160',
+                                        formatter : '.formatter.formatNumber' }"
+                                            wrapping="false"
+                                        />
+                                    </t:template>
+                                </t:Column>
+                                <t:Column
+                                    width="10rem"
+                                    hAlign="Center"
+                                    autoResizable="true"
+                                >
+                                    <t:multiLabels>
+                                        <Label
+                                            text="{i18n>Vcdo-61-90-d}"
+                                            textAlign="Center"
+                                            width="100%"
+                                        />
+                                        <Label
+                                            text="{i18n>Vcdo-61-90-d}"
+                                            textAlign="Center"
+                                            width="100%"
+                                        />
+                                    </t:multiLabels>
+                                    <t:template>
+                                        <Text
+                                            text="{ path: 'oDataInfoCliente>Deu6190',
+                                        formatter : '.formatter.formatNumber' }"
+                                            wrapping="false"
+                                        />
+                                    </t:template>
+                                </t:Column>
+                                <t:Column
+                                    width="10rem"
+                                    hAlign="Center"
+                                    autoResizable="true"
+                                >
+                                    <t:multiLabels>
+                                        <Label
+                                            text="{i18n>Vcdo-90-d}"
+                                            textAlign="Center"
+                                            width="100%"
+                                        />
+                                        <Label
+                                            text="{i18n>Vcdo-90-d}"
+                                            textAlign="Center"
+                                            width="100%"
+                                        />
+                                    </t:multiLabels>
+                                    <t:template>
+                                        <Text
+                                            text="{ path: 'oDataInfoCliente>Deu91',
+                                        formatter : '.formatter.formatNumber' }"
+                                            wrapping="false"
+                                        />
+                                    </t:template>
+                                </t:Column>
+                                <t:Column
+                                    width="10rem"
+                                    hAlign="Center"
+                                    autoResizable="true"
+                                >
+                                    <Label text="{i18n>SaldoFavor}" />
+                                    <t:template>
+                                        <Text
+                                            text="{ path: 'oDataInfoCliente>SaldoAfavor',
+                                        formatter : '.formatter.formatNumber' }"
+                                            wrapping="false"
+                                        />
+                                    </t:template>
+                                </t:Column>
+                                <t:Column
+                                    width="10rem"
+                                    hAlign="Center"
+                                    autoResizable="true"
+                                >
+                                    <Label text="{i18n>Total}" />
+                                    <t:template>
+                                        <Text
+                                            text="{ path: 'oDataInfoCliente>Total',
+                                        formatter : '.formatter.formatNumber' }"
+                                            wrapping="false"
+                                        />
+                                    </t:template>
+                                </t:Column>
+                                <t:Column
+                                    width="10rem"
+                                    hAlign="Center"
+                                    autoResizable="true"
+                                    resizable="true"
+                                >
+                                    <Label text="{i18n>Moneda}" />
+                                    <t:template>
+                                        <Text
+                                            text="{oDataInfoCliente>Waers}"
+                                            wrapping="false"
+                                        />
+                                    </t:template>
+                                </t:Column>
+                            </t:columns>
+                        </t:Table>
+                    </content>
+                </Panel>
+            </VBox>
+        </content>
+    </Panel>
+</mvc:View>

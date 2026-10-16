@@ -1,0 +1,241 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog
+        id="dialogEditMaterialMA"
+        title="{i18n>EditarMaterial}"
+        contentWidth="80%"
+        draggable="true"
+    >
+        <content>
+            <f:Form editable="true">
+                <f:layout>
+                    <f:ResponsiveGridLayout backgroundDesign="Solid" />
+                </f:layout>
+                <f:formContainers>
+                    <f:FormContainer>
+                        <f:layoutData>
+                            <f:ColumnContainerData
+                                columnsXL="2"
+                                columnsL="2"
+                                columnsM="1"
+                            />
+                        </f:layoutData>
+                        <f:formElements>
+                            <f:FormElement>
+                                <!-- MATERIAL -->
+                                <VBox class="sapUiTinyMarginBottom">
+                                    <Label
+                                        text="{i18n>Material}:"
+                                        required="true"
+                                    />
+                                    <!-- <HBox> -->
+                                    <Input
+                                        value="{local>/MaterialEdit/MaterialTxt} ({local>/MaterialEdit/Material})"
+                                        editable="false"
+                                    />
+                                    <!-- <Text
+                                            text="{local>/MaterialEdit/MaterialTxt}"
+                                            wrapping="true"
+                                            class="sapUiTinyMarginBegin"
+                                        /> -->
+                                    <!-- </HBox> -->
+                                </VBox>
+                                <!-- MONEDA -->
+                                <VBox class="sapUiTinyMarginBottom">
+                                    <Label text="{i18n>Moneda}:" />
+                                    <Input
+                                        value="{local>/MaterialEdit/Moneda}"
+                                        editable="false"
+                                    />
+                                </VBox>
+                            </f:FormElement>
+                            <f:FormElement>
+                                <!-- PRECIO ACTUAL -->
+                                <VBox class="sapUiTinyMarginBottom">
+                                    <Label text="{i18n>PrecioActual}:" />
+                                    <Input
+                                        value="{
+                                        path: 'local>/MaterialEdit/PrecioAct',
+                                        formatter : '.formatter.formatNumber'
+                                    }"
+                                        editable="false"
+                                    />
+                                </VBox>
+                                <!-- LIMITE INFERIOR -->
+                                <VBox class="sapUiTinyMarginBottom">
+                                    <Label text="{i18n>LimiteInf}:" />
+                                    <Input
+                                        value="{
+                                            path: 'local>/MaterialEdit/LimiteInf',
+                                            formatter : '.formatter.formatNumber'
+                                        }"
+                                        editable="false"
+                                    />
+                                </VBox>
+                            </f:FormElement>
+                            <f:FormElement>
+                                <!-- PRECIO SUGERIDO -->
+                                <VBox class="sapUiTinyMarginBottom">
+                                    <Label
+                                        text="{i18n>PrecioSugerido}:"
+                                        required="true"
+                                    />
+                                    <!-- <Input
+                                        id="txtPrecioSugEditMA"
+                                        value="{
+                                            path: 'local>/MaterialEdit/PrecioSug',
+                                            type: 'sap.ui.model.type.Float',
+                                            formatter : '.formatter.formatNumber'
+                                        }"
+                                        liveChange=".onValidarCampo('txtPrecioSugEditMA')"
+                                        submit=".onOkPress($event, 'dialogEditMaterialMA')"
+                                        valueStateText="{i18n>MsgGSValidaPrecioSug}"
+                                        editable="false"
+                                        required="true"
+                                        class="custBGColor1"
+                                    /> -->
+                                    <Input
+                                        id="txtPrecioSugEditMA1000"
+                                        value="{
+                                            path: 'local>/MaterialEdit/PrecioSug',
+                                            type: 'sap.ui.model.type.Float',
+                                            formatOptions: {
+                                                groupingEnabled: true,
+                                                groupingSeparator: ',',
+                                                decimalSeparator: '.',
+                                                decimals: 2,
+                                                minFractionDigits: 2,
+                                                maxFractionDigits: 2
+                                            }
+                                        }"
+                                        liveChange=".onValidarPrecio('txtPrecioSugEditMA1000')"
+                                        submit=".onOkPress($event, 'dialogEditMaterialMA')"
+                                        valueStateText="{i18n>MsgGSValidaPrecioSug}"
+                                        required="true"
+                                        class="custBGColor1"
+                                        visible="{= ${local>/Sociedad} === '1000' ? true : false}"
+                                    />
+                                    <Input
+                                        id="txtPrecioSugEditMA1200"
+                                        value="{
+                                            path: 'local>/MaterialEdit/PrecioSug',
+                                            type: 'sap.ui.model.type.Float',
+                                            formatOptions: {
+                                                groupingEnabled: true,
+                                                groupingSeparator: '.',
+                                                decimalSeparator: ',',
+                                                decimals: 2,
+                                                minFractionDigits: 2,
+                                                maxFractionDigits: 2
+                                            }
+                                        }"
+                                        liveChange=".onValidarPrecio('txtPrecioSugEditMA1200')"
+                                        submit=".onOkPress($event, 'dialogEditMaterialMA')"
+                                        valueStateText="{i18n>MsgGSValidaPrecioSug}"
+                                        required="true"
+                                        class="custBGColor1"
+                                        visible="{= ${local>/Sociedad} === '1200' ? true : false}"
+                                    />
+                                </VBox>
+                                <!-- CANTIDAD SUGERIDA -->
+                                <VBox class="sapUiTinyMarginBottom">
+                                    <Label text="{i18n>CantidadSug}:" />
+                                    <Input
+                                        type="Number"
+                                        value="{local>/MaterialEdit/CantidadSug}"
+                                        required="true"
+                                        editable="false"
+                                    />
+                                </VBox>
+                            </f:FormElement>
+                            <f:FormElement>
+                                <!-- FECHA INICIO -->
+                                <VBox class="sapUiTinyMarginBottom">
+                                    <Label text="{i18n>FechaInicio}:" />
+                                    <DatePicker
+                                        editable="false"
+                                        value="{
+                                            path: 'local>/MaterialEdit/FechaIni',
+                                            type: 'sap.ui.model.type.Date',
+                                            formatOptions: {
+                                                pattern: 'dd/MM/y'
+                                            }
+                                        }"
+                                    />
+                                </VBox>
+                                <!-- FECHA FIN -->
+                                <VBox class="sapUiTinyMarginBottom">
+                                    <Label
+                                        text="{i18n>FechaFin}:"
+                                        required="true"
+                                    />
+                                    <DatePicker
+                                        id="txtFechaFinEditMA"
+                                        value="{
+                                            path: 'local>/MaterialEdit/FechaFin',
+                                            type: 'sap.ui.model.type.Date',
+                                            formatOptions: {
+                                                pattern: 'dd/MM/y'
+                                            }
+                                        }"
+                                        change=".onValidarCampo('txtFechaFinEditMA')"
+                                        minDate="{local>/MaterialEdit/FechaIni}"
+                                        required="true"
+                                    />
+                                </VBox>
+                            </f:FormElement>
+                            <!-- NOTA -->
+                            <f:FormElement>
+                                <VBox class="sapUiTinyMarginBottom">
+                                    <Label text="{i18n>Nota}:" />
+                                    <TextArea
+                                        value="{local>/MaterialEdit/Nota}"
+                                        placeholder="Nota"
+                                        rows="4"
+                                        width="100%"
+                                        editable="false"
+                                    />
+                                </VBox>
+                            </f:FormElement>
+                            <!-- NOTA RESPUESTA-->
+                            <f:FormElement>
+                                <VBox class="sapUiTinyMarginBottom">
+                                    <Label text="{i18n>NotaResp}:" />
+                                    <TextArea
+                                        value="{local>/MaterialEdit/NotaResp}"
+                                        placeholder="Respuesta (opcional)"
+                                        rows="4"
+                                        width="100%"
+                                    />
+                                </VBox>
+                            </f:FormElement>
+                        </f:formElements>
+                    </f:FormContainer>
+                </f:formContainers>
+            </f:Form>
+        </content>
+        <beginButton>
+            <Button
+                type="Default"
+                text="{i18n>Cerrar}"
+                press=".onCloseDialog($event, 'dialogEditMaterialMA')"
+                width="6rem"
+            />
+        </beginButton>
+        <endButton>
+            <Button
+                type="Success"
+                icon="sap-icon://accept"
+                text="{i18n>Ok}"
+                press=".onOkPress($event, 'dialogEditMaterialMA')"
+                width="6rem"
+                class="sapUiTinyMarginEnd"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,21 @@
+<core:FragmentDefinition
+    xmlns="sap.ui.comp.valuehelpdialog"
+    xmlns:m="sap.m"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+>
+    <ValueHelpDialog
+        id="dialogMultiComercialCO"
+        title="{i18n>Comercial}"
+        ok=".onOkPress($event, 'dialogMultiComercialCO')"
+        cancel=".onCancelPress($event, 'dialogMultiComercialCO')"
+        afterClose=".onAfterClose($event, 'dialogMultiComercialCO')"
+        supportRanges="true"
+        supportRangesOnly="true"
+        key="Clave"
+        descriptionKey="Denominacion"
+        draggable="true"
+    />
+</core:FragmentDefinition>

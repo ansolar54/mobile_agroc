@@ -1,0 +1,17 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.f"
+	xmlns:l="sap.ui.layout">
+	<Popover
+		id="userMenu"
+		title="{local>/Usuario}"
+		titleAlignment="Center"
+		placement="Bottom"
+		showArrow="{=${local>/IsMobile} ? false : true}"
+		offsetY="{=${local>/IsMobile} ? 5 : 0}"
+		offsetX="{=${local>/IsMobile} ? -90 : 0}"
+		afterClose="onPopoverClose">
+		<core:Fragment fragmentName="com.axelera.pe.gestioncomercial.view.UserMenu" type="XML"> </core:Fragment>
+	</Popover>
+</core:FragmentDefinition>

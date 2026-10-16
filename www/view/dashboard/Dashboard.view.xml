@@ -1,0 +1,65 @@
+<mvc:View xmlns:networkgraph="sap.suite.ui.commons.networkgraph"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    controllerName="com.axelera.pe.gestioncomercial.controller.dashboard.Dashboard"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    height="100%"
+>
+    <List
+        id="idMenuList"
+        items="{ 
+            path: '/navigationDB', 
+            templateShareable:false
+        }"
+    >
+        <items>
+            <CustomListItem class="backgroundLaunchpad">
+                <Panel class="contentGroup contentPadding sapUiTinyMargin">
+                    <headerToolbar>
+                        <OverflowToolbar>
+                            <Title text="{title}" />
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <content>
+                        <HBox
+                            items="{path: 'items', templateShareable:false}"
+                            width="100%"
+                            wrap="Wrap"
+                            visible="{=!${local>/IsMobile} ? true : false}"
+                        >
+                            <items>
+                                <VBox>
+                                    <Button
+                                        id="btnMenu"
+                                        type="{buttonType}"
+                                        icon="{icon}"
+                                        text="{title}"
+                                        press=".onNavigateToApp"
+                                        width="12rem"
+                                        class="sapUiTinyMarginBeginEnd btnLaunchpad btnIconLaunchpad"
+                                    />
+                                </VBox>
+                            </items>
+                        </HBox>
+                        <List 
+                            items="{path: 'items', templateShareable:false}" 
+                            visible="{=${local>/IsMobile} ? true : false}"
+                        >
+                            <StandardListItem 
+                                title="{title}"
+                                description=""
+                                icon="{icon}"
+                                iconDensityAware="false"
+                                iconInset="true"
+                                type="Navigation"
+                                visible="true"
+                                press=".onNavigateToApp"
+                            />
+                        </List>
+                    </content>
+                </Panel>
+            </CustomListItem>
+        </items>
+    </List>
+</mvc:View>

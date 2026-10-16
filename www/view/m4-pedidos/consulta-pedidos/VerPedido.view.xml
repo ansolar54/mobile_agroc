@@ -1,0 +1,1588 @@
+<mvc:View
+    controllerName="com.axelera.pe.gestioncomercial.controller.m4-pedidos.VerPedido"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:t="sap.ui.table"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+>
+    <Page
+        title="{i18n>VerPedido}"
+        showNavButton="true"
+        navButtonPress=".onNavBack"
+    >
+        <Panel
+            accessibleRole="Region"
+            visible="{=!${local>/IsMobile}}"
+        >
+            <content>
+                <l:Grid class="sapUiTinyMargin">
+                    <l:content>
+                        <!-- Row 1: 3 Inputs -->
+                        <!-- ORG.VENTAS -->
+                        <HBox alignItems="Center">
+                            <Label
+                                text="{i18n>OrgVentas}:"
+                                textAlign="End"
+                                width="110px"
+                                class="sapUiTinyMargin"
+                            />
+                            <Input
+                                value="{local>/OrgVentas}"
+                                editable="false"
+                                maxLength="4"
+                                width="8rem"
+                            />
+                            <Text
+                                id="txtOrgVentasVPInfo"
+                                text="{local>/OrgVentasInfo}"
+                                wrapping="false"
+                                class="sapUiTinyMargin"
+                            />
+                            <layoutData>
+                                <l:GridData span="XL4 L4 M4 S12" />
+                            </layoutData>
+                        </HBox>
+                        <!-- CANAL DISTRIB. -->
+                        <HBox alignItems="Center">
+                            <Label
+                                text="{i18n>CanalDistrib}:"
+                                textAlign="End"
+                                width="110px"
+                                class="sapUiTinyMargin"
+                            />
+                            <Input
+                                value="{local>/CanalDist}"
+                                editable="false"
+                                width="5rem"
+                            />
+                            <Text
+                                text="{local>/CanalDistInfo}"
+                                wrapping="false"
+                                class="sapUiTinyMargin"
+                            />
+                            <layoutData>
+                                <l:GridData span="XL4 L4 M4 S12" />
+                            </layoutData>
+                        </HBox>
+                        <!-- SECTOR -->
+                        <HBox alignItems="Center">
+                            <Label
+                                text="{i18n>Sector}:"
+                                textAlign="End"
+                                width="110px"
+                                class="sapUiTinyMargin"
+                            />
+                            <Input
+                                value="{local>/Sector}"
+                                width="5rem"
+                                editable="false"
+                            />
+                            <Text
+                                text="{local>/SectorInfo}"
+                                class="sapUiTinyMargin"
+                                wrapping="false"
+                            />
+                            <layoutData>
+                                <l:GridData span="XL4 L4 M4 S12" />
+                            </layoutData>
+                        </HBox>
+                        <!-- Row 2: 1 Input -->
+                        <!-- NRO PEDIDO -->
+                        <HBox alignItems="Center">
+                            <Label
+                                text="{i18n>NroPedido}:"
+                                textAlign="End"
+                                width="110px"
+                                class="sapUiTinyMargin"
+                            />
+                            <Input
+                                value="{local>/NroPedido}"
+                                editable="false"
+                            />
+                            <layoutData>
+                                <l:GridData span="XL12 L12 M12 S12" />
+                            </layoutData>
+                        </HBox>
+                        <!-- SOLICITANTE -->
+                        <HBox alignItems="Center">
+                            <Label
+                                text="{i18n>Solicitante}:"
+                                textAlign="End"
+                                width="110px"
+                                class="sapUiTinyMargin"
+                            />
+                            <Input
+                                value="{local>/Solicitante}"
+                                editable="false"
+                                width="8rem"
+                            />
+                            <Text
+                                text="{local>/SolicInfo}"
+                                wrapping="false"
+                                class="sapUiTinyMargin"
+                            />
+                            <layoutData>
+                                <l:GridData span="XL12 L12 M12 S12" />
+                            </layoutData>
+                        </HBox>
+                        <!-- Row 3: 1 Input -->
+                        <!-- DEST. MERCANCIA -->
+                        <HBox alignItems="Center">
+                            <Label
+                                text="{i18n>DestMercancia}:"
+                                textAlign="End"
+                                width="110px"
+                                class="sapUiTinyMargin"
+                            />
+                            <Input
+                                value="{local>/DestMerc}"
+                                editable="false"
+                                width="8rem"
+                            />
+                            <Text
+                                text="{local>/DestMercInfo}"
+                                wrapping="false"
+                                class="sapUiTinyMargin"
+                            />
+                            <layoutData>
+                                <l:GridData span="XL12 L12 M12 S12" />
+                            </layoutData>
+                        </HBox>
+                        <!-- Row 4: 1 Input -->
+                        <!-- NRO. PEDIDO CLIENTE -->
+                        <HBox alignItems="Center">
+                            <Label
+                                text="{i18n>OCCliente}:"
+                                textAlign="End"
+                                width="110px"
+                                class="sapUiTinyMargin"
+                            />
+                            <Input
+                                value="{local>/NroPedCliente}"
+                                editable="false"
+                                width="8rem"
+                            />
+                            <layoutData>
+                                <l:GridData span="XL12 L12 M12 S12" />
+                            </layoutData>
+                        </HBox>
+                        <!-- Row 5: 1 Input -->
+                        <!-- TRANSPORTISTA -->
+                        <HBox alignItems="Center">
+                            <Label
+                                text="{i18n>Transportista}:"
+                                textAlign="End"
+                                width="110px"
+                                class="sapUiTinyMargin"
+                            />
+                            <Input
+                                value="{local>/Transportista}"
+                                editable="false"
+                                width="8rem"
+                            />
+                            <Text
+                                text="{local>/TranspInfo}"
+                                wrapping="false"
+                                class="sapUiTinyMargin"
+                            />
+                            <layoutData>
+                                <l:GridData span="XL12 L12 M12 S12" />
+                            </layoutData>
+                        </HBox>
+                        <!-- Row 6: 4 Inputs -->
+                        <!-- OFICINA -->
+                        <HBox
+                            class="sapUiContentPadding"
+                            alignItems="Center"
+                        >
+                            <Label
+                                text="{i18n>Oficina}:"
+                                textAlign="End"
+                                width="110px"
+                                class="sapUiTinyMargin"
+                            />
+                            <Input
+                                value="{local>/OfiVentasInfo}"
+                                tooltip="{local>/OfiVentasInfo}"
+                                editable="false"
+                            />
+                            <!-- <Text
+                            text="{local>/OfiVentasInfo}"
+                            class="sapUiTinyMargin"
+                            wrapping="false"
+                        /> -->
+                            <layoutData>
+                                <l:GridData span="XL3 L3 M3 S12" />
+                            </layoutData>
+                        </HBox>
+                        <!-- GRUPO VEND. -->
+                        <HBox
+                            class="sapUiContentPadding"
+                            alignItems="Center"
+                        >
+                            <Label
+                                text="{i18n>GpoVend}:"
+                                textAlign="End"
+                                width="110px"
+                                class="sapUiTinyMargin"
+                            />
+                            <Input
+                                value="{local>/GrupoVendInfo}"
+                                tooltip="{local>/GrupoVendInfo}"
+                                editable="false"
+                            />
+                            <!-- <Text
+                            text="{local>/GrupoVendInfo}"
+                            wrapping="false"
+                            class="sapUiTinyMargin"
+                        /> -->
+                            <layoutData>
+                                <l:GridData span="XL3 L3 M3 S12" />
+                            </layoutData>
+                        </HBox>
+                        <!-- COMERCIAL -->
+                        <HBox
+                            class="sapUiContentPadding"
+                            alignItems="Center"
+                        >
+                            <Label
+                                text="{i18n>Comercial}:"
+                                textAlign="End"
+                                width="110px"
+                                class="sapUiTinyMargin"
+                            />
+                            <Input
+                                value="{local>/Comercial}"
+                                tooltip="{local>/Comercial}"
+                                editable="false"
+                            />
+                            <layoutData>
+                                <l:GridData span="XL3 L3 M3 S12" />
+                            </layoutData>
+                        </HBox>
+                        <!-- LISTA DE PRECIOS -->
+                        <HBox
+                            class="sapUiContentPadding"
+                            alignItems="Center"
+                        >
+                            <Label
+                                text="{i18n>ListaPrecios}:"
+                                textAlign="End"
+                                width="110px"
+                                class="sapUiTinyMargin"
+                            />
+                            <Input
+                                value="{local>/ListaPreciosInfo}"
+                                tooltip="{local>/ListaPreciosInfo}"
+                                editable="false"
+                            />
+                            <!-- <Text
+                            text="{local>/ListaPreciosInfo}"
+                            wrapping="false"
+                            class="sapUiTinyMargin"
+                        /> -->
+                            <layoutData>
+                                <l:GridData span="XL3 L3 M3 S12" />
+                            </layoutData>
+                        </HBox>
+                        <!-- Row 7: 2 RadioButton 1 checkbox -->
+                        <!-- MONEDA -->
+                        <HBox
+                            class="sapUiContentPadding"
+                            alignItems="Center"
+                        >
+                            <Label
+                                text="{i18n>Moneda}:"
+                                labelFor="rbtnMonedaVP"
+                                textAlign="End"
+                                width="110px"
+                                class="sapUiTinyMargin"
+                            />
+                            <RadioButtonGroup
+                                id="rbtnMonedaVP"
+                                valueState="Information"
+                                columns="2"
+                                editable="false"
+                            >
+                                <RadioButton text="{i18n>Soles}" />
+                                <RadioButton text="{i18n>Dolares}" />
+                            </RadioButtonGroup>
+                            <layoutData>
+                                <l:GridData span="XL4 L4 M4 S12" />
+                            </layoutData>
+                        </HBox>
+                        <!-- CLASE DOC. -->
+                        <HBox
+                            class="sapUiContentPadding"
+                            alignItems="Center"
+                        >
+                            <Label
+                                text="{i18n>ClaseDoc}:"
+                                labelFor="rbtnClaseDocVP"
+                                textAlign="End"
+                                width="110px"
+                                class="sapUiTinyMargin"
+                            />
+                            <RadioButtonGroup
+                                id="rbtnClaseDocVP"
+                                valueState="Information"
+                                columns="2"
+                                editable="false"
+                            >
+                                <RadioButton text="{i18n>Boleta}" />
+                                <RadioButton text="{i18n>Factura}" />
+                            </RadioButtonGroup>
+                            <layoutData>
+                                <l:GridData span="XL4 L4 M4 S12" />
+                            </layoutData>
+                        </HBox>
+                        <!-- CHECK ASUME FLETE -->
+                        <HBox
+                            class="sapUiContentPadding"
+                            alignItems="Center"
+                        >
+                            <Label
+                                labelFor="chkFleteVP"
+                                textAlign="End"
+                                width="110px"
+                                class="sapUiTinyMargin"
+                            />
+                            <CheckBox
+                                id="chkFleteVP"
+                                text="{local>/LblAsumeFlete}"
+                                editable="false"
+                            />
+                            <layoutData>
+                                <l:GridData span="XL4 L4 M4 S12" />
+                            </layoutData>
+                        </HBox>
+                        <!-- COND. PAGO -->
+                        <HBox
+                            class="sapUiContentPadding"
+                            alignItems="Center"
+                        >
+                            <Label
+                                text="{i18n>CondPago}:"
+                                labelFor="txtCondPagoVP"
+                                textAlign="End"
+                                width="110px"
+                                class="sapUiTinyMargin"
+                            />
+                            <HBox>
+                                <Input
+                                    id="txtCondPagoVP"
+                                    value="{local>/CondPago}"
+                                    editable="false"
+                                    width="4rem"
+                                />
+                                <!-- <Button
+                                icon="sap-icon://value-help"
+                                press=".onMatchcodeCondPago"
+                                tooltip="Value Help"
+                            /> -->
+                            </HBox>
+                            <Text
+                                id="txtCondPagoVPInfo"
+                                text="{local>/CondPagoInfo}"
+                                wrapping="false"
+                                class="sapUiTinyMargin"
+                            />
+                            <layoutData>
+                                <l:GridData span="XL6 L6 M12 S12" />
+                            </layoutData>
+                        </HBox>
+                        <!-- CALCULAR PLAZO -->
+                        <!-- <HBox
+                        alignItems="Center"
+                        class="sapUiContentPadding"
+                    >
+                        <Button
+                            type="Success"
+                            icon="sap-icon://simulate"
+                            text="{i18n>CalcularPlazo}"
+                            press="onCalcularPlazo"
+                            enabled="true"
+                            width="12rem"
+                            class="sapUiTinyMargin"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL6 L6 M12 S12" />
+                        </layoutData>
+                    </HBox> -->
+                        <!-- OBS GUIA -->
+                        <HBox
+                            visible="{= ${local>/TipoNota} === 'NC' || ${local>/TipoNota} === 'ND' ? false : true }"
+                            alignItems="Center"
+                            class="sapUiContentPadding"
+                        >
+                            <Label
+                                text="{i18n>ObservGuia}:"
+                                labelFor="txtObsGuiaVP"
+                                textAlign="End"
+                                width="110px"
+                                class="sapUiTinyMargin"
+                            />
+                            <Input
+                                id="txtObsGuiaVP"
+                                value="{local>/ObsGuia}"
+                                editable="false"
+                                width="25rem"
+                            />
+                            <layoutData>
+                                <l:GridData span="XL12 L12 M12 S12" />
+                            </layoutData>
+                        </HBox>
+                        <!-- OBS FACTURA -->
+                            <!-- visible="{= ${local>/TipoNota} === 'NC' || ${local>/TipoNota} === 'ND' ? false : true }" -->
+                        <HBox
+                            alignItems="Center"
+                            class="sapUiContentPadding"
+                        >
+                            <Label
+                                text="{i18n>ObservFactura}:"
+                                labelFor="txtObsFacturaVP"
+                                textAlign="End"
+                                width="110px"
+                                class="sapUiTinyMargin"
+                            />
+                            <Input
+                                id="txtObsFacturaVP"
+                                value="{local>/ObsFactura}"
+                                editable="false"
+                                width="25rem"
+                            />
+                            <layoutData>
+                                <l:GridData span="XL12 L12 M12 S12" />
+                            </layoutData>
+                        </HBox>
+                        <!-- MOTIVO -->
+                        <HBox
+                            visible="{= ${local>/TipoNota} === 'NC' || ${local>/TipoNota} === 'ND' ? true : false }"
+                            alignItems="Center"
+                            class="sapUiContentPadding"
+                        >
+                            <Label
+                                text="{i18n>Motivo}:"
+                                textAlign="End"
+                                width="110px"
+                                class="sapUiTinyMargin"
+                            />
+                            <Input
+                                value="{local>/Motivo}"
+                                editable="false"
+                                width="25rem"
+                            />
+                            <layoutData>
+                                <l:GridData span="XL12 L12 M12 S12" />
+                            </layoutData>
+                        </HBox>
+                        <HBox
+                            alignItems="Start"
+                            alignContent="Center"
+                            class="sapUiTinyMarginTop sapUiTinyMarginBottom"
+                        >
+                            <Button
+                                id="btnEnviarPDFVP"
+                                type="Success"
+                                icon="sap-icon://save"
+                                text="Enviar PDF"
+                                press=".onScreenCargaCorreos1"
+                                enabled="true"
+                                width="12rem"
+                                class="sapUiTinyMarginEnd"
+                            />
+                            <layoutData>
+                                <l:GridData span="XL12 L12 M12 S12" />
+                            </layoutData>
+                        </HBox>
+                    </l:content>
+                </l:Grid>
+                <t:Table
+                    id="tblVerPedidos"
+                    rowActionCount="1"
+                    rows="{local>/PosPedidos/Tabla}"
+                    selectionMode="Single"
+                    enableBusyIndicator="true"
+                    showNoData="false"
+                    rowSelectionChange="onRowSelectionChange"
+                    class="sapUiTinyMargin"
+                >
+                    <t:columns>
+                        <t:Column
+                            width="3rem"
+                            hAlign="Center"
+                        >
+                            <Label text="{i18n>Pos}" />
+                            <t:template>
+                                <Text text="{local>Posnr}" />
+                            </t:template>
+                        </t:Column>
+                        <!-- CENTRO -->
+                        <t:Column
+                            width="4rem"
+                            hAlign="Center"
+                        >
+                            <Label text="{i18n>Centro}" />
+                            <t:template>
+                                <Text text="{local>Werks}" />
+                            </t:template>
+                        </t:Column>
+                        <!-- ALMACEN -->
+                        <t:Column
+                            width="5rem"
+                            hAlign="Center"
+                        >
+                            <Label text="{i18n>Almacen}" />
+                            <t:template>
+                                <Text text="{local>Lgort}" />
+                            </t:template>
+                        </t:Column>
+                        <!-- MATERIAL -->
+                        <t:Column
+                            width="8rem"
+                            hAlign="Center"
+                        >
+                            <Label text="{i18n>Material}" />
+                            <!-- <Text text="{i18n>Material}" width="100%" textAlign="Center" /> -->
+                            <t:template>
+                                <Text
+                                    id="txtItemMaterialVP"
+                                    text="{local>Matnr}"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <!-- DENOMINACION -->
+                        <t:Column width="20rem">
+                            <!-- <Label text="{i18n>Denominacion}" /> -->
+                            <Text
+                                text="{i18n>Denominacion}"
+                                width="100%"
+                                textAlign="Center"
+                            />
+                            <t:template>
+                                <Text text="{local>Maktx}" />
+                            </t:template>
+                        </t:Column>
+                        <!-- STOCK DISP. -->
+                        <!-- <t:Column
+                        width="6rem"
+                        hAlign="End"
+                    >
+                        <Label text="{i18n>StockDisp}" />
+                        <t:template>
+                            <Text
+                                text="{
+                                    path: 'local>Labst',
+                                    type: 'sap.ui.model.type.Float',
+                                    formatOptions: {
+                                        minFractionDigits: 2,
+                                        maxFractionDigits: 2,
+                                        groupingSeparator: ',',
+                                        decimalSeparator: '.',
+                                        groupingEnabled: true
+                                    },
+                                    constraints: {
+                                        precision: 11,
+                                        scale: 2
+                                    }
+                                }"
+                            />
+                        </t:template>
+                    </t:Column> -->
+                        <!-- UM -->
+                        <t:Column
+                            width="4rem"
+                            hAlign="Center"
+                        >
+                            <Label text="{i18n>UM}" />
+                            <t:template>
+                                <Text text="{local>Vrkme}" />
+                            </t:template>
+                        </t:Column>
+                        <!-- CANTIDAD -->
+                        <t:Column
+                            width="6rem"
+                            hAlign="Center"
+                        >
+                            <Label text="{i18n>CantPed}" />
+                            <t:template>
+                                <Text
+                                    text="{
+                                        path: 'local>Zmeng',
+                                        type: 'sap.ui.model.type.Integer'
+                                    }"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <!-- CANT. DESP. -->
+                        <t:Column
+                            width="6rem"
+                            hAlign="Center"
+                        >
+                            <Label text="{i18n>CantDesp}" />
+                            <t:template>
+                                <Text text="{local>CantDesp}" />
+                            </t:template>
+                        </t:Column>
+                        <!-- PRECIO LISTA -->
+                        <t:Column width="6rem">
+                            <!-- <Label text="{i18n>PrecioLista}" /> -->
+                            <Text
+                                text="{i18n>PrecioLista}"
+                                width="100%"
+                                textAlign="Center"
+                            />
+                            <t:template>
+                                <Text
+                                    text="{local>PrecioLista}"
+                                    width="100%"
+                                    textAlign="End"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <!-- % DESCUENTO -->
+                        <!-- <t:Column
+                        width="4rem"
+                        hAlign="End"
+                    >
+                        <Label text="{i18n>DescPorc}" />
+                        <t:template>
+                            <Text
+                                text="{local>Desc}"
+                                textAlign="End"
+                            />
+                        </t:template>
+                    </t:Column> -->
+                        <!-- PRECIO CON DESCUENTO -->
+                        <t:Column width="6rem">
+                            <!-- <Label text="{i18n>PrecioFinal}" /> -->
+                            <Text
+                                text="{i18n>PrecioFinal}"
+                                width="100%"
+                                textAlign="Center"
+                            />
+                            <t:template>
+                                <Text
+                                    text="{local>Precio}"
+                                    width="100%"
+                                    textAlign="End"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <!-- <t:Column width="6rem">
+                        <Label text="{i18n>PrecioDesc}" />
+                        <t:template>
+                            <Text
+                                text="{local>PrecioDesc}"
+                                textAlign="End"
+                            />
+                        </t:template>
+                    </t:Column> -->
+                        <!-- <t:Column
+                        width="5rem"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>Flete}" />
+                        <t:template>
+                            <Text
+                                text="{local>Flete}"
+                                textAlign="End"
+                            />
+                        </t:template>
+                    </t:Column> -->
+                        <!-- SUB TOTAL -->
+                        <t:Column width="6rem">
+                            <!-- <Label text="{i18n>SubTotal}" /> -->
+                            <Text
+                                text="{i18n>SubTotal}"
+                                width="100%"
+                                textAlign="Center"
+                            />
+                            <t:template>
+                                <Text
+                                    text="{
+                                        path: 'local>Subtotal',
+                                        type: 'sap.ui.model.type.Float',
+                                        formatOptions: {
+                                            minFractionDigits: 2,
+                                            maxFractionDigits: 2,
+                                            groupingSeparator: ',',
+                                            decimalSeparator: '.',
+                                            groupingEnabled: true
+                                        },
+                                        constraints: {
+                                            precision: 11,
+                                            scale: 2
+                                        }
+                                    }"
+                                    width="100%"
+                                    textAlign="End"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <!-- FACTURA -->
+                        <t:Column
+                            width="14rem"
+                            hAlign="Center"
+                        >
+                            <!-- <Label text="{i18n>Factura}" /> -->
+                            <Label
+                                text="{= ${local>/TipoNota} === 'NC' ? 'NC' : ${local>/TipoNota} === 'ND' ? 'ND' : 'Factura' }"
+                            />
+                            <t:template>
+                                <!-- <Text text="{local>VbelnFact}" /> -->
+                                <HBox alignItems="Center">
+                                    <items>
+                                        <Text
+                                            text="{local>VbelnFact}"
+                                            wrapping="false"
+                                        />
+                                        <Button
+                                            type="Transparent"
+                                            icon="sap-icon://pdf-attachment"
+                                            tooltip="{i18n>VerFactura}"
+                                            press=".onVerPDFFactura"
+                                            visible="{= ${local>VbelnFact} === '' ? false : true}"
+                                        />
+                                    </items>
+                                </HBox>
+                            </t:template>
+                        </t:Column>
+                        <!-- DESPACHO -->
+                        <t:Column
+                            width="14rem"
+                            hAlign="Center"
+                            visible="{= ${local>/TipoNota} === 'NC' || ${local>/TipoNota} === 'ND' ? false : true }"
+                        >
+                            <Label text="{i18n>Despacho}" />
+                            <t:template>
+                                <!-- <Text text="{local>VbelnGuia}" /> -->
+                                <HBox alignItems="Center">
+                                    <items>
+                                        <Text
+                                            text="{local>VbelnGuia}"
+                                            wrapping="false"
+                                        />
+                                        <Button
+                                            type="Transparent"
+                                            icon="sap-icon://pdf-attachment"
+                                            tooltip="{i18n>VerGuiaRem}"
+                                            press=".onVerPDFGuiaRem"
+                                            visible="{= ${local>VbelnGuia} === '' ? false : true}"
+                                            enabled="{= ${local>NombGuia} === '' ? false : true}"
+                                        />
+                                    </items>
+                                </HBox>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="5rem"
+                            showSortMenuEntry="true"
+                            sortProperty="Action"
+                            hAlign="Center"
+                        >
+                            <Label text="{i18n>Accion}" />
+                            <t:template>
+                                <HBox justifyContent="Center">
+                                    <items>
+                                        <!-- <Button
+                                            type="Transparent"
+                                            icon="sap-icon://pdf-reader"
+                                            tooltip="{i18n>VerFactura}"
+                                            press=".onVerPDFFactura"
+                                        /> -->
+                                        <Button
+                                            type="Transparent"
+                                            icon="sap-icon://email"
+                                            tooltip="{i18n>EnviarFactura}"
+                                            press=".onScreenCargaCorreos2"
+                                        />
+                                    </items>
+                                </HBox>
+                            </t:template>
+                        </t:Column>
+                    </t:columns>
+                </t:Table>
+                <l:Grid class="sapUiTinyMarginTop">
+                    <l:content>
+                        <!-- <HBox>
+                        <Label
+                            text="{i18n>FletePed}:"
+                            textAlign="End"
+                            width="110px"
+                            class="sapUiTinyMargin"
+                        />
+                        <Input
+                            id="txtFletePedVP"
+                            value="{local>/Footer/FletePed}"
+                            textAlign="End"
+                            class="sapUiTinyMargin"
+                            editable="false"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL6 L6 M12 S12" />
+                        </layoutData>
+                    </HBox> -->
+                        <HBox justifyContent="Center">
+                            <layoutData>
+                                <l:GridData span="XL6 L6 M12 S12" />
+                            </layoutData>
+                        </HBox>
+                        <HBox
+                            justifyContent="Center"
+                            class="sapUiTinyMarginBottom"
+                        >
+                            <VBox>
+                                <HBox>
+                                    <Label
+                                        text="{i18n>SubTotal}:"
+                                        textAlign="End"
+                                        width="110px"
+                                        class="sapUiTinyMargin"
+                                    />
+                                    <Input
+                                        value="{
+                                        path: 'local>/Footer/SubTotal',
+                                        type: 'sap.ui.model.type.Float',
+                                        formatOptions: {
+                                            minFractionDigits: 2,
+                                            maxFractionDigits: 2,
+                                            groupingSeparator: ',',
+                                            decimalSeparator: '.',
+                                            groupingEnabled: true
+                                        },
+                                        constraints: {
+                                            precision: 11,
+                                            scale: 2
+                                        }
+                                    }"
+                                        textAlign="End"
+                                        editable="false"
+                                    />
+                                    <layoutData>
+                                        <l:GridData span="XL6 L6 M12 S12" />
+                                    </layoutData>
+                                </HBox>
+                                <HBox>
+                                    <Label
+                                        text="{i18n>IGV1}:"
+                                        textAlign="End"
+                                        width="110px"
+                                        class="sapUiTinyMargin"
+                                    />
+                                    <Input
+                                        value="{
+                                        path: 'local>/Footer/IGV',
+                                        type: 'sap.ui.model.type.Float',
+                                        formatOptions: {
+                                            minFractionDigits: 2,
+                                            maxFractionDigits: 2,
+                                            groupingSeparator: ',',
+                                            decimalSeparator: '.',
+                                            groupingEnabled: true
+                                        },
+                                        constraints: {
+                                            precision: 11,
+                                            scale: 2
+                                        }
+                                    }"
+                                        textAlign="End"
+                                        editable="false"
+                                    />
+                                    <layoutData>
+                                        <l:GridData span="XL6 L6 M12 S12" />
+                                    </layoutData>
+                                </HBox>
+                                <HBox>
+                                    <Label
+                                        text="{i18n>Total}:"
+                                        textAlign="End"
+                                        width="110px"
+                                        class="sapUiTinyMargin"
+                                    />
+                                    <Input
+                                        value="{
+                                        path: 'local>/Footer/Total',
+                                        type: 'sap.ui.model.type.Float',
+                                        formatOptions: {
+                                            minFractionDigits: 2,
+                                            maxFractionDigits: 2,
+                                            groupingSeparator: ',',
+                                            decimalSeparator: '.',
+                                            groupingEnabled: true
+                                        },
+                                        constraints: {
+                                            precision: 11,
+                                            scale: 2
+                                        }
+                                    }"
+                                        textAlign="End"
+                                        editable="false"
+                                    />
+                                    <Text
+                                        text="{local>/MonedaDesc}"
+                                        class="sapUiTinyMargin"
+                                    />
+                                    <layoutData>
+                                        <l:GridData span="XL6 L6 M12 S12" />
+                                    </layoutData>
+                                </HBox>
+                            </VBox>
+                            <layoutData>
+                                <l:GridData span="XL6 L6 M12 S12" />
+                            </layoutData>
+                        </HBox>
+                    </l:content>
+                </l:Grid>
+            </content>
+        </Panel>
+
+        <VBox
+            visible="{=${local>/IsMobile}}"
+            class="sapUiSmallMargin"
+        >
+            <f:Form editable="true">
+                <!-- <f:title>
+                    <core:Title text="{i18n>HeaderGP01}" />
+                </f:title> -->
+                <f:layout>
+                    <f:ColumnLayout
+                        columnsM="2"
+                        columnsL="2"
+                        columnsXL="4"
+                    />
+                </f:layout>
+                <f:formContainers>
+                    <f:FormContainer>
+                        <f:formElements>
+                            <!-- ORG.VENTAS -->
+                            <f:FormElement label="{i18n>OrgVentas}">
+                                <Input
+                                    value="{local>/OrgVentas}"
+                                    editable="false"
+                                    maxLength="4"
+                                />
+                                <Text
+                                    id="txtOrgVentasVPInfoMob"
+                                    text="{local>/OrgVentasInfo}"
+                                    wrapping="false"
+                                />
+                            </f:FormElement>
+                            <!-- CANAL DISTRIB. -->
+                            <f:FormElement label="{i18n>CanalDistrib}">
+                                <Input
+                                    value="{local>/CanalDist}"
+                                    editable="false"
+                                />
+                                <Text
+                                    text="{local>/CanalDistInfo}"
+                                    wrapping="false"
+                                />
+                            </f:FormElement>
+                            <!-- SECTOR -->
+                            <f:FormElement label="{i18n>Sector}">
+                                <Input
+                                    value="{local>/Sector}"
+                                    editable="false"
+                                />
+                                <Text
+                                    text="{local>/SectorInfo}"
+                                    wrapping="false"
+                                />
+                            </f:FormElement>
+                            <!-- NRO PEDIDO -->
+                            <f:FormElement label="{i18n>NroPedido}">
+                                <Input
+                                    value="{local>/NroPedido}"
+                                    editable="false"
+                                />
+                            </f:FormElement>
+                            <!-- SOLICITANTE -->
+                            <f:FormElement label="{i18n>Solicitante}">
+                                <Input
+                                    value="{local>/Solicitante}"
+                                    editable="false"
+                                />
+                                <Text
+                                    text="{local>/SolicInfo}"
+                                    wrapping="false"
+                                />
+                            </f:FormElement>
+                            <!-- DEST. MERCANCIA -->
+                            <f:FormElement label="{i18n>DestMercancia}">
+                                <Input
+                                    value="{local>/DestMerc}"
+                                    editable="false"
+                                />
+                                <Text
+                                    text="{local>/DestMercInfo}"
+                                    wrapping="false"
+                                />
+                            </f:FormElement>
+                            <!-- NRO. PEDIDO CLIENTE -->
+                            <f:FormElement label="{i18n>OCCliente}">
+                                <Input
+                                    value="{local>/NroPedCliente}"
+                                    editable="false"
+                                />
+                            </f:FormElement>
+                            <!-- TRANSPORTISTA -->
+                            <f:FormElement label="{i18n>Transportista}">
+                                <Input
+                                    value="{local>/Transportista}"
+                                    editable="false"
+                                />
+                                <Text
+                                    text="{local>/TranspInfo}"
+                                    wrapping="false"
+                                />
+                            </f:FormElement>
+                            <!-- OFICINA -->
+                            <f:FormElement label="{i18n>Oficina}">
+                                <Input
+                                    value="{local>/OfiVentasInfo}"
+                                    tooltip="{local>/OfiVentasInfo}"
+                                    editable="false"
+                                />
+                            </f:FormElement>
+                            <!-- GRUPO VEND. -->
+                            <f:FormElement label="{i18n>GpoVend}">
+                                <Input
+                                    value="{local>/GrupoVendInfo}"
+                                    tooltip="{local>/GrupoVendInfo}"
+                                    editable="false"
+                                />
+                            </f:FormElement>
+                            <!-- COMERCIAL -->
+                            <f:FormElement label="{i18n>Comercial}">
+                                <Input
+                                    value="{local>/Comercial}"
+                                    tooltip="{local>/Comercial}"
+                                    editable="false"
+                                />
+                            </f:FormElement>
+                            <!-- LISTA DE PRECIOS -->
+                            <f:FormElement label="{i18n>ListaPrecios}">
+                                <Input
+                                    value="{local>/ListaPreciosInfo}"
+                                    tooltip="{local>/ListaPreciosInfo}"
+                                    editable="false"
+                                />
+                            </f:FormElement>
+                            <!-- MONEDA -->
+                            <f:FormElement label="{i18n>Moneda}">
+                                <RadioButtonGroup
+                                    id="rbtnMonedaVPMob"
+                                    valueState="Information"
+                                    columns="2"
+                                    editable="false"
+                                >
+                                    <RadioButton text="{i18n>Soles}" />
+                                    <RadioButton text="{i18n>Dolares}" />
+                                </RadioButtonGroup>
+                            </f:FormElement>
+                            <!-- CLASE DOC. -->
+                            <f:FormElement label="{i18n>ClaseDoc}">
+                                <RadioButtonGroup
+                                    id="rbtnClaseDocVPMob"
+                                    valueState="Information"
+                                    columns="2"
+                                    editable="false"
+                                >
+                                    <RadioButton text="{i18n>Boleta}" />
+                                    <RadioButton text="{i18n>Factura}" />
+                                </RadioButtonGroup>
+                            </f:FormElement>
+                            <!-- CHECK ASUME FLETE -->
+                            <f:FormElement>
+                                <CheckBox
+                                    id="chkFleteVPMob"
+                                    text="{local>/LblAsumeFlete}"
+                                    editable="false"
+                                />
+                            </f:FormElement>
+                            <!-- COND. PAGO -->
+                            <f:FormElement label="{i18n>CondPago}">
+                                <Input
+                                    id="txtCondPagoVPMob"
+                                    value="{local>/CondPago}"
+                                    editable="false"
+                                />
+                                <Text
+                                    id="txtCondPagoVPMobInfo"
+                                    text="{local>/CondPagoInfo}"
+                                    wrapping="false"
+                                />
+                            </f:FormElement>
+                            <!-- OBS GUIA -->
+                            <f:FormElement
+                                label="{i18n>ObservGuia}"
+                                visible="{= ${local>/TipoNota} === 'NC' || ${local>/TipoNota} === 'ND' ? false : true }"
+                            >
+                                <Input
+                                    id="txtObsGuiaVPMob"
+                                    value="{local>/ObsGuia}"
+                                    editable="false"
+                                />
+                            </f:FormElement>
+                            <!-- OBS FACTURA -->
+                                <!-- visible="{= ${local>/TipoNota} === 'NC' || ${local>/TipoNota} === 'ND' ? false : true }" -->
+                            <f:FormElement
+                                label="{i18n>ObservFactura}"
+                            >
+                                <Input
+                                    id="txtObsFacturaVPMob"
+                                    value="{local>/ObsFactura}"
+                                    editable="false"
+                                />
+                            </f:FormElement>
+                            <!-- MOTIVO -->
+                            <f:FormElement
+                                label="{i18n>Motivo}"
+                                visible="{= ${local>/TipoNota} === 'NC' || ${local>/TipoNota} === 'ND' ? true : false }"
+                            >
+                                <Input
+                                    value="{local>/Motivo}"
+                                    editable="false"
+                                />
+                            </f:FormElement>
+                            <f:FormElement>
+                                <Button
+                                    id="btnEnviarPDFVPMob"
+                                    type="Success"
+                                    icon="sap-icon://save"
+                                    text="Enviar PDF"
+                                    press=".onScreenCargaCorreos1"
+                                    enabled="true"
+                                    width="12rem"
+                                />
+                            </f:FormElement>
+                        </f:formElements>
+                    </f:FormContainer>
+                </f:formContainers>
+            </f:Form>
+            <t:Table
+                id="tblVerPedidosMob"
+                rowActionCount="1"
+                rows="{local>/PosPedidos/Tabla}"
+                selectionMode="Single"
+                enableBusyIndicator="true"
+                showNoData="false"
+                rowSelectionChange="onRowSelectionChange"
+                class="sapUiTinyMargin"
+            >
+                <t:columns>
+                    <t:Column
+                        width="3rem"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>Pos}" />
+                        <t:template>
+                            <Text text="{local>Posnr}" />
+                        </t:template>
+                    </t:Column>
+                    <!-- CENTRO -->
+                    <t:Column
+                        width="4rem"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>Centro}" />
+                        <t:template>
+                            <Text text="{local>Werks}" />
+                        </t:template>
+                    </t:Column>
+                    <!-- ALMACEN -->
+                    <t:Column
+                        width="5rem"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>Almacen}" />
+                        <t:template>
+                            <Text text="{local>Lgort}" />
+                        </t:template>
+                    </t:Column>
+                    <!-- MATERIAL -->
+                    <t:Column
+                        width="8rem"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>Material}" />
+                        <!-- <Text text="{i18n>Material}" width="100%" textAlign="Center" /> -->
+                        <t:template>
+                            <Text
+                                id="txtItemMaterialVPMob"
+                                text="{local>Matnr}"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <!-- DENOMINACION -->
+                    <t:Column width="20rem">
+                        <!-- <Label text="{i18n>Denominacion}" /> -->
+                        <Text
+                            text="{i18n>Denominacion}"
+                            width="100%"
+                            textAlign="Center"
+                        />
+                        <t:template>
+                            <Text text="{local>Maktx}" />
+                        </t:template>
+                    </t:Column>
+                    <!-- STOCK DISP. -->
+                    <!-- <t:Column
+                        width="6rem"
+                        hAlign="End"
+                    >
+                        <Label text="{i18n>StockDisp}" />
+                        <t:template>
+                            <Text
+                                text="{
+                                    path: 'local>Labst',
+                                    type: 'sap.ui.model.type.Float',
+                                    formatOptions: {
+                                        minFractionDigits: 2,
+                                        maxFractionDigits: 2,
+                                        groupingSeparator: ',',
+                                        decimalSeparator: '.',
+                                        groupingEnabled: true
+                                    },
+                                    constraints: {
+                                        precision: 11,
+                                        scale: 2
+                                    }
+                                }"
+                            />
+                        </t:template>
+                    </t:Column> -->
+                    <!-- UM -->
+                    <t:Column
+                        width="4rem"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>UM}" />
+                        <t:template>
+                            <Text text="{local>Vrkme}" />
+                        </t:template>
+                    </t:Column>
+                    <!-- CANTIDAD -->
+                    <t:Column
+                        width="6rem"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>CantPed}" />
+                        <t:template>
+                            <Text
+                                text="{
+                                        path: 'local>Zmeng',
+                                        type: 'sap.ui.model.type.Integer'
+                                    }"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <!-- CANT. DESP. -->
+                    <t:Column
+                        width="6rem"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>CantDesp}" />
+                        <t:template>
+                            <Text text="{local>CantDesp}" />
+                        </t:template>
+                    </t:Column>
+                    <!-- PRECIO LISTA -->
+                    <t:Column width="6rem">
+                        <!-- <Label text="{i18n>PrecioLista}" /> -->
+                        <Text
+                            text="{i18n>PrecioLista}"
+                            width="100%"
+                            textAlign="Center"
+                        />
+                        <t:template>
+                            <Text
+                                text="{local>PrecioLista}"
+                                width="100%"
+                                textAlign="End"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <!-- % DESCUENTO -->
+                    <!-- <t:Column
+                        width="4rem"
+                        hAlign="End"
+                    >
+                        <Label text="{i18n>DescPorc}" />
+                        <t:template>
+                            <Text
+                                text="{local>Desc}"
+                                textAlign="End"
+                            />
+                        </t:template>
+                    </t:Column> -->
+                    <!-- PRECIO CON DESCUENTO -->
+                    <t:Column width="6rem">
+                        <!-- <Label text="{i18n>PrecioFinal}" /> -->
+                        <Text
+                            text="{i18n>PrecioFinal}"
+                            width="100%"
+                            textAlign="Center"
+                        />
+                        <t:template>
+                            <Text
+                                text="{local>Precio}"
+                                width="100%"
+                                textAlign="End"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <!-- <t:Column width="6rem">
+                        <Label text="{i18n>PrecioDesc}" />
+                        <t:template>
+                            <Text
+                                text="{local>PrecioDesc}"
+                                textAlign="End"
+                            />
+                        </t:template>
+                    </t:Column> -->
+                    <!-- <t:Column
+                        width="5rem"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>Flete}" />
+                        <t:template>
+                            <Text
+                                text="{local>Flete}"
+                                textAlign="End"
+                            />
+                        </t:template>
+                    </t:Column> -->
+                    <!-- SUB TOTAL -->
+                    <t:Column width="6rem">
+                        <!-- <Label text="{i18n>SubTotal}" /> -->
+                        <Text
+                            text="{i18n>SubTotal}"
+                            width="100%"
+                            textAlign="Center"
+                        />
+                        <t:template>
+                            <Text
+                                text="{
+                                        path: 'local>Subtotal',
+                                        type: 'sap.ui.model.type.Float',
+                                        formatOptions: {
+                                            minFractionDigits: 2,
+                                            maxFractionDigits: 2,
+                                            groupingSeparator: ',',
+                                            decimalSeparator: '.',
+                                            groupingEnabled: true
+                                        },
+                                        constraints: {
+                                            precision: 11,
+                                            scale: 2
+                                        }
+                                    }"
+                                width="100%"
+                                textAlign="End"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <!-- FACTURA -->
+                    <t:Column
+                        width="14rem"
+                        hAlign="Center"
+                    >
+                        <!-- <Label text="{i18n>Factura}" /> -->
+                        <Label
+                            text="{= ${local>/TipoNota} === 'NC' ? 'NC' : ${local>/TipoNota} === 'ND' ? 'ND' : 'Factura' }"
+                        />
+                        <t:template>
+                            <!-- <Text text="{local>VbelnFact}" /> -->
+                            <HBox alignItems="Center">
+                                <items>
+                                    <Text
+                                        text="{local>VbelnFact}"
+                                        wrapping="false"
+                                    />
+                                    <Button
+                                        type="Transparent"
+                                        icon="sap-icon://pdf-attachment"
+                                        tooltip="{i18n>VerFactura}"
+                                        press=".onVerPDFFactura"
+                                        visible="{= ${local>VbelnFact} === '' ? false : true}"
+                                    />
+                                </items>
+                            </HBox>
+                        </t:template>
+                    </t:Column>
+                    <!-- DESPACHO -->
+                    <t:Column
+                        width="14rem"
+                        hAlign="Center"
+                        visible="{= ${local>/TipoNota} === 'NC' || ${local>/TipoNota} === 'ND' ? false : true }"
+                    >
+                        <Label text="{i18n>Despacho}" />
+                        <t:template>
+                            <!-- <Text text="{local>VbelnGuia}" /> -->
+                            <HBox alignItems="Center">
+                                <items>
+                                    <Text
+                                        text="{local>VbelnGuia}"
+                                        wrapping="false"
+                                    />
+                                    <Button
+                                        type="Transparent"
+                                        icon="sap-icon://pdf-attachment"
+                                        tooltip="{i18n>VerGuiaRem}"
+                                        press=".onVerPDFGuiaRem"
+                                        visible="{= ${local>VbelnGuia} === '' ? false : true}"
+                                        enabled="{= ${local>NombGuia} === '' ? false : true}"
+                                    />
+                                </items>
+                            </HBox>
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="5rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Action"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>Accion}" />
+                        <t:template>
+                            <HBox justifyContent="Center">
+                                <items>
+                                    <!-- <Button
+                                        type="Transparent"
+                                        icon="sap-icon://pdf-reader"
+                                        tooltip="{i18n>VerFactura}"
+                                        press=".onVerPDFFactura"
+                                    /> -->
+                                    <Button
+                                        type="Transparent"
+                                        icon="sap-icon://email"
+                                        tooltip="{i18n>EnviarFactura}"
+                                        press=".onScreenCargaCorreos2"
+                                    />
+                                </items>
+                            </HBox>
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+            <l:Grid class="sapUiTinyMarginTop">
+                <l:content>
+                    <HBox justifyContent="Center">
+                        <layoutData>
+                            <l:GridData span="XL6 L6 M12 S12" />
+                        </layoutData>
+                    </HBox>
+                    <HBox
+                        justifyContent="Center"
+                        class="sapUiTinyMarginBottom"
+                    >
+                        <VBox>
+                            <HBox>
+                                <Label
+                                    text="{i18n>SubTotal}:"
+                                    textAlign="End"
+                                    width="110px"
+                                    class="sapUiTinyMargin"
+                                />
+                                <Input
+                                    value="{
+                                        path: 'local>/Footer/SubTotal',
+                                        type: 'sap.ui.model.type.Float',
+                                        formatOptions: {
+                                            minFractionDigits: 2,
+                                            maxFractionDigits: 2,
+                                            groupingSeparator: ',',
+                                            decimalSeparator: '.',
+                                            groupingEnabled: true
+                                        },
+                                        constraints: {
+                                            precision: 11,
+                                            scale: 2
+                                        }
+                                    }"
+                                    textAlign="End"
+                                    editable="false"
+                                />
+                                <layoutData>
+                                    <l:GridData span="XL6 L6 M12 S12" />
+                                </layoutData>
+                            </HBox>
+                            <HBox>
+                                <Label
+                                    text="{i18n>IGV1}:"
+                                    textAlign="End"
+                                    width="110px"
+                                    class="sapUiTinyMargin"
+                                />
+                                <Input
+                                    value="{
+                                        path: 'local>/Footer/IGV',
+                                        type: 'sap.ui.model.type.Float',
+                                        formatOptions: {
+                                            minFractionDigits: 2,
+                                            maxFractionDigits: 2,
+                                            groupingSeparator: ',',
+                                            decimalSeparator: '.',
+                                            groupingEnabled: true
+                                        },
+                                        constraints: {
+                                            precision: 11,
+                                            scale: 2
+                                        }
+                                    }"
+                                    textAlign="End"
+                                    editable="false"
+                                />
+                                <layoutData>
+                                    <l:GridData span="XL6 L6 M12 S12" />
+                                </layoutData>
+                            </HBox>
+                            <HBox>
+                                <Label
+                                    text="{i18n>Total}:"
+                                    textAlign="End"
+                                    width="110px"
+                                    class="sapUiTinyMargin"
+                                />
+                                <Input
+                                    value="{
+                                        path: 'local>/Footer/Total',
+                                        type: 'sap.ui.model.type.Float',
+                                        formatOptions: {
+                                            minFractionDigits: 2,
+                                            maxFractionDigits: 2,
+                                            groupingSeparator: ',',
+                                            decimalSeparator: '.',
+                                            groupingEnabled: true
+                                        },
+                                        constraints: {
+                                            precision: 11,
+                                            scale: 2
+                                        }
+                                    }"
+                                    textAlign="End"
+                                    editable="false"
+                                />
+                                <!-- <Text
+                                    text="{local>/MonedaDesc}"
+                                    class="sapUiTinyMargin"
+                                /> -->
+                                <layoutData>
+                                    <l:GridData span="XL6 L6 M12 S12" />
+                                </layoutData>
+                            </HBox>
+                        </VBox>
+                        <layoutData>
+                            <l:GridData span="XL6 L6 M12 S12" />
+                        </layoutData>
+                    </HBox>
+                </l:content>
+            </l:Grid>
+        </VBox>
+    </Page>
+</mvc:View>

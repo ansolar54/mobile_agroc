@@ -1,0 +1,21 @@
+<core:FragmentDefinition
+    xmlns="sap.ui.comp.valuehelpdialog"
+    xmlns:m="sap.m"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+>
+    <ValueHelpDialog
+        id="dialogMultiOrgVentasCO"
+        title="{i18n>OrgVentas}"
+        ok=".onOkPress($event, 'dialogMultiOrgVentasCO')"
+        cancel=".onCancelPress($event, 'dialogMultiOrgVentasCO')"
+        afterClose=".onAfterClose($event, 'dialogMultiOrgVentasCO')"
+        supportRanges="true"
+        supportRangesOnly="true"
+        key="Vkorg"
+        descriptionKey="Denominacion"
+        draggable="true"
+    />
+</core:FragmentDefinition>

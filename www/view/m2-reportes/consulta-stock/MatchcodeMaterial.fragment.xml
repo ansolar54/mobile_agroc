@@ -1,0 +1,140 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:t="sap.ui.table"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog
+        id="dialogMaterialCS"
+        title="{i18n>Material}"
+        contentHeight="70%"
+        contentWidth="80%"
+        draggable="true"
+    >
+        <l:Grid class="sapUiTinyMargin">
+            <l:content>
+                <VBox class="sapUiTinyMarginBottom">
+                    <Label
+                        text="{i18n>CodProducto}:"
+                        textAlign="Begin"
+                        labelFor="txtCodProducto_CS"
+                    />
+                    <Input
+                        id="txtCodProducto_CS"
+                        value="{local>/mcMaterial/CodProducto}"
+                        submit=".matchcodeMaterial($event, 1)"
+                    />
+                    <layoutData>
+                        <l:GridData span="XL3 L3 M3 S12" />
+                    </layoutData>
+                </VBox>
+                <VBox class="sapUiTinyMarginBottom">
+                    <Label
+                        text="{i18n>NombreProducto}:"
+                        textAlign="Begin"
+                        labelFor="txtNomProducto_CS"
+                    />
+                    <Input
+                        id="txtNomProducto_CS"
+                        value="{local>/mcMaterial/NombreProducto}"
+                        submit=".matchcodeMaterial($event, 1)"
+                    />
+                    <layoutData>
+                        <l:GridData span="XL6 L6 M6 S12" />
+                    </layoutData>
+                </VBox>
+                <VBox class="sapUiTinyMarginBottom">
+                    <Label
+                        text="{i18n>OrgVentas}:"
+                        textAlign="Begin"
+                    />
+                    <!-- tooltip="{local>/mcMaterial/OrgVentasMatInfo}" -->
+                    <Input
+                        value="{local>/mcMaterial/OrgVentasMat}"
+                        showValueHelp="true"
+                        valueHelpRequest=".onMatchcodeOrgVentasMat"
+                    />
+                    <Text
+                        visible="{=${local>/mcMaterial/OrgVentasMatInfo} ? true : false}"
+                        text="{local>/mcMaterial/OrgVentasMatInfo}"
+                        wrapping="false"                
+                    />                    
+                    <layoutData>
+                        <l:GridData span="XL3 L3 M3 S12" />
+                    </layoutData>
+                </VBox>
+                <VBox class="sapUiTinyMarginBottom">
+                    <Button
+                        type="Success"
+                        icon="sap-icon://search"
+                        text="{i18n>Buscar}"
+                        press="onBuscarMaterial"
+                        width="100%"
+                    >
+                        <layoutData>
+                            <FlexItemData growFactor="1" />
+                        </layoutData>
+                    </Button>
+                    <layoutData>
+                        <l:GridData span="XL6 L6 M6 S6" />
+                    </layoutData>
+                </VBox>
+                <VBox class="sapUiTinyMarginBottom">
+                     <Button
+                        type="Success"
+                        icon="sap-icon://eraser"
+                        text="{i18n>LimpiarCampos}"
+                        width="100%"
+                        press="onLimpiarOrgVentasMat"
+                    >
+                        <layoutData>
+                                <FlexItemData growFactor="1" />
+                            </layoutData>
+                    </Button>
+                    <layoutData>
+                        <l:GridData span="XL6 L6 M6 S6" />
+                    </layoutData>
+                </VBox>
+            </l:content>
+        </l:Grid>        
+        <Table
+            items="{oDataMCMaterial>/matcode_materiales_nav/results}"
+            enableBusyIndicator="true"
+            mode="SingleSelectMaster"
+            selectionChange=".onConfirmPress($event, 'dialogMaterialCS')"
+            includeItemInSelection="false"
+            modeAnimationOn="false"
+            inset="false"
+            growing="true"
+        >
+            <columns>
+                <Column hAlign="Center" width="10em" >
+                    <Text text="{i18n>CodProducto}" />
+                </Column>
+                <Column 
+                    hAlign="Center" 
+                    minScreenWidth="Desktop" 
+                    demandPopin="true"
+                >
+                    <Text text="{i18n>NombreProd}" />
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem>
+                    <cells>
+                        <ObjectIdentifier title="{oDataMCMaterial>Matnr}" />
+                        <Text text="{oDataMCMaterial>Maktx}" class="customTextLeft" />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+        <beginButton>
+            <Button
+                type="Default"
+                icon="sap-icon://decline"
+                text="{i18n>Cancelar}"
+                press=".onCancelPress($event, 'dialogMaterialCS')"
+            />
+        </beginButton>
+    </Dialog>
+</core:FragmentDefinition>

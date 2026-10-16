@@ -1,0 +1,580 @@
+<mvc:View
+    controllerName="com.axelera.pe.gestioncomercial.controller.m3-cambio-precio.GenerarSolicitud"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:t="sap.ui.table"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+>
+    <!-- WEB -->
+    <Panel
+        accessibleRole="Region"
+        headerText="{i18n>HeaderCP01}"
+        busy="{local>/loading}"
+        class="custBackgroundColor"
+        visible="{=!${local>/IsMobile}}"
+    >
+        <content>
+            <l:Grid class="sapUiTinyMarginBottom">
+                <l:content>
+                    <!-- ORG VENTAS -->
+                    <HBox alignItems="Center">
+                        <Label
+                            text="{i18n>OrgVentas}:"
+                            required="true"
+                            textAlign="Begin"
+                            width="120px"
+                            class="sapUiTinyMargin"
+                        />
+                        <Input
+                            value="{local>/OrgVentas}"
+                            liveChange="onChange($event, 'OrgVentas')"
+                            showClearIcon="true"
+                            showValueHelp="true"
+                            valueHelpRequest="onMatchcodeOrgVentas"
+                            showSuggestion="true"
+                            suggestionItems="{oDataMCOrgVentas>/results}"
+                            suggestionItemSelected="onSuggeItemSelected($event, 'ORGVENTAS')"
+                            maxSuggestionWidth="350px"
+                            startSuggestion="0"
+                            maxLength="4"
+                            width="10rem"
+                            class="sapUiTinyMarginEnd"
+                        >
+                            <suggestionItems>
+                                <core:ListItem
+                                    key="{oDataMCOrgVentas>Vkorg}|{oDataMCOrgVentas>Spart}"
+                                    text="{oDataMCOrgVentas>Vkorg}"
+                                    additionalText="{oDataMCOrgVentas>Vtext} - {oDataMCOrgVentas>Spart}"
+                                />
+                            </suggestionItems>
+                        </Input>
+                        <Text
+                            text="{local>/OrgVentasInfo}"
+                            wrapping="false"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL6 L6 M6 S12" />
+                        </layoutData>
+                    </HBox>
+                    <!-- SECTOR -->
+                    <HBox alignItems="Center">
+                        <Label
+                            text="{i18n>Sector}:"
+                            textAlign="Begin"
+                            width="120px"
+                            class="sapUiTinyMargin"
+                        />
+                        <Input
+                            value="{local>/Sector}"
+                            width="10rem"
+                            editable="false"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <Text
+                            text="{local>/SectorInfo}"
+                            wrapping="false"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL6 L6 M6 S12" />
+                        </layoutData>
+                    </HBox>
+                    <!-- CLIENTE -->
+                    <HBox alignItems="Center">
+                        <Label
+                            text="{i18n>Cliente}:"
+                            required="true"
+                            textAlign="Begin"
+                            width="120px"
+                            class="sapUiTinyMargin"
+                        />
+                        <Input
+                            value="{local>/Cliente}"
+                            liveChange="onChange($event, 'Cliente')"
+                            showClearIcon="true"
+                            showValueHelp="true"
+                            valueHelpRequest=".onMatchcodeCliente"
+                            width="10rem"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <Text
+                            text="{local>/ClienteInfo}"
+                            wrapping="false"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </HBox>
+                </l:content>
+            </l:Grid>
+            <!-- BOTON AGREGAR MATERIAL Y LIMPIAR CAMPOS -->
+            <l:Grid class="sapUiTinyMarginBottom">
+                <l:content>
+                    <HBox
+                        alignContent="Center"
+                        alignItems="Start"
+                        justifyContent="Start"
+                    >
+                        <items>
+                            <Button
+                                type="Success"
+                                icon="sap-icon://add"
+                                text="{i18n>AgregarMat}"
+                                press=".onValidarAddMaterial"
+                                class="sapUiTinyMarginEnd"
+                                width="12rem"
+                            />
+                            <Button
+                                type="Success"
+                                icon="sap-icon://eraser"
+                                text="{i18n>LimpiarCampos}"
+                                press=".onLimpiarCampos"
+                                class="sapUiTinyMarginEnd"
+                                width="12rem"
+                            />
+                        </items>
+                        <layoutData>
+                            <l:GridData span="L12 M12 S12" />
+                        </layoutData>
+                    </HBox>
+                </l:content>
+            </l:Grid>
+
+            <Table
+                id="idProductsTable12"
+                inset="false"
+                mode="None"
+                items="{
+                    path: 'local>/Materiales/items',
+                    sorter: {
+                        path: 'local>MaterialTxt'
+                    }
+                }"
+            >
+                <columns>
+                    <Column width="12em" hAlign="Center" >
+                        <Text text="{i18n>Material}" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Tablet"
+                        width="18em"
+                        demandPopin="true"
+                        hAlign="Center"
+                    >
+                        <Text text="{i18n>Denominacion}" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Tablet"
+                        width="5em"
+                        demandPopin="true"
+                        hAlign="Center"
+                    >
+                        <Text text="{i18n>Moneda}" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true"
+                        hAlign="Center"
+                    >
+                        <Text text="{i18n>PrecioActual}" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true"
+                        hAlign="Center"
+                    >
+                        <Text text="{i18n>PrecioSugerido}" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true"
+                        hAlign="Center"
+                    >
+                        <Text text="{i18n>FechaInicio}" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true"
+                        hAlign="Center"
+                    >
+                        <Text text="{i18n>FechaFin}" />
+                    </Column>
+                    <Column hAlign="Center">
+                        <Text text="{i18n>Accion}" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem vAlign="Middle" type="Inactive" >
+                        <cells>
+                            <ObjectIdentifier title="{local>Material}" />
+                            <Text text="{local>MaterialTxt}" class="customTextLeft" />
+                            <Text text="{local>Moneda}" />
+                            <Text
+                                text="{
+                                    path: 'local>PrecioAct',
+                                    formatter : '.formatter.formatNumber'
+                                }"
+                            />
+                            <Text
+                                text="{
+                                    path: 'local>PrecioSug',
+                                    formatter : '.formatter.formatNumber'
+                                }"
+                            />
+                            <Text
+                                text="{
+                                    path: 'local>FechaIni',
+                                    type: 'sap.ui.model.type.Date',
+                                    formatOptions: { pattern: 'dd/MM/y' }
+                                }"
+                                wrapping="true"
+                            />
+                            <Text
+                                text="{
+                                    path: 'local>FechaFin',
+                                    type: 'sap.ui.model.type.Date',
+                                    formatOptions: { pattern: 'dd/MM/y' }
+                                }"
+                                wrapping="true"
+                            />
+                            <HBox justifyContent="Center">
+                                <items>
+                                    <Button
+                                        id="btnEditMaterial1"
+                                        icon="sap-icon://edit"
+                                        type="Transparent"
+                                        tooltip="{i18n>EditarMaterial}"
+                                        press=".onScreenEditarMaterial"
+                                    />
+                                    <Button
+                                        id="btnDeleteMaterial1"
+                                        icon="sap-icon://delete"
+                                        type="Transparent"
+                                        tooltip="{i18n>EliminarMaterial}"
+                                        press=".onEliminarMaterial"
+                                    />
+                                </items>
+                            </HBox>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+            <!-- BOTON ENVIAR SOLICITUD -->
+            <l:Grid class="sapUiTinyMarginTop">
+                <l:content>
+                    <HBox
+                        alignContent="Center"
+                        alignItems="Center"
+                        justifyContent="Center"
+                    >
+                        <Button
+                            type="Success"
+                            icon="sap-icon://paper-plane"
+                            text="{i18n>EnviarSol}"
+                            press=".onEnviarSolicitud"
+                            class="sapUiTinyMarginEnd"
+                            width="12rem"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </HBox>
+                </l:content>
+            </l:Grid>
+        </content>
+    </Panel>
+
+    <!-- MOBILE -->
+    <Panel
+        accessibleRole="Region"
+        headerText="{i18n>HeaderCP01}"
+        busy="{local>/loading}"
+        class="custBackgroundColor"
+        visible="{=${local>/IsMobile}}"
+    >
+        <content>
+            <VBox>
+                <f:Form editable="true">
+                    <!-- <f:title>
+                        <core:Title text="{i18n>HeaderCP01}" />
+                    </f:title> -->
+                    <f:layout>
+                        <f:ColumnLayout
+                            columnsM="2"
+                            columnsL="2"
+                            columnsXL="4"
+                        />
+                        <!-- <f:ResponsiveGridLayout
+                    labelSpanXL="4"
+                    labelSpanL="4"
+                    labelSpanM="12"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="0"
+                    emptySpanL="0"
+                    emptySpanM="0"
+                    emptySpanS="0"
+                    columnsXL="2"
+                    columnsL="2"
+                    columnsM="2"
+                    singleContainerFullSize="false" /> -->
+                    </f:layout>
+                    <f:formContainers>
+                        <f:FormContainer>
+                            <f:formElements>
+                                <!-- ORG VENTAS -->
+                                <f:FormElement label="{i18n>OrgVentas}">
+                                    <f:fields>
+                                        <Input
+                                            required="true"
+                                            value="{local>/OrgVentas}"
+                                            liveChange="onChange($event, 'OrgVentas')"
+                                            showClearIcon="true"
+                                            showValueHelp="true"
+                                            valueHelpRequest="onMatchcodeOrgVentas"
+                                            showSuggestion="true"
+                                            startSuggestion="0"
+                                            suggestionItems="{oDataMCOrgVentas>/results}"
+                                            suggestionItemSelected="onSuggeItemSelected($event, 'ORGVENTAS')"
+                                            maxLength="4"
+                                        >
+                                            <suggestionItems>
+                                                <core:ListItem
+                                                    key="{oDataMCOrgVentas>Vkorg}|{oDataMCOrgVentas>Spart}"
+                                                    text="{oDataMCOrgVentas>Vkorg}"
+                                                    additionalText="{oDataMCOrgVentas>Vtext} - {oDataMCOrgVentas>Spart}"
+                                                />
+                                            </suggestionItems>
+                                            <!-- <layoutData>
+                                        <f:ColumnElementData cellsSmall="6" cellsLarge="5" />
+                                    </layoutData> -->
+                                        </Input>
+                                        <Text
+                                            text="{local>/OrgVentasInfo}"
+                                            wrapping="false"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                                <!-- SECTOR -->
+                                <f:FormElement label="{i18n>Sector}">
+                                    <f:fields>
+                                        <Input
+                                            value="{local>/Sector}"
+                                            editable="false"
+                                        />
+                                        <Text
+                                            text="{local>/SectorInfo}"
+                                            wrapping="false"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                                <!-- CLIENTE -->
+                                <f:FormElement label="{i18n>Cliente}">
+                                    <f:fields>
+                                        <Input
+                                            required="true"
+                                            value="{local>/Cliente}"
+                                            liveChange="onChange($event, 'Cliente')"
+                                            showClearIcon="true"
+                                            showValueHelp="true"
+                                            valueHelpRequest=".onMatchcodeCliente"
+                                        />
+                                        <Text
+                                            text="{local>/ClienteInfo}"
+                                            wrapping="false"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                            </f:formElements>
+                        </f:FormContainer>
+                    </f:formContainers>
+                </f:Form>
+                <!-- BOTON AGREGAR MATERIAL Y LIMPIAR CAMPOS -->
+                <l:Grid class="sapUiTinyMarginBottom">
+                    <l:content>
+                        <HBox alignItems="Center">
+                            <items>
+                                <Button
+                                    type="Success"
+                                    icon="sap-icon://add"
+                                    text="{i18n>AgregarMat}"
+                                    press=".onValidarAddMaterial"
+                                    class="sapUiTinyMarginEnd"
+                                    width="100%"
+                                >
+                                    <layoutData>
+                                        <FlexItemData growFactor="1" />
+                                    </layoutData>
+                                </Button>
+                            </items>
+                            <layoutData>
+                                <l:GridData span="L6 M6 S6" />
+                            </layoutData>
+                        </HBox>
+                        <HBox alignItems="Center">
+                            <Button
+                                type="Success"
+                                icon="sap-icon://eraser"
+                                text="{i18n>LimpiarCampos}"
+                                press=".onLimpiarCampos"
+                                class="sapUiTinyMarginEnd"
+                                width="100%"
+                            >
+                                <layoutData>
+                                    <FlexItemData growFactor="1" />
+                                </layoutData>
+                            </Button>
+
+                            <layoutData>
+                                <l:GridData span="L6 M6 S6" />
+                            </layoutData>
+                        </HBox>
+                    </l:content>
+                </l:Grid>
+                <Table
+                    inset="false"
+                    mode="None"
+                    items="{
+                path: 'local>/Materiales/items',
+                sorter: {
+                    path: 'local>MaterialTxt'
+                }
+            }"
+                >
+                    <columns>
+                        <Column width="12em" hAlign="Center" >
+                            <Text text="{i18n>Material}" />
+                        </Column>
+                        <Column
+                            minScreenWidth="Tablet"
+                            width="18em"
+                            demandPopin="true"
+                            hAlign="Center"
+                        >
+                            <Text text="{i18n>Denominacion}" />
+                        </Column>
+                        <Column
+                            minScreenWidth="Tablet"
+                            width="5em"
+                            demandPopin="true"
+                            hAlign="Center"
+                        >
+                            <Text text="{i18n>Moneda}" />
+                        </Column>
+                        <Column
+                            minScreenWidth="Tablet"
+                            demandPopin="true"
+                            hAlign="Center"
+                        >
+                            <Text text="{i18n>PrecioActual}" />
+                        </Column>
+                        <Column
+                            minScreenWidth="Tablet"
+                            demandPopin="true"
+                            hAlign="Center"
+                        >
+                            <Text text="{i18n>PrecioSugerido}" />
+                        </Column>
+                        <Column
+                            minScreenWidth="Tablet"
+                            demandPopin="true"
+                            hAlign="Center"
+                        >
+                            <Text text="{i18n>FechaInicio}" />
+                        </Column>
+                        <Column
+                            minScreenWidth="Tablet"
+                            demandPopin="true"
+                            hAlign="Center"
+                        >
+                            <Text text="{i18n>FechaFin}" />
+                        </Column>
+                        <Column hAlign="Center">
+                            <Text text="{i18n>Accion}" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem vAlign="Middle" type="Inactive" >
+                            <cells>
+                                <ObjectIdentifier title="{local>Material}" />
+                                <Text text="{local>MaterialTxt}" class="customTextLeft" />
+                                <Text text="{local>Moneda}" />
+                                <Text
+                                    text="{
+                                path: 'local>PrecioAct',
+                                formatter : '.formatter.formatNumber'
+                            }"
+                                />
+                                <Text
+                                    text="{
+                                path: 'local>PrecioSug',
+                                formatter : '.formatter.formatNumber'
+                            }"
+                                />
+                                <Text
+                                    text="{
+                                    path: 'local>FechaIni',
+                                    type: 'sap.ui.model.type.Date',
+                                    formatOptions: { pattern: 'dd/MM/y' }
+                                }"
+                                    wrapping="true"
+                                />
+                                <Text
+                                    text="{
+                                    path: 'local>FechaFin',
+                                    type: 'sap.ui.model.type.Date',
+                                    formatOptions: { pattern: 'dd/MM/y' }
+                                }"
+                                    wrapping="true"
+                                />
+                                <HBox justifyContent="Center">
+                                    <items>
+                                        <Button
+                                            icon="sap-icon://edit"
+                                            type="Transparent"
+                                            tooltip="{i18n>EditarMaterial}"
+                                            press=".onScreenEditarMaterial"
+                                        />
+                                        <Button
+                                            icon="sap-icon://delete"
+                                            type="Transparent"
+                                            tooltip="{i18n>EliminarMaterial}"
+                                            press=".onEliminarMaterial"
+                                        />
+                                    </items>
+                                </HBox>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+                <!-- BOTON ENVIAR SOLICITUD -->
+                <l:Grid class="sapUiTinyMarginTop">
+                    <l:content>
+                        <HBox
+                            alignContent="Center"
+                            alignItems="Center"
+                            justifyContent="Center"
+                        >
+                            <Button
+                                type="Success"
+                                icon="sap-icon://paper-plane"
+                                text="{i18n>EnviarSol}"
+                                press=".onEnviarSolicitud"
+                                class="sapUiTinyMarginEnd"
+                                width="12rem"
+                            />
+                            <layoutData>
+                                <l:GridData span="XL12 L12 M12 S12" />
+                            </layoutData>
+                        </HBox>
+                    </l:content>
+                </l:Grid>
+            </VBox>
+        </content>
+    </Panel>
+</mvc:View>

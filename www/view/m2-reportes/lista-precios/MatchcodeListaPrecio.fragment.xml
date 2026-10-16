@@ -1,0 +1,46 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <TableSelectDialog
+        noDataText="{i18n>NoDataFound}"
+        title="{i18n>ListaPrecios}"
+        liveChange=".matchcodeSearch($event, 'dialogListaPrecioLP')"
+        confirm=".onConfirmPress($event, 'dialogListaPrecioLP')"
+        cancel=".onCancelPress"
+        showClearButton="false"
+        items="{
+			path : 'oDataMCListaPrecio>/results',
+			sorter : {
+				path : 'Pltyp',
+				descending : false
+			}
+		}"
+        contentWidth="30%"
+        contentHeight="50%"
+        draggable="true"
+    >
+        <ColumnListItem vAlign="Middle">
+            <cells>
+                <ObjectIdentifier title="{oDataMCListaPrecio>Pltyp}" />
+                <Text text="{oDataMCListaPrecio>Ptext}" class="customTextLeft" />
+            </cells>
+        </ColumnListItem>
+        <columns>
+            <Column hAlign="Center" width="10em" >
+                <header>
+                    <Text text="{i18n>ListaPrecios}" />
+                </header>
+            </Column>
+            <Column
+                minScreenWidth="Desktop"
+                demandPopin="true"
+                hAlign="Center"
+            >
+                <header>
+                    <Text text="{i18n>Denominacion}" />
+                </header>
+            </Column>
+        </columns>
+    </TableSelectDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,193 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:t="sap.ui.table"
+    xmlns:l="sap.ui.layout"
+>
+    <Dialog
+        id="dialogDetalleSolMA"
+        contentHeight="50%"
+        draggable="true"
+    >
+        <Table
+            id="tblMisAprobDetailSol"
+            noDataText="{i18n>NoDataFound}"
+            items="{
+                path : 'local>/Materiales/items',
+                sorter : {
+                    path : 'Name1',
+                    descending : false
+                }
+            }"
+            enableBusyIndicator="true"
+            mode="SingleSelectMaster"
+            includeItemInSelection="false"
+            modeAnimationOn="false"
+        >
+            <columns>
+                <Column
+                    minScreenWidth="Desktop"
+                    demandPopin="true"
+                    hAlign="Center"
+                    width="8rem"
+                >
+                    <Text text="{i18n>Codigo}" />
+                </Column>
+                <Column
+                    minScreenWidth="Desktop"
+                    demandPopin="true"
+                    hAlign="Center"
+                >
+                    <Text text="{i18n>Material}" />
+                </Column>
+                <Column
+                    minScreenWidth="Desktop"
+                    demandPopin="true"
+                    hAlign="Center"
+                >
+                    <Text text="{i18n>Moneda}" />
+                </Column>
+                <Column
+                    minScreenWidth="Desktop"
+                    demandPopin="true"
+                    hAlign="Center"
+                >
+                    <Text text="{i18n>PrecioActual}" />
+                </Column>
+                <Column
+                    minScreenWidth="Desktop"
+                    demandPopin="true"
+                    hAlign="Center"
+                    visible="{= ${local>/EstadoItem} === '1' ? true : false}"
+                >
+                    <Text text="{i18n>PrecioAprobado}" />
+                </Column>
+                <Column
+                    minScreenWidth="Desktop"
+                    demandPopin="true"
+                    hAlign="Center"
+                    visible="{= ${local>/EstadoItem} !== '1' ? true : false}"
+                >
+                    <Text text="{i18n>LimiteInf}" />
+                </Column>
+                <Column
+                    minScreenWidth="Desktop"
+                    demandPopin="true"
+                    hAlign="Center"
+                    visible="{= ${local>/EstadoItem} !== '1' ? true : false}"
+                >
+                    <Text text="{i18n>PrecioSugerido}" />
+                </Column>
+                <Column
+                    minScreenWidth="Desktop"
+                    demandPopin="true"
+                    hAlign="Center"
+                >
+                    <Text text="{i18n>Margen}" />
+                </Column>
+                <Column
+                    minScreenWidth="Desktop"
+                    demandPopin="true"
+                    hAlign="Center"
+                >
+                    <Text text="{i18n>FechaInicio}" />
+                </Column>
+                <Column
+                    minScreenWidth="Desktop"
+                    demandPopin="true"
+                    hAlign="Center"
+                >
+                    <Text text="{i18n>FechaFin}" />
+                </Column>
+                <Column
+                    minScreenWidth="Desktop"
+                    demandPopin="true"
+                    hAlign="Center"
+                >
+                    <Text text="{i18n>Nota}" />
+                </Column>
+                <Column
+                    minScreenWidth="Desktop"
+                    demandPopin="true"
+                    hAlign="Center"
+                    visible="{= ${local>/EstadoItem} === '2' ? true : false}"
+                >
+                    <Text text="{i18n>Accion}" />
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem>
+                    <cells>
+                        <Text text="{local>Material}" />
+                        <Text text="{local>MaterialTxt}" class="customTextLeft" />
+                        <Text text="{local>Moneda}" />
+                        <!-- <Text text="{local>PrecioAct}" /> -->
+                        <Text text="{
+                                path: 'local>PrecioAct',
+                                formatter: '.formatter.formatNumber'
+                            }" 
+                        />
+                        <!-- <Text text="{local>LimiteInf}" />
+                        <Text text="{local>LimiteInf}" /> -->
+                        <Text text="{
+                                path: 'local>LimiteInf',
+                                formatter: '.formatter.formatNumber'
+                            }"
+                        />
+                        <Text text="{
+                                path: 'local>LimiteInf',
+                                formatter: '.formatter.formatNumber'
+                            }"
+                        />
+                        <!-- <Text text="{local>PrecioSug}" /> -->
+                        <Text text="{
+                                path: 'local>PrecioSug',
+                                formatter: '.formatter.formatNumber'
+                            }"
+                        />
+                        <Text text="{local>Margen}%" />
+                        <!-- <Text text="{local>Margen}%" class="{= ${local>Margen} === 86 ? 'redText' : 'greenText'}"/> -->
+                        <Text
+                            text="{
+                                path: 'local>FechaIni',
+                                type: 'sap.ui.model.type.Date',
+                                formatOptions: {
+                                pattern: 'dd/MM/y'
+                                }
+                            }"
+                        />
+                        <Text
+                            text="{
+                                path: 'local>FechaFin',
+                                type: 'sap.ui.model.type.Date',
+                                formatOptions: {
+                                pattern: 'dd/MM/y'
+                                }
+                            }"
+                        />
+                        <Button 
+                            icon="sap-icon://vds-file"
+                            type="Transparent"
+                            tooltip="{i18n>VerNota}"
+                            press="onScreenVerNota"
+                        />
+                        <Button 
+                            icon="sap-icon://edit"
+                            type="Transparent"
+                            tooltip="{i18n>EditarMaterial}"
+                            press="onScreenEditarMaterial"                            
+                        />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+        <beginButton>
+            <Button
+                type="Default"
+                icon="sap-icon://decline"
+                text="{i18n>Cancelar}"
+                press=".onCancelPress($event, 'dialogDetalleSolMA')"
+            />
+        </beginButton>
+    </Dialog>
+</core:FragmentDefinition>

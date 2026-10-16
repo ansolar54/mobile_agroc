@@ -1,0 +1,77 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog
+        id="dialogCantFilasCO"
+        title="{i18n>CantFilas}"
+        draggable="true"
+    >
+        <content>
+            <l:Grid class="sapUiTinyMarginTop sapUiTinyMarginBottom">
+                <l:content>
+                    <HBox
+                        alignItems="Center"
+                        alignContent="Center"
+                    >
+                        <Label
+                            text="{i18n>NroFilasPag}"
+                            textAlign="Begin"
+                            width="80px"
+                            class="sapUiTinyMargin"
+                        />
+                        <ComboBox
+                            id="comboBoxId"
+                            selectedKey="DefaultKey"
+                            selectionChange=".onSelectedItemCantFilas"
+                        >
+                            <items>
+                                <core:Item
+                                    key="DefaultKey"
+                                    text="{i18n>Seleccionar}"
+                                />
+                                <core:Item
+                                    key="Item1"
+                                    text="10"
+                                />
+                                <core:Item
+                                    key="Item2"
+                                    text="20"
+                                />
+                                <core:Item
+                                    key="Item3"
+                                    text="50"
+                                />
+                                <core:Item
+                                    key="Item4"
+                                    text="100"
+                                />
+                            </items>
+                        </ComboBox>
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </HBox>
+                </l:content>
+            </l:Grid>
+        </content>
+        <beginButton>
+            <Button
+                type="Reject"
+                icon="sap-icon://decline"
+                text="{i18n>Cancelar}"
+                press=".onCloseDialog($event ,'dialogCantFilasCO')"
+            />
+        </beginButton>
+        <endButton>
+            <Button
+                type="Success"
+                icon="sap-icon://accept"
+                text="{i18n>Aceptar}"
+                press=".onSearchPedidosCantFilas"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

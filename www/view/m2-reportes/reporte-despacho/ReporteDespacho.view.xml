@@ -1,0 +1,1691 @@
+<mvc:View
+    controllerName="com.axelera.pe.gestioncomercial.controller.m2-reportes.ReporteDespacho"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:t="sap.ui.table"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+>
+    <!-- WEB -->
+    <Panel
+        accessibleRole="Region"
+        headerText="{i18n>HeaderR06}"
+        class="custBackgroundColor"
+        visible="{=!${local>/IsMobile}}"
+    >
+        <content>
+            <l:Grid class="sapUiTinyMarginBottom">
+                <l:content>
+                    <!-- SOCIEDAD -->
+                    <HBox>
+                        <Label
+                            text="{i18n>Sociedad}"
+                            labelFor="textSociedadRD"
+                            textAlign="Initial"
+                            width="145px"
+                            class="sapUiTinyMargin"
+                        />
+                        <Input
+                            id="textSociedadRD"
+                            editable="false"
+                            value="{local>/Sociedad}"
+                            required="true"
+                            width="10rem"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </HBox>
+                    <!-- ORG. VENTAS -->
+                    <!-- <HBox alignItems="Center" class="sapUiTinyMarginBegin">
+                        <Label
+                            text="{i18n>OrgVentas}"
+                            labelFor="multiInputOrgVentas"
+                            textAlign="Initial"
+                            width="145px"
+                            class="sapUiTinyMarginEnd sapUiTinyMarginTopBottom"
+                        />
+                        <MultiInput
+                            id="multiInputOrgVentas"
+                            required="true"
+                            valueHelpRequest=".onMatchcodeMultiOrgVentas"
+                            width="30rem"
+                        >
+                        </MultiInput>
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </HBox> -->
+                    <HBox alignItems="Center">
+                        <Label
+                            text="{i18n>OrgVentas}"
+                            labelFor="txtOrgVentas1RD"
+                            textAlign="Initial"
+                            width="145px"
+                            class="sapUiTinyMargin"
+                        />
+                        <Input
+                            id="txtOrgVentas1RD"
+                            value="{local>/OrgVentas1}"
+                            liveChange="onValidarCampos"
+                            change="onValidarCampos"
+                            showClearIcon="true"
+                            showValueHelp="true"
+                            valueHelpRequest=".onMatchcodeOrgVentas('1')"
+                            showSuggestion="true"
+                            suggestionItems="{oDataMCOrgVentas>/results}"
+                            suggestionItemSelected="onSuggeItemSelected($event, 'ORGVENTAS')"
+                            maxSuggestionWidth="350px"
+                            startSuggestion="0"
+                            maxLength="4"
+                            width="10rem"
+                            class="sapUiTinyMarginEnd"
+                        >
+                            <suggestionItems>
+                                <core:ListItem
+                                    key="{oDataMCOrgVentas>Vkorg}|{oDataMCOrgVentas>Spart}"
+                                    text="{oDataMCOrgVentas>Vkorg}"
+                                    additionalText="{oDataMCOrgVentas>Vtext} - {oDataMCOrgVentas>Spart}"
+                                />
+                            </suggestionItems>
+                        </Input>
+                        <Input
+                            id="txtOrgVentas2RD"
+                            value="{local>/OrgVentas2}"
+                            showClearIcon="true"
+                            showValueHelp="true"
+                            valueHelpRequest=".onMatchcodeOrgVentas('2')"
+                            maxLength="10"
+                            width="10rem"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <MultiInput
+                            id="mtxtOrgVentasRD"
+                            visible="false"
+                            valueHelpRequest=".onMatchcodeMultiOrgVentas"
+                        />
+                        <Button
+                            icon="sap-icon://value-help"
+                            press=".onMatchcodeMultiOrgVentas"
+                            class="btnRefreshUser btnIconLaunchpad borderBtnRefresh"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </HBox>
+                    <!-- FCH REGISTRO -->
+                    <!-- <HBox alignItems="Center" class="sapUiTinyMarginBegin">
+                        <Label
+                            text="{i18n>FechaRegistro}"
+                            labelFor="multiInputFechaReg"
+                            textAlign="Initial"
+                            width="145px"
+                            class="sapUiTinyMarginEnd sapUiTinyMarginTopBottom"
+                        />
+                        <MultiInput
+                            id="multiInputFechaReg"
+                            required="true"
+                            valueHelpRequest=".onMatchcodeMultiFechaReg"
+                            width="30rem"
+                        >
+                        </MultiInput>
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </HBox> -->
+                    <HBox alignItems="Center">
+                        <Label
+                            text="{i18n>FechaRegistro}"
+                            labelFor="txtFechaReg1RD"
+                            textAlign="Initial"
+                            width="145px"
+                            class="sapUiTinyMargin"
+                        />
+                        <DatePicker
+                            id="txtFechaReg1RD"
+                            value="{
+                                'path': 'local>/FechaReg1',
+                                'type': 'sap.ui.model.type.Date',
+                                'formatOptions': {
+                                    'pattern': 'dd/MM/y'
+                                }
+                            }"
+                            liveChange="onValidarCampos"
+                            change="onValidarCampos"
+                            maxDate="{local>/FechaReg2}"
+                            validationSuccess="onValidarCampos"
+                            placeholder="{i18n>FormatoFecha1}"
+                            showCurrentDateButton="true"
+                            required="true"
+                            width="10rem"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <DatePicker
+                            id="txtFechaReg2RD"
+                            value="{
+                                'path': 'local>/FechaReg2',
+                                'type': 'sap.ui.model.type.Date',
+                                'formatOptions': {
+                                    'pattern': 'dd/MM/y'
+                                }
+                            }"
+                            minDate="{local>/FechaReg1}"
+                            placeholder="{i18n>FormatoFecha1}"
+                            width="10rem"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <MultiInput
+                            id="mtxtFechaRegRD"
+                            visible="false"
+                            valueHelpRequest=".onMatchcodeMultiFechaReg"
+                        />
+                        <Button
+                            icon="sap-icon://value-help"
+                            press=".onMatchcodeMultiFechaReg"
+                            class="btnRefreshUser btnIconLaunchpad borderBtnRefresh"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </HBox>
+                    <!-- PUESTO EXPEDICION -->
+                    <!-- <HBox alignItems="Center" class="sapUiTinyMarginBegin">
+                        <Label
+                            text="{i18n>PuestoExpedicion}"
+                            labelFor="multiInputPuesto"
+                            textAlign="Initial"
+                            width="145px"
+                            class="sapUiTinyMarginEnd sapUiTinyMarginTopBottom"
+                        />
+                        <MultiInput
+                            id="multiInputPuesto"
+                            valueHelpRequest=".onMatchcodeMultiOrgVentas"
+                            width="30rem"
+                        >
+                        </MultiInput>
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </HBox> -->
+                    <HBox alignItems="Center">
+                        <Label
+                            text="{i18n>PuestoExpedicion}"
+                            labelFor="txtMaterial1"
+                            textAlign="Initial"
+                            width="145px"
+                            class="sapUiTinyMargin"
+                        />
+                        <Input
+                            id="txtPuestoExp1RD"
+                            value="{local>/PuestoExp1}"
+                            liveChange="onValidarCampos"
+                            change="onValidarCampos"
+                            showClearIcon="true"
+                            showValueHelp="true"
+                            valueHelpRequest=".onMatchcodePuestoExp('1')"
+                            showSuggestion="true"
+                            suggestionItems="{oDataMCPuestoExp>/results}"
+                            suggestionItemSelected="onSuggeItemSelected($event, 'PUESTOEXP')"
+                            maxSuggestionWidth="350px"
+                            startSuggestion="0"
+                            maxLength="10"
+                            width="10rem"
+                            class="sapUiTinyMarginEnd"
+                        >
+                            <suggestionItems>
+                                <core:ListItem
+                                    key="{oDataMCPuestoExp>Vstel}"
+                                    text="{oDataMCPuestoExp>Vstel}"
+                                    additionalText="{oDataMCPuestoExp>Vtext}"
+                                />
+                            </suggestionItems>
+                        </Input>
+                        <Input
+                            id="txtPuestoExp2RD"
+                            value="{local>/PuestoExp2}"
+                            showClearIcon="true"
+                            showValueHelp="true"
+                            valueHelpRequest=".onMatchcodePuestoExp('2')"
+                            maxLength="10"
+                            width="10rem"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <MultiInput
+                            id="mtxtPuestoExpeRD"
+                            visible="false"
+                            valueHelpRequest=".onMatchcodeMultiPuestoExp"
+                        />
+                        <Button
+                            icon="sap-icon://value-help"
+                            press=".onMatchcodeMultiPuestoExp"
+                            class="btnRefreshUser btnIconLaunchpad borderBtnRefresh"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </HBox>
+                    <!-- CLIENTE -->
+                    <!-- <HBox alignItems="Center" class="sapUiTinyMarginBegin">
+                        <Label
+                            text="{i18n>Cliente}"
+                            labelFor="multiInputCliente"
+                            textAlign="Initial"
+                            width="145px"
+                            class="sapUiTinyMarginEnd sapUiTinyMarginTopBottom"
+                        />
+                        <MultiInput
+                            id="multiInputCliente"
+                            valueHelpRequest=".onMatchcodeMultiOrgVentas"
+                            width="30rem"
+                        >
+                        </MultiInput>
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </HBox> -->
+                    <HBox alignItems="Center">
+                        <Label
+                            text="{i18n>Cliente}"
+                            labelFor="txtMaterial1"
+                            textAlign="Initial"
+                            width="145px"
+                            class="sapUiTinyMargin"
+                        />
+                        <Input
+                            id="txtCliente1RD"
+                            value="{local>/Cliente1}"
+                            liveChange="onValidarCampos"
+                            change="onValidarCampos"
+                            showClearIcon="true"
+                            showValueHelp="true"
+                            valueHelpRequest=".onMatchcodeCliente('1')"
+                            maxLength="10"
+                            width="10rem"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <Input
+                            id="txtCliente2RD"
+                            value="{local>/Cliente2}"
+                            showClearIcon="true"
+                            showValueHelp="true"
+                            valueHelpRequest=".onMatchcodeCliente('2')"
+                            maxLength="10"
+                            width="10rem"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <MultiInput
+                            id="mtxtClienteRD"
+                            visible="false"
+                            valueHelpRequest=".onMatchcodeMultiCliente"
+                        />
+                        <Button
+                            icon="sap-icon://value-help"
+                            press=".onMatchcodeMultiCliente"
+                            class="btnRefreshUser btnIconLaunchpad borderBtnRefresh"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </HBox>
+                    <!-- NRO PEDIDO -->
+                    <!-- <HBox alignItems="Center" class="sapUiTinyMarginBegin">
+                        <Label
+                            text="{i18n>NPedido}"
+                            labelFor="multiInputNroPedido"
+                            textAlign="Initial"
+                            width="145px"
+                            class="sapUiTinyMarginEnd sapUiTinyMarginTopBottom"
+                        />
+                        <MultiInput
+                            id="multiInputNroPedido"
+                            valueHelpRequest=".onMatchcodeMultiOrgVentas"
+                            width="30rem"
+                        >
+                        </MultiInput>
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </HBox> -->
+                    <HBox alignItems="Center">
+                        <Label
+                            text="{i18n>NPedido}"
+                            labelFor="txtMaterial1"
+                            textAlign="Initial"
+                            width="145px"
+                            class="sapUiTinyMargin"
+                        />
+                        <Input
+                            id="txtNroPedido1RD"
+                            value="{local>/NroPedido1}"
+                            liveChange="onValidarCampos"
+                            change="onValidarCampos"
+                            showClearIcon="true"
+                            maxLength="10"
+                            width="10rem"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <Input
+                            id="txtNroPedido2RD"
+                            value="{local>/NroPedido2}"
+                            showClearIcon="true"
+                            maxLength="10"
+                            width="10rem"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <MultiInput
+                            id="mtxtNroPedidoRD"
+                            visible="false"
+                            valueHelpRequest=".onMatchcodeMultiNroPedido"
+                        />
+                        <Button
+                            icon="sap-icon://value-help"
+                            press=".onMatchcodeMultiNroPedido"
+                            class="btnRefreshUser btnIconLaunchpad borderBtnRefresh"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </HBox>
+                    <!-- OFICINA VENTAS -->
+                    <!-- <HBox alignItems="Center" class="sapUiTinyMarginBegin">
+                        <Label
+                            text="{i18n>OfiVentas1}"
+                            labelFor="multiInputOfiVentas"
+                            textAlign="Initial"
+                            width="145px"
+                            class="sapUiTinyMarginEnd sapUiTinyMarginTopBottom"
+                        />
+                        <MultiInput
+                            id="multiInputOfiVentas"
+                            valueHelpRequest=".onMatchcodeMultiOrgVentas"
+                            width="30rem"
+                        >
+                        </MultiInput>
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </HBox> -->
+                    <HBox alignItems="Center">
+                        <Label
+                            text="{i18n>OfiVentas1}"
+                            labelFor="txtMaterial1"
+                            textAlign="Initial"
+                            width="145px"
+                            class="sapUiTinyMargin"
+                        />
+                        <Input
+                            id="txtOfiVentas1RD"
+                            value="{local>/OfiVentas1}"
+                            liveChange="onValidarCampos"
+                            change="onValidarCampos"
+                            showClearIcon="true"
+                            showValueHelp="true"
+                            valueHelpRequest=".onMatchcodeOfiVentas('1')"
+                            showSuggestion="true"
+                            suggestionItems="{oDataMCOfiVentas>/results}"
+                            suggestionItemSelected="onSuggeItemSelected($event, 'OFIVENTAS')"
+                            maxSuggestionWidth="350px"
+                            startSuggestion="0"
+                            maxLength="10"
+                            width="10rem"
+                            class="sapUiTinyMarginEnd"
+                        >
+                            <suggestionItems>
+                                <core:ListItem
+                                    key="{oDataMCOfiVentas>Vkbur}"
+                                    text="{oDataMCOfiVentas>Vkbur}"
+                                    additionalText="{oDataMCOfiVentas>Bezei}"
+                                />
+                            </suggestionItems>
+                        </Input>
+                        <Input
+                            id="txtOfiVentas2RD"
+                            value="{local>/OfiVentas2}"
+                            showClearIcon="true"
+                            showValueHelp="true"
+                            valueHelpRequest=".onMatchcodeOfiVentas('2')"
+                            maxLength="10"
+                            width="10rem"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <MultiInput
+                            id="mtxtOfiVentasRD"
+                            visible="false"
+                            valueHelpRequest=".onMatchcodeMultiOfiVentas"
+                        />
+                        <Button
+                            icon="sap-icon://value-help"
+                            press=".onMatchcodeMultiOfiVentas"
+                            class="btnRefreshUser btnIconLaunchpad borderBtnRefresh"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </HBox>
+                    <!-- COMERCIAL -->
+                    <!-- <HBox alignItems="Center" class="sapUiTinyMarginBegin">
+                        <Label
+                            text="{i18n>Comercial}"
+                            labelFor="multiInputComercial"
+                            textAlign="Initial"
+                            width="145px"
+                            class="sapUiTinyMarginEnd sapUiTinyMarginTopBottom"
+                        />
+                        <MultiInput
+                            id="multiInputComercial"
+                            valueHelpRequest=".onMatchcodeMultiOrgVentas"
+                            width="30rem"
+                        >
+                        </MultiInput>
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </HBox> -->
+                    <HBox alignItems="Center">
+                        <Label
+                            text="{i18n>Comercial}"
+                            labelFor="txtMaterial1"
+                            textAlign="Initial"
+                            width="145px"
+                            class="sapUiTinyMargin"
+                        />
+                        <Input
+                            id="txtComercial1RD"
+                            value="{local>/Comercial1}"
+                            liveChange="onValidarCampos"
+                            change="onValidarCampos"
+                            showClearIcon="true"
+                            showValueHelp="true"
+                            valueHelpRequest=".onMatchcodeComercial('1')"
+                            maxLength="10"
+                            width="10rem"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <Input
+                            id="txtComercial2RD"
+                            value="{local>/Comercial2}"
+                            showClearIcon="true"
+                            showValueHelp="true"
+                            valueHelpRequest=".onMatchcodeComercial('2')"
+                            maxLength="10"
+                            width="10rem"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <MultiInput
+                            id="mtxtComercialRD"
+                            visible="false"
+                            valueHelpRequest=".onMatchcodeMultiComercial"
+                        />
+                        <Button
+                            icon="sap-icon://value-help"
+                            press=".onMatchcodeMultiComercial"
+                            class="btnRefreshUser btnIconLaunchpad borderBtnRefresh"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </HBox>
+                    <HBox
+                        alignItems="Start"
+                        alignContent="Center"
+                        class="sapUiTinyMarginTop sapUiTinyMarginBottom"
+                    >
+                        <Button
+                            id="btnBuscarRD"
+                            type="Success"
+                            icon="sap-icon://search"
+                            text="{i18n>Buscar}"
+                            press=".onBuscar"
+                            width="12rem"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <Button
+                            type="Success"
+                            icon="sap-icon://clear-all"
+                            text="{i18n>LimpiarCampos}"
+                            press=".onLimpiarCampos"
+                            width="12rem"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <Button
+                            id="btnDescargarRD"
+                            type="Success"
+                            icon="sap-icon://excel-attachment"
+                            text="{i18n>DescargarExcel}"
+                            press=".onDescargarExcel"
+                            width="12rem"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <Button
+                            id="btnCantFilasRD"
+                            type="Success"
+                            icon="sap-icon://expand-all"
+                            width="12rem"
+                            text="{i18n>CantFilas}"
+                            press=".onScreenCantidadFilas"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </HBox>
+                </l:content>
+            </l:Grid>
+            <t:Table
+                id="tblReporteDespacho"
+                rowActionCount="1"
+                rows="{oDataRepDespacho>/reporte_despachoped_nav/results}"
+                enableSelectAll="true"
+                enableBusyIndicator="true"
+                busy="{local>/loadingTbl}"
+                sort="onTableSort"
+                filter="onTableFilter"
+                class="sapUiResponsiveMarginTop sapUiResponsiveMarginBottom"
+            >
+                <t:columns>
+                    <t:Column
+                        width="15rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Name1"
+                        filterProperty="Name1"
+                        filterValue="{local>/filters/Name1}"
+                    >
+                        <!-- <Label text="{i18n>Cliente}" /> -->
+                        <Text
+                            text="{i18n>Cliente}"
+                            width="100%"
+                            textAlign="Center"
+                        />
+                        <t:template>
+                            <Text
+                                text="{oDataRepDespacho>Name1}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="6rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Vkorg"
+                        filterProperty="Vkorg"
+                        filterValue="{local>/filters/Vkorg}"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>OrgVentas}" />
+                        <t:template>
+                            <Text
+                                text="{oDataRepDespacho>Vkorg}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="5rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Aubel"
+                        filterProperty="Aubel"
+                        filterValue="{local>/filters/Aubel}"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>Pedido}" />
+                        <t:template>
+                            <Text
+                                text="{oDataRepDespacho>Aubel}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="6rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Erdat"
+                        filterProperty="Erdat"
+                        filterValue="{local>/filters/Erdat}"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>FechaEnt}" />
+                        <t:template>
+                            <Text
+                                text="{ 
+                                    path: 'oDataRepDespacho>Erdat',
+                                    formatter : '.formatter.formateaFecha' 
+                                }"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <!--FECHA
+                    TRASLADO-->
+                    <t:Column
+                        width="6rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Wadat"
+                        filterProperty="Wadat"
+                        filterValue="{local>/filters/Wadat}"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>FechaTraslado}" />
+                        <t:template>
+                            <Text
+                                text="{ 
+                                    path: 'oDataRepDespacho>Wadat',
+                                    formatter : '.formatter.fecha1' 
+                                }"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="15rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Arktx"
+                        filterProperty="Arktx"
+                        filterValue="{local>/filters/Arktx}"
+                    >
+                        <!-- <Label text="{i18n>Denominacion}" /> -->
+                        <Text
+                            text="{i18n>Denominacion}"
+                            width="100%"
+                            textAlign="Center"
+                        />
+                        <t:template>
+                            <Text
+                                text="{oDataRepDespacho>Arktx}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="6rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Lfimg"
+                        filterProperty="Lfimg"
+                        filterValue="{local>/filters/Lfimg}"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>CtdEnt}" />
+                        <t:template>
+                            <Text
+                                text="{
+                                    path: 'oDataRepDespacho>Lfimg',
+                                    formatter : '.formatter.cantidad'
+                                }"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="5rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Charg"
+                        filterProperty="Charg"
+                        filterValue="{local>/filters/Charg}"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>Lote}" />
+                        <t:template>
+                            <Text
+                                text="{oDataRepDespacho>Charg}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="10rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Xblnr"
+                        filterProperty="Xblnr"
+                        filterValue="{local>/filters/Xblnr}"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>GuiaRemision}" />
+                        <t:template>
+                            <!-- <Text
+                                text="{oDataRepDespacho>Xblnr}"
+                                wrapping="false"
+                            /> -->
+                            <HBox alignItems="Center">
+                                <items>
+                                    <Text
+                                        text="{oDataRepDespacho>Xblnr}"
+                                        wrapping="false"
+                                    />
+                                    <Button
+                                        type="Transparent"
+                                        icon="sap-icon://pdf-attachment"
+                                        tooltip="{i18n>VerFactura}"
+                                        press=".onVerPDFGuiaRem"
+                                        visible="{= ${oDataRepDespacho>Xblnr} === '' ? false : true}"
+                                        enabled="{= ${oDataRepDespacho>NombGuia} === '' ? false : true}"
+                                    />
+                                    <!-- <Button
+                                        type="Transparent"
+                                        icon="sap-icon://email"
+                                        tooltip="{i18n>EnviarFactura}"
+                                        press=".onScreenCargaCorreos2"
+                                    /> -->
+                                </items>
+                            </HBox>
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="15rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Ntrans"
+                        filterProperty="Ntrans"
+                        filterValue="{local>/filters/Ntrans}"
+                    >
+                        <!-- <Label text="{i18n>Transporte}" /> -->
+                        <Text
+                            text="{i18n>Transporte}"
+                            width="100%"
+                            textAlign="Center"
+                        />
+                        <t:template>
+                            <Text
+                                text="{oDataRepDespacho>Ntrans}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="8rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Xblnr1"
+                        filterProperty="Xblnr1"
+                        filterValue="{local>/filters/Xblnr1}"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>FacBolVta}" />
+                        <t:template>
+                            <Text
+                                text="{oDataRepDespacho>Xblnr1}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="5rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Bstkd"
+                        filterProperty="Bstkd"
+                        filterValue="{local>/filters/Bstkd}"
+                    >
+                        <Label text="{i18n>NOC}" />
+                        <t:template>
+                            <Text
+                                text="{oDataRepDespacho>Bstkd}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <!-- <t:Column
+                        width="5rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Werks"
+                        filterProperty="Werks"
+                        filterValue="{local>/filters/Werks}"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>Centro}" />
+                        <t:template>
+                            <Text
+                                text="{oDataRepDespacho>Werks}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column> -->
+                    <t:Column
+                        width="10rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Werkstxt"
+                        filterProperty="Werkstxt"
+                        filterValue="{local>/filters/Werkstxt}"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>Centro}" />
+                        <t:template>
+                            <Text
+                                text="{oDataRepDespacho>Werks} ({oDataRepDespacho>Werkstxt})"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="10rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Vkburtxt"
+                        filterProperty="Vkburtxt"
+                        filterValue="{local>/filters/Vkburtxt}"
+                    >
+                        <!-- <Label text="{i18n>Oficina2}" /> -->
+                        <!-- <Label text="{i18n>OfiVentas}" /> -->
+                        <Text
+                            text="{i18n>OfiVentas}"
+                            width="100%"
+                            textAlign="Center"
+                        />
+                        <t:template>
+                            <Text
+                                text="{oDataRepDespacho>Vkbur} ({oDataRepDespacho>Vkburtxt})"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="10rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Vkgrptxt"
+                        filterProperty="Vkgrptxt"
+                        filterValue="{local>/filters/Vkgrptxt}"
+                    >
+                        <!-- <Label text="{i18n>GrupoVentas}" /> -->
+                        <Text
+                            text="{i18n>GrupoVentas}"
+                            width="100%"
+                            textAlign="Center"
+                        />
+                        <t:template>
+                            <Text
+                                text="{oDataRepDespacho>Vkgrp} ({oDataRepDespacho>Vkgrptxt})"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="15rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Sname"
+                        filterProperty="Sname"
+                        filterValue="{local>/filters/Sname}"
+                    >
+                        <!-- <Label text="{i18n>Vendedor}" /> -->
+                        <Text
+                            text="{i18n>Vendedor}"
+                            width="100%"
+                            textAlign="Center"
+                        />
+                        <t:template>
+                            <Text
+                                text="{oDataRepDespacho>Sname}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+            <l:Grid class="sapUiTinyMarginTop">
+                <l:content>
+                    <!-- Pagination -->
+                    <HBox>
+                        <Button
+                            type="Emphasized"
+                            icon="sap-icon://close-command-field"
+                            press="onFirstPress"
+                            enabled="{local>/page/PrevPageBtn}"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <Button
+                            type="Emphasized"
+                            icon="sap-icon://navigation-left-arrow"
+                            press="onPreviousPress"
+                            enabled="{local>/page/PrevPageBtn}"
+                        />
+                        <Text
+                            text="{i18n>Pagina} {local>/page/Page} de {local>/page/TotalPages}"
+                            textAlign="Center"
+                            width="120px"
+                            class="sapUiTinyMargin"
+                        />
+                        <Button
+                            type="Emphasized"
+                            icon="sap-icon://navigation-right-arrow"
+                            press="onNextPress"
+                            enabled="{local>/page/NextPageBtn}"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <Button
+                            type="Emphasized"
+                            icon="sap-icon://open-command-field"
+                            press="onLastPress"
+                            enabled="{local>/page/NextPageBtn}"
+                        />
+                    </HBox>
+                </l:content>
+            </l:Grid>
+        </content>
+    </Panel>
+
+    <!-- MOBILE -->
+    <Panel
+        accessibleRole="Region"
+        headerText="{i18n>HeaderR06}"
+        class="custBackgroundColor"
+        visible="{=${local>/IsMobile}}"
+    >
+        <content>
+            <VBox>
+                <f:Form editable="true">
+                    <!-- <f:title>
+                        <core:Title text="{i18n>HeaderR06}" />
+                    </f:title> -->
+                    <f:layout>
+                        <f:ColumnLayout />
+                    </f:layout>
+                    <f:formContainers>
+                        <f:FormContainer>
+                            <f:formElements>
+                                <!-- SOCIEDAD -->
+                                <f:FormElement label="{i18n>Sociedad}">
+                                    <f:fields>
+                                        <Input
+                                            id="textSociedadRDMob"
+                                            required="true"
+                                            editable="false"
+                                            value="{local>/Sociedad}"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                                <!-- ORG. VENTAS -->
+                                <f:FormElement label="{i18n>OrgVentas}">
+                                    <f:fields>
+                                        <Input
+                                            id="txtOrgVentas1RDMob"
+                                            value="{local>/OrgVentas1}"
+                                            liveChange="onValidarCampos"
+                                            change="onValidarCampos"
+                                            showClearIcon="true"
+                                            showValueHelp="true"
+                                            valueHelpRequest=".onMatchcodeOrgVentas('1')"
+                                            showSuggestion="true"
+                                            suggestionItems="{oDataMCOrgVentas>/results}"
+                                            suggestionItemSelected="onSuggeItemSelected($event, 'ORGVENTAS')"
+                                            maxSuggestionWidth="350px"
+                                            startSuggestion="0"
+                                            maxLength="4"
+                                        >
+                                            <suggestionItems>
+                                                <core:ListItem
+                                                    key="{oDataMCOrgVentas>Vkorg}|{oDataMCOrgVentas>Spart}"
+                                                    text="{oDataMCOrgVentas>Vkorg}"
+                                                    additionalText="{oDataMCOrgVentas>Vtext} - {oDataMCOrgVentas>Spart}"
+                                                />
+                                            </suggestionItems>
+                                            <layoutData>
+                                                <f:ColumnElementData
+                                                    cellsSmall="10"
+                                                    cellsLarge="6"
+                                                />
+                                            </layoutData>
+                                        </Input>
+                                        <Button
+                                            icon="sap-icon://value-help"
+                                            press=".onMatchcodeMultiOrgVentas"
+                                            class="btnRefreshUser btnIconLaunchpad borderBtnRefresh"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                                <!-- FCH REGISTRO -->
+                                <f:FormElement label="{i18n>FechaRegistro}">
+                                    <f:fields>
+                                        <DatePicker
+                                            id="txtFechaReg1RDMob"
+                                            value="{
+                                'path': 'local>/FechaReg1',
+                                'type': 'sap.ui.model.type.Date',
+                                'formatOptions': {
+                                    'pattern': 'dd/MM/y'
+                                }
+                            }"
+                                            liveChange="onValidarCampos"
+                                            change="onValidarCampos"
+                                            maxDate="{local>/FechaReg2}"
+                                            validationSuccess="onValidarCampos"
+                                            placeholder="{i18n>FormatoFecha1}"
+                                            showCurrentDateButton="true"
+                                            required="true"
+                                        >
+                                            <layoutData>
+                                                <f:ColumnElementData
+                                                    cellsSmall="10"
+                                                    cellsLarge="6"
+                                                />
+                                            </layoutData>
+                                        </DatePicker>
+                                        <Button
+                                            icon="sap-icon://value-help"
+                                            press=".onMatchcodeMultiFechaReg"
+                                            class="btnRefreshUser btnIconLaunchpad borderBtnRefresh"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                                <!-- PUESTO EXPEDICION -->
+                                <f:FormElement label="{i18n>PuestoExpedicion}">
+                                    <f:fields>
+                                        <Input
+                                            id="txtPuestoExp1RDMob"
+                                            value="{local>/PuestoExp1}"
+                                            liveChange="onValidarCampos"
+                                            change="onValidarCampos"
+                                            showClearIcon="true"
+                                            showValueHelp="true"
+                                            valueHelpRequest=".onMatchcodePuestoExp('1')"
+                                            showSuggestion="true"
+                                            suggestionItems="{oDataMCPuestoExp>/results}"
+                                            suggestionItemSelected="onSuggeItemSelected($event, 'PUESTOEXP')"
+                                            maxSuggestionWidth="350px"
+                                            startSuggestion="0"
+                                            maxLength="10"
+                                        >
+                                            <suggestionItems>
+                                                <core:ListItem
+                                                    key="{oDataMCPuestoExp>Vstel}"
+                                                    text="{oDataMCPuestoExp>Vstel}"
+                                                    additionalText="{oDataMCPuestoExp>Vtext}"
+                                                />
+                                            </suggestionItems>
+                                            <layoutData>
+                                                <f:ColumnElementData
+                                                    cellsSmall="10"
+                                                    cellsLarge="6"
+                                                />
+                                            </layoutData>
+                                        </Input>
+                                        <Button
+                                            icon="sap-icon://value-help"
+                                            press=".onMatchcodeMultiPuestoExp"
+                                            class="btnRefreshUser btnIconLaunchpad borderBtnRefresh"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                                <!-- CLIENTE -->
+                                <f:FormElement label="{i18n>Cliente}">
+                                    <f:fields>
+                                        <Input
+                                            id="txtCliente1RDMob"
+                                            value="{local>/Cliente1}"
+                                            liveChange="onValidarCampos"
+                                            change="onValidarCampos"
+                                            showClearIcon="true"
+                                            showValueHelp="true"
+                                            valueHelpRequest=".onMatchcodeCliente('1')"
+                                            maxLength="10"
+                                        >
+                                            <layoutData>
+                                                <f:ColumnElementData
+                                                    cellsSmall="10"
+                                                    cellsLarge="6"
+                                                />
+                                            </layoutData>
+                                        </Input>
+                                        <Button
+                                            icon="sap-icon://value-help"
+                                            press=".onMatchcodeMultiCliente"
+                                            class="btnRefreshUser btnIconLaunchpad borderBtnRefresh"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                                <!-- NRO PEDIDO -->
+                                <f:FormElement label="{i18n>NPedido}">
+                                    <f:fields>
+                                        <Input
+                                            id="txtNroPedido1RDMob"
+                                            value="{local>/NroPedido1}"
+                                            liveChange="onValidarCampos"
+                                            change="onValidarCampos"
+                                            showClearIcon="true"
+                                            maxLength="10"
+                                        >
+                                            <layoutData>
+                                                <f:ColumnElementData
+                                                    cellsSmall="10"
+                                                    cellsLarge="6"
+                                                />
+                                            </layoutData>
+                                        </Input>
+                                        <Button
+                                            icon="sap-icon://value-help"
+                                            press=".onMatchcodeMultiNroPedido"
+                                            class="btnRefreshUser btnIconLaunchpad borderBtnRefresh"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                                <!-- OFICINA VENTAS -->
+                                <f:FormElement label="{i18n>OfiVentas1}">
+                                    <f:fields>
+                                        <Input
+                                            id="txtOfiVentas1RDMob"
+                                            value="{local>/OfiVentas1}"
+                                            liveChange="onValidarCampos"
+                                            change="onValidarCampos"
+                                            showClearIcon="true"
+                                            showValueHelp="true"
+                                            valueHelpRequest=".onMatchcodeOfiVentas('1')"
+                                            showSuggestion="true"
+                                            suggestionItems="{oDataMCOfiVentas>/results}"
+                                            suggestionItemSelected="onSuggeItemSelected($event, 'OFIVENTAS')"
+                                            maxSuggestionWidth="350px"
+                                            startSuggestion="0"
+                                            maxLength="10"
+                                        >
+                                            <suggestionItems>
+                                                <core:ListItem
+                                                    key="{oDataMCOfiVentas>Vkbur}"
+                                                    text="{oDataMCOfiVentas>Vkbur}"
+                                                    additionalText="{oDataMCOfiVentas>Bezei}"
+                                                />
+                                            </suggestionItems>
+                                            <layoutData>
+                                                <f:ColumnElementData
+                                                    cellsSmall="10"
+                                                    cellsLarge="6"
+                                                />
+                                            </layoutData>
+                                        </Input>
+                                        <Button
+                                            icon="sap-icon://value-help"
+                                            press=".onMatchcodeMultiOfiVentas"
+                                            class="btnRefreshUser btnIconLaunchpad borderBtnRefresh"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                                <!-- COMERCIAL -->
+                                <f:FormElement label="{i18n>Comercial}">
+                                    <f:fields>
+                                        <Input
+                                            id="txtComercial1RDMob"
+                                            value="{local>/Comercial1}"
+                                            liveChange="onValidarCampos"
+                                            change="onValidarCampos"
+                                            showClearIcon="true"
+                                            showValueHelp="true"
+                                            valueHelpRequest=".onMatchcodeComercial('1')"
+                                            maxLength="10"
+                                        >
+                                            <layoutData>
+                                                <f:ColumnElementData
+                                                    cellsSmall="10"
+                                                    cellsLarge="6"
+                                                />
+                                            </layoutData>
+                                        </Input>
+                                        <Button
+                                            icon="sap-icon://value-help"
+                                            press=".onMatchcodeMultiComercial"
+                                            class="btnRefreshUser btnIconLaunchpad borderBtnRefresh"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                            </f:formElements>
+                        </f:FormContainer>
+                    </f:formContainers>
+                </f:Form>
+
+                <!-- BOTON AGREGAR MATERIAL Y LIMPIAR CAMPOS -->
+                <l:Grid class="sapUiTinyMarginBottom">
+                    <l:content>
+                        <HBox alignItems="Center">
+                            <Button
+                                id="btnBuscarRDMob"
+                                type="Success"
+                                icon="sap-icon://search"
+                                text="{i18n>Buscar}"
+                                press=".onBuscar"
+                                width="100%"
+                            >
+                                <layoutData>
+                                    <FlexItemData growFactor="1" />
+                                </layoutData>
+                            </Button>
+                            <layoutData>
+                                <l:GridData span="L6 M6 S6" />
+                            </layoutData>
+                        </HBox>
+                        <HBox alignItems="Center">
+                            <Button
+                                type="Success"
+                                icon="sap-icon://clear-all"
+                                text="{i18n>LimpiarCampos}"
+                                press=".onLimpiarCampos"
+                                width="100%"
+                            >
+                                <layoutData>
+                                    <FlexItemData growFactor="1" />
+                                </layoutData>
+                            </Button>
+                            <layoutData>
+                                <l:GridData span="L6 M6 S6" />
+                            </layoutData>
+                        </HBox>
+                        <!-- <HBox alignItems="Center">
+                    <Button
+                        type="Success"
+                        icon="sap-icon://excel-attachment"
+                        text="{i18n>DescargarExcel}"
+                        press=".onDescargarExcel"
+                        width="100%"
+                    >
+                        <layoutData>
+                            <FlexItemData growFactor="1" />
+                        </layoutData>
+                    </Button>
+                    <layoutData>
+                        <l:GridData
+                            span="L6 M6 S6" />
+                    </layoutData>
+                </HBox> -->
+                        <HBox alignItems="Center">
+                            <Button
+                                type="Success"
+                                icon="sap-icon://expand-all"
+                                text="{i18n>CantFilas}"
+                                press=".onScreenCantidadFilas"
+                                width="100%"
+                            >
+                                <layoutData>
+                                    <FlexItemData growFactor="1" />
+                                </layoutData>
+                            </Button>
+                            <layoutData>
+                                <l:GridData span="L12 M12 S12" />
+                            </layoutData>
+                        </HBox>
+                    </l:content>
+                </l:Grid>
+
+                <!-- TABLA -->
+                <t:Table
+                    id="tblReporteDespachoMob"
+                    rowActionCount="1"
+                    rows="{oDataRepDespacho>/reporte_despachoped_nav/results}"
+                    enableSelectAll="true"
+                    enableBusyIndicator="true"
+                    busy="{local>/loadingTbl}"
+                    sort="onTableSort"
+                    filter="onTableFilter"
+                    class="sapUiResponsiveMarginTop sapUiResponsiveMarginBottom"
+                >
+                    <t:columns>
+                        <t:Column
+                            width="15rem"
+                            showSortMenuEntry="true"
+                            sortProperty="Name1"
+                            filterProperty="Name1"
+                            filterValue="{local>/filters/Name1}"
+                        >
+                            <!-- <Label text="{i18n>Cliente}" /> -->
+                            <Text
+                                text="{i18n>Cliente}"
+                                width="100%"
+                                textAlign="Center"
+                            />
+                            <t:template>
+                                <Text
+                                    text="{oDataRepDespacho>Name1}"
+                                    wrapping="false"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="6rem"
+                            showSortMenuEntry="true"
+                            sortProperty="Vkorg"
+                            filterProperty="Vkorg"
+                            filterValue="{local>/filters/Vkorg}"
+                            hAlign="Center"
+                        >
+                            <Label text="{i18n>OrgVentas}" />
+                            <t:template>
+                                <Text
+                                    text="{oDataRepDespacho>Vkorg}"
+                                    wrapping="false"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="5rem"
+                            showSortMenuEntry="true"
+                            sortProperty="Aubel"
+                            filterProperty="Aubel"
+                            filterValue="{local>/filters/Aubel}"
+                            hAlign="Center"
+                        >
+                            <Label text="{i18n>Pedido}" />
+                            <t:template>
+                                <Text
+                                    text="{oDataRepDespacho>Aubel}"
+                                    wrapping="false"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="6rem"
+                            showSortMenuEntry="true"
+                            sortProperty="Erdat"
+                            filterProperty="Erdat"
+                            filterValue="{local>/filters/Erdat}"
+                            hAlign="Center"
+                        >
+                            <Label text="{i18n>FechaEnt}" />
+                            <t:template>
+                                <Text
+                                    text="{ 
+                                    path: 'oDataRepDespacho>Erdat',
+                                    formatter : '.formatter.formateaFecha' 
+                                }"
+                                    wrapping="false"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <!--FECHA
+                    TRASLADO-->
+                        <t:Column
+                            width="6rem"
+                            showSortMenuEntry="true"
+                            sortProperty="Wadat"
+                            filterProperty="Wadat"
+                            filterValue="{local>/filters/Wadat}"
+                            hAlign="Center"
+                        >
+                            <Label text="{i18n>FechaTraslado}" />
+                            <t:template>
+                                <Text
+                                    text="{ 
+                                    path: 'oDataRepDespacho>Wadat',
+                                    formatter : '.formatter.fecha1' 
+                                }"
+                                    wrapping="false"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="15rem"
+                            showSortMenuEntry="true"
+                            sortProperty="Arktx"
+                            filterProperty="Arktx"
+                            filterValue="{local>/filters/Arktx}"
+                        >
+                            <!-- <Label text="{i18n>Denominacion}" /> -->
+                            <Text
+                                text="{i18n>Denominacion}"
+                                width="100%"
+                                textAlign="Center"
+                            />
+                            <t:template>
+                                <Text
+                                    text="{oDataRepDespacho>Arktx}"
+                                    wrapping="false"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="6rem"
+                            showSortMenuEntry="true"
+                            sortProperty="Lfimg"
+                            filterProperty="Lfimg"
+                            filterValue="{local>/filters/Lfimg}"
+                            hAlign="Center"
+                        >
+                            <Label text="{i18n>CtdEnt}" />
+                            <t:template>
+                                <Text
+                                    text="{
+                                    path: 'oDataRepDespacho>Lfimg',
+                                    formatter : '.formatter.cantidad'
+                                }"
+                                    wrapping="false"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="5rem"
+                            showSortMenuEntry="true"
+                            sortProperty="Charg"
+                            filterProperty="Charg"
+                            filterValue="{local>/filters/Charg}"
+                            hAlign="Center"
+                        >
+                            <Label text="{i18n>Lote}" />
+                            <t:template>
+                                <Text
+                                    text="{oDataRepDespacho>Charg}"
+                                    wrapping="false"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="10rem"
+                            showSortMenuEntry="true"
+                            sortProperty="Xblnr"
+                            filterProperty="Xblnr"
+                            filterValue="{local>/filters/Xblnr}"
+                            hAlign="Center"
+                        >
+                            <Label text="{i18n>GuiaRemision}" />
+                            <t:template>
+                                <!-- <Text
+                                text="{oDataRepDespacho>Xblnr}"
+                                wrapping="false"
+                            /> -->
+                                <HBox alignItems="Center">
+                                    <items>
+                                        <Text
+                                            text="{oDataRepDespacho>Xblnr}"
+                                            wrapping="false"
+                                        />
+                                        <Button
+                                            type="Transparent"
+                                            icon="sap-icon://pdf-attachment"
+                                            tooltip="{i18n>VerFactura}"
+                                            press=".onVerPDFGuiaRem"
+                                            visible="{= ${oDataRepDespacho>Xblnr} === '' ? false : true}"
+                                            enabled="{= ${oDataRepDespacho>NombGuia} === '' ? false : true}"
+                                        />
+                                        <!-- <Button
+                                        type="Transparent"
+                                        icon="sap-icon://email"
+                                        tooltip="{i18n>EnviarFactura}"
+                                        press=".onScreenCargaCorreos2"
+                                    /> -->
+                                    </items>
+                                </HBox>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="15rem"
+                            showSortMenuEntry="true"
+                            sortProperty="Ntrans"
+                            filterProperty="Ntrans"
+                            filterValue="{local>/filters/Ntrans}"
+                        >
+                            <!-- <Label text="{i18n>Transporte}" /> -->
+                            <Text
+                                text="{i18n>Transporte}"
+                                width="100%"
+                                textAlign="Center"
+                            />
+                            <t:template>
+                                <Text
+                                    text="{oDataRepDespacho>Ntrans}"
+                                    wrapping="false"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="8rem"
+                            showSortMenuEntry="true"
+                            sortProperty="Xblnr1"
+                            filterProperty="Xblnr1"
+                            filterValue="{local>/filters/Xblnr1}"
+                            hAlign="Center"
+                        >
+                            <Label text="{i18n>FacBolVta}" />
+                            <t:template>
+                                <Text
+                                    text="{oDataRepDespacho>Xblnr1}"
+                                    wrapping="false"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="5rem"
+                            showSortMenuEntry="true"
+                            sortProperty="Bstkd"
+                            filterProperty="Bstkd"
+                            filterValue="{local>/filters/Bstkd}"
+                        >
+                            <Label text="{i18n>NOC}" />
+                            <t:template>
+                                <Text
+                                    text="{oDataRepDespacho>Bstkd}"
+                                    wrapping="false"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <!-- <t:Column
+                        width="5rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Werks"
+                        filterProperty="Werks"
+                        filterValue="{local>/filters/Werks}"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>Centro}" />
+                        <t:template>
+                            <Text
+                                text="{oDataRepDespacho>Werks}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column> -->
+                        <t:Column
+                            width="10rem"
+                            showSortMenuEntry="true"
+                            sortProperty="Werkstxt"
+                            filterProperty="Werkstxt"
+                            filterValue="{local>/filters/Werkstxt}"
+                            hAlign="Center"
+                        >
+                            <Label text="{i18n>Centro}" />
+                            <t:template>
+                                <Text
+                                    text="{oDataRepDespacho>Werks} ({oDataRepDespacho>Werkstxt})"
+                                    wrapping="false"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="10rem"
+                            showSortMenuEntry="true"
+                            sortProperty="Vkburtxt"
+                            filterProperty="Vkburtxt"
+                            filterValue="{local>/filters/Vkburtxt}"
+                        >
+                            <!-- <Label text="{i18n>Oficina2}" /> -->
+                            <!-- <Label text="{i18n>OfiVentas}" /> -->
+                            <Text
+                                text="{i18n>OfiVentas}"
+                                width="100%"
+                                textAlign="Center"
+                            />
+                            <t:template>
+                                <Text
+                                    text="{oDataRepDespacho>Vkbur} ({oDataRepDespacho>Vkburtxt})"
+                                    wrapping="false"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="10rem"
+                            showSortMenuEntry="true"
+                            sortProperty="Vkgrptxt"
+                            filterProperty="Vkgrptxt"
+                            filterValue="{local>/filters/Vkgrptxt}"
+                        >
+                            <!-- <Label text="{i18n>GrupoVentas}" /> -->
+                            <Text
+                                text="{i18n>GrupoVentas}"
+                                width="100%"
+                                textAlign="Center"
+                            />
+                            <t:template>
+                                <Text
+                                    text="{oDataRepDespacho>Vkgrp} ({oDataRepDespacho>Vkgrptxt})"
+                                    wrapping="false"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="15rem"
+                            showSortMenuEntry="true"
+                            sortProperty="Sname"
+                            filterProperty="Sname"
+                            filterValue="{local>/filters/Sname}"
+                        >
+                            <!-- <Label text="{i18n>Vendedor}" /> -->
+                            <Text
+                                text="{i18n>Vendedor}"
+                                width="100%"
+                                textAlign="Center"
+                            />
+                            <t:template>
+                                <Text
+                                    text="{oDataRepDespacho>Sname}"
+                                    wrapping="false"
+                                />
+                            </t:template>
+                        </t:Column>
+                    </t:columns>
+                </t:Table>
+
+                <!-- PAGINADO -->
+                <l:Grid class="sapUiTinyMarginTop">
+                    <l:content>
+                        <HBox
+                            alignContent="Center"
+                            alignItems="Center"
+                            justifyContent="Center"
+                        >
+                            <Button
+                                type="Emphasized"
+                                icon="sap-icon://close-command-field"
+                                press="onFirstPress"
+                                enabled="{local>/page/PrevPageBtn}"
+                                class="sapUiTinyMarginEnd"
+                            />
+                            <Button
+                                type="Emphasized"
+                                icon="sap-icon://navigation-left-arrow"
+                                press="onPreviousPress"
+                                enabled="{local>/page/PrevPageBtn}"
+                            />
+                            <Text
+                                text="{i18n>Pagina} {local>/page/Page} de {local>/page/TotalPages}"
+                                textAlign="Center"
+                                width="120px"
+                                class="sapUiTinyMargin"
+                            />
+                            <Button
+                                type="Emphasized"
+                                icon="sap-icon://navigation-right-arrow"
+                                press="onNextPress"
+                                enabled="{local>/page/NextPageBtn}"
+                                class="sapUiTinyMarginEnd"
+                            />
+                            <Button
+                                type="Emphasized"
+                                icon="sap-icon://open-command-field"
+                                press="onLastPress"
+                                enabled="{local>/page/NextPageBtn}"
+                            />
+                            <layoutData>
+                                <l:GridData span="XL12 L12 M12 S12" />
+                            </layoutData>
+                        </HBox>
+                    </l:content>
+                </l:Grid>
+            </VBox>
+        </content>
+    </Panel>
+</mvc:View>

@@ -1,0 +1,325 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:t="sap.ui.table"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog
+        id="dialogClienteIC"
+        title="{i18n>Cliente}"
+        contentHeight="70%"
+        contentWidth="80%"
+        draggable="true"
+    >
+        <content>
+            <l:Grid class="sapUiTinyMargin">
+                <l:content>
+                    <VBox class="sapUiTinyMarginBottom">
+                        <Label
+                            text="{i18n>CodCliente}:"
+                            textAlign="Begin"
+                        />
+                        <Input
+                            value="{local>/mcCliente/CodCliente}"
+                            submit="matchcodeCliente('')"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL3 L3 M3 S12" />
+                        </layoutData>
+                    </VBox>
+                    <VBox class="sapUiTinyMarginBottom">
+                        <Label
+                            text="{i18n>NombreCliente}:"
+                            textAlign="Begin"
+                        />
+                        <Input
+                            value="{local>/mcCliente/NomCliente}"
+                            submit="matchcodeCliente('')"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL6 L6 M6 S12" />
+                        </layoutData>
+                    </VBox>
+                    <VBox class="sapUiTinyMarginBottom">
+                        <Label
+                            text="{i18n>RUC1}:"
+                            textAlign="Begin"
+                        />
+                        <Input
+                            value="{local>/mcCliente/RUC}"
+                            submit="matchcodeCliente('')"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL3 L3 M3 S12" />
+                        </layoutData>
+                    </VBox>
+                    <VBox class="sapUiTinyMarginBottom">
+                        <Button
+                            type="Success"
+                            icon="sap-icon://search"
+                            text="{i18n>Buscar}"
+                            press=".onBuscarCliente"
+                            width="100%"
+                        >
+                            <layoutData>
+                                <FlexItemData growFactor="1" />
+                            </layoutData>
+                        </Button>
+                        <layoutData>
+                            <l:GridData span="XL6 L6 M6 S6" />
+                        </layoutData>
+                    </VBox>
+                    <VBox class="sapUiTinyMarginBottom">
+                        <Button
+                            type="Success"
+                            icon="sap-icon://eraser"
+                            text="{i18n>LimpiarCampos}"
+                            press=".onLimpiarMCCliente"
+                            width="100%"
+                        >
+                            <layoutData>
+                                <FlexItemData growFactor="1" />
+                            </layoutData>
+                        </Button>
+                        <layoutData>
+                            <l:GridData span="XL6 L6 M6 S6" />
+                        </layoutData>
+                    </VBox>
+                </l:content>
+            </l:Grid>
+            <Table
+                noDataText="{i18n>NoDataFound}"
+                items="{
+                path : 'oDataMCCliente>/matcode_clientesic_nav/results',
+                sorter : {
+                    path : 'Name1',
+                    descending : false
+                }
+            }"
+                enableBusyIndicator="true"
+                mode="SingleSelectMaster"
+                selectionChange=".onConfirmPress($event, 'dialogClienteIC')"
+                includeItemInSelection="false"
+                modeAnimationOn="false"
+                inset="false"
+                growing="true"
+            >
+                <columns>
+                    <Column hAlign="Center" >
+                        <Text text="{i18n>CodCliente}" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Desktop"
+                        demandPopin="true"
+                        hAlign="Center"
+                    >
+                        <Text text="{i18n>NombreCliente}" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Desktop"
+                        demandPopin="true"
+                        hAlign="Center"
+                    >
+                        <Text text="{i18n>ZonaCliente}" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Desktop"
+                        demandPopin="true"
+                        hAlign="Center"
+                    >
+                        <Text text="{i18n>RUC1}" />
+                    </Column>
+                    <!-- <Column
+                        minScreenWidth="Desktop"
+                        demandPopin="true"
+                        hAlign="Center"
+                    >
+                        <header>
+                            <Text text="{i18n>LineaCredDispUSD}" />
+                        </header>
+                    </Column> -->
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <ObjectIdentifier title="{oDataMCCliente>Kunnr}" />
+                            <Text text="{oDataMCCliente>Name1}" class="customTextLeft" />
+                            <Text text="{oDataMCCliente>Zona}" class="customTextLeft" />
+                            <Text text="{oDataMCCliente>Stcd1}" />
+                            <!-- <Text text="{oDataMCCliente>Klimk}" /> -->
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+        <beginButton>
+            <Button
+                type="Default"
+                icon="sap-icon://decline"
+                text="{i18n>Cancelar}"
+                press=".onCancelPress($event, 'dialogClienteIC')"
+            />
+        </beginButton>
+    </Dialog>
+
+    <!-- <Dialog
+        id="dialogClienteIC"
+        title="{i18n>Cliente}"
+        contentWidth="90%"
+        contentHeight="60%"
+        draggable="true"
+    >
+        <l:Grid class="sapUiTinyMargin">
+            <l:content>
+                <HBox alignItems="Center">
+                    <Label
+                        text="{i18n>CodCliente}:"
+                        textAlign="Begin"
+                        width="130px"
+                        class="sapUiTinyMargin"
+                    />
+                    <Input
+                        value="{local>/mcCliente/CodCliente}"
+                        width="12rem"
+                        submit="matchcodeCliente('')"
+                    />
+                    <layoutData>
+                        <l:GridData span="XL12 L12 M12 S12" />
+                    </layoutData>
+                </HBox>
+                <HBox alignItems="Center">
+                    <Label
+                        text="{i18n>NombreCliente}:"
+                        textAlign="Begin"
+                        width="130px"
+                        class="sapUiTinyMargin"
+                    />
+                    <Input
+                        value="{local>/mcCliente/NomCliente}"
+                        width="12rem"
+                        submit="matchcodeCliente('')"
+                    />
+                    <layoutData>
+                        <l:GridData span="XL12 L12 M12 S12" />
+                    </layoutData>
+                </HBox>
+                <HBox alignItems="Center">
+                    <Label
+                        text="{i18n>RUC1}:"
+                        textAlign="Begin"
+                        width="130px"
+                        class="sapUiTinyMargin"
+                    />
+                    <Input
+                        value="{local>/mcCliente/RUC}"
+                        width="12rem"
+                        submit="matchcodeCliente('')"
+                    />
+                    <layoutData>
+                        <l:GridData span="XL12 L12 M12 S12" />
+                    </layoutData>
+                </HBox>
+                <HBox
+                    alignItems="Start"
+                    alignContent="Center"
+                    class="sapUiTinyMarginBottom"
+                >
+                    <Button
+                        type="Success"
+                        icon="sap-icon://search"
+                        text="{i18n>Buscar}"
+                        press=".onBuscarCliente"
+                        width="12rem"
+                        class="sapUiTinyMarginEnd"
+                    />
+                    <Button
+                        type="Success"
+                        icon="sap-icon://eraser"
+                        text="{i18n>LimpiarCampos}"
+                        width="12rem"
+                        press=".onLimpiarMCCliente"
+                    />
+                    <layoutData>
+                        <l:GridData span="XL12 L12 M12 S12" />
+                    </layoutData>
+                </HBox>
+            </l:content>
+        </l:Grid>
+        <Table
+            items="{oDataMCCliente>/matcode_clientesic_nav/results}"
+            enableBusyIndicator="true"
+            mode="SingleSelectMaster"
+            selectionChange=".onConfirmPress($event, 'dialogClienteIC')"
+            includeItemInSelection="false"
+            modeAnimationOn="false"
+            inset="false"
+            growing="true"
+        >
+            <columns>
+                <Column
+                    hAlign="Center"
+                    width="10em"
+                >
+                    <header>
+                        <Text text="{i18n>CodCliente}" />
+                    </header>
+                </Column>
+                <Column
+                    minScreenWidth="Desktop"
+                    demandPopin="true"
+                    hAlign="Center"
+                >
+                    <header>
+                        <Text text="{i18n>NombreCliente}" />
+                    </header>
+                </Column>
+                <Column
+                    minScreenWidth="Desktop"
+                    demandPopin="true"
+                    hAlign="Center"
+                >
+                    <header>
+                        <Text text="{i18n>ZonaCliente}" />
+                    </header>
+                </Column>
+                <Column
+                    minScreenWidth="Desktop"
+                    demandPopin="true"
+                    hAlign="Center"
+                >
+                    <header>
+                        <Text text="{i18n>RUC1}" />
+                    </header>
+                </Column>
+                <Column
+                    minScreenWidth="Desktop"
+                    demandPopin="true"
+                    hAlign="Center"
+                >
+                    <header>
+                        <Text text="{i18n>LineaCredDispUSD}" />
+                    </header>
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem>
+                    <cells>
+                        <ObjectIdentifier title="{oDataMCCliente>Kunnr}" />
+                        <Text text="{oDataMCCliente>Name1}" />
+                        <Text text="{oDataMCCliente>Zona}" />
+                        <Text text="{oDataMCCliente>Stcd1}" />
+                        <Text text="{oDataMCCliente>Klimk}" />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+        <beginButton>
+            <Button
+                type="Default"
+                icon="sap-icon://decline"
+                text="{i18n>Cancelar}"
+                press=".onCancelPress($event, 'dialogClienteIC')"
+            />
+        </beginButton>
+    </Dialog> -->
+</core:FragmentDefinition>

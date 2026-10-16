@@ -1,0 +1,1092 @@
+<mvc:View
+    controllerName="com.axelera.pe.gestioncomercial.controller.m3-cambio-precio.ReporteSolicitud"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:t="sap.ui.table"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+>
+    <!-- WEB -->
+    <Panel
+        accessibleRole="Region"
+        headerText="{i18n>HeaderCP04}"
+        class="custBackgroundColor"
+        visible="{=!${local>/IsMobile}}"
+    >
+        <content>
+            <l:Grid class="sapUiTinyMarginBottom">
+                <l:content>
+                    <!-- FECHA DESDE -->
+                    <HBox alignItems="Center">
+                        <Label
+                            text="{i18n>FechaDesde}"
+                            required="true"
+                            textAlign="Begin"
+                            width="120px"
+                            class="sapUiTinyMargin"
+                        />
+                        <DatePicker
+                            value="{
+                                path: 'local>/FechaDesde',
+                                type: 'sap.ui.model.type.Date',
+                                formatOptions: {
+                                pattern: 'dd/MM/y'
+                                }
+                            }"
+                            width="10rem"
+                            placeholder="{i18n>FormatoFecha1}"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL4 L6 M4 S12" />
+                        </layoutData>
+                    </HBox>
+                    <!-- FECHA HASTA -->
+                    <HBox alignItems="Center">
+                        <Label
+                            text="{i18n>FechaHasta}"
+                            textAlign="Begin"
+                            width="120px"
+                            class="sapUiTinyMargin"
+                        />
+                        <DatePicker
+                            value="{
+                                path: 'local>/FechaHasta',
+                                type: 'sap.ui.model.type.Date',
+                                formatOptions: {
+                                pattern: 'dd/MM/y'
+                                }
+                            }"
+                            width="10rem"
+                            placeholder="{i18n>FormatoFecha1}"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL4 L6 M4 S12" />
+                        </layoutData>
+                    </HBox>
+                    <!-- NRO SOLICITUD -->
+                    <HBox alignItems="Center">
+                        <Label
+                            text="{i18n>NSolicitud}"
+                            textAlign="Begin"
+                            width="120px"
+                            class="sapUiTinyMargin"
+                        />
+                        <Input
+                            value="{local>/NroSol}"
+                            width="10rem"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL4 L6 M4 S12" />
+                        </layoutData>
+                    </HBox>
+                    <!-- ESTADO -->
+                    <HBox alignItems="Center">
+                        <Label
+                            text="{i18n>Estado}"
+                            textAlign="Begin"
+                            width="120px"
+                            class="sapUiTinyMargin"
+                        />
+                        <ComboBox
+                            selectedKey="{local>/Estado}"
+                            width="10rem"
+                            class="sapUiTinyMarginEnd"
+                        >
+                            <core:Item
+                                key="0"
+                                text="TODOS"
+                            />
+                            <core:Item
+                                key="1"
+                                text="APROBADO"
+                            />
+                            <core:Item
+                                key="2"
+                                text="PENDIENTE"
+                            />
+                            <core:Item
+                                key="3"
+                                text="RECHAZADO"
+                            />
+                            <core:Item
+                                key="4"
+                                text="ANULADO"
+                            />
+                            <core:Item
+                                key="9"
+                                text="ELIMINADO"
+                            />
+                        </ComboBox>
+                        <layoutData>
+                            <l:GridData span="XL4 L6 M4 S12" />
+                        </layoutData>
+                    </HBox>
+                    <!-- SOLICITANTE -->
+                    <HBox alignItems="Center">
+                        <Label
+                            text="{i18n>Solicitante}"
+                            textAlign="Begin"
+                            width="120px"
+                            class="sapUiTinyMargin"
+                        />
+                        <ComboBox
+                            items="{
+                                path: 'oDataMCSolicitante>/consulta_comerciales_nav/results'
+                            }"
+                            value="{local>/Solicitante}"
+                            width="10rem"
+                            class="sapUiTinyMarginEnd"
+                        >
+                            <items>
+                                <core:Item
+                                    key="{oDataMCSolicitante>Id}"
+                                    text="{oDataMCSolicitante>Usuario}"
+                                />
+                            </items>
+                        </ComboBox>
+                        <layoutData>
+                            <l:GridData span="XL4 L6 M4 S12" />
+                        </layoutData>
+                    </HBox>
+                    <!-- APROBADOR -->
+                    <HBox alignItems="Center">
+                        <Label
+                            text="{i18n>Aprobador}"
+                            textAlign="Begin"
+                            width="120px"
+                            class="sapUiTinyMargin"
+                        />
+                        <ComboBox
+                            items="{
+                                path: 'oDataMCAprobador>/consulta_gerentes_nav/results'
+                            }"
+                            value="{local>/Aprobador}"
+                            width="10rem"
+                            class="sapUiTinyMarginEnd"
+                        >
+                            <items>
+                                <core:Item
+                                    key="{oDataMCAprobador>Id}"
+                                    text="{oDataMCAprobador>Usuario}"
+                                />
+                            </items>
+                        </ComboBox>
+                        <layoutData>
+                            <l:GridData span="XL4 L6 M4 S12" />
+                        </layoutData>
+                    </HBox>
+                    <!-- ORG VENTAS -->
+                    <HBox alignItems="Center">
+                        <Label
+                            text="{i18n>OrgVentas}"
+                            textAlign="Begin"
+                            width="120px"
+                            class="sapUiTinyMargin"
+                        />
+                        <Input
+                            value="{local>/OrgVentas}"
+                            liveChange="onChange($event, 'OrgVentas')"
+                            showClearIcon="true"
+                            showValueHelp="true"
+                            valueHelpRequest=".onMatchcodeOrgVentas"
+                            showSuggestion="true"
+                            suggestionItems="{oDataMCOrgVentas>/results}"
+                            suggestionItemSelected="onSuggeItemSelected($event, 'ORGVENTAS')"
+                            maxSuggestionWidth="350px"
+                            startSuggestion="0"
+                            maxLength="4"
+                            width="10rem"
+                            class="sapUiTinyMarginEnd"
+                        >
+                            <suggestionItems>
+                                <core:ListItem
+                                    key="{oDataMCOrgVentas>Vkorg}|{oDataMCOrgVentas>Spart}"
+                                    text="{oDataMCOrgVentas>Vkorg}"
+                                    additionalText="{oDataMCOrgVentas>Vtext} - {oDataMCOrgVentas>Spart}"
+                                />
+                            </suggestionItems>
+                        </Input>
+                        <Text
+                            class="sapUiTinyMargin"
+                            text="{local>/OrgVentasInfo}"
+                            wrapping="false"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL4 L6 M6 S12" />
+                        </layoutData>
+                    </HBox>
+                    <!-- SECTOR -->
+                    <HBox alignItems="Center">
+                        <Label
+                            text="{i18n>Sector}:"
+                            textAlign="Begin"
+                            width="120px"
+                            class="sapUiTinyMargin"
+                        />
+                        <Input
+                            value="{local>/Sector}"
+                            editable="false"
+                            width="10rem"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <Text
+                            text="{local>/SectorInfo}"
+                            wrapping="false"
+                            class="sapUiTinyMargin"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL4 L6 M6 S12" />
+                        </layoutData>
+                    </HBox>
+                    <!-- CLIENTE -->
+                    <HBox alignItems="Center">
+                        <Label
+                            text="{i18n>Cliente}"
+                            textAlign="Begin"
+                            width="120px"
+                            class="sapUiTinyMargin"
+                        />
+                        <Input
+                            type="Text"
+                            value="{local>/Cliente}"
+                            showClearIcon="true"
+                            liveChange="onChange($event, 'Cliente')"
+                            showValueHelp="true"
+                            valueHelpRequest=".onMatchcodeCliente"
+                            width="10rem"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <Text
+                            class="sapUiTinyMargin"
+                            text="{local>/ClienteInfo}"
+                            wrapping="false"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL6 L12 M12 S12" />
+                        </layoutData>
+                    </HBox>
+                    <HBox
+                        alignItems="Start"
+                        alignContent="Center"
+                        class="sapUiTinyMarginTop sapUiTinyMarginBottom"
+                    >
+                        <Button
+                            id="btnBuscarRS"
+                            type="Success"
+                            icon="sap-icon://search"
+                            text="{i18n>Buscar}"
+                            press="onBuscar"
+                            width="12rem"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <Button
+                            type="Success"
+                            icon="sap-icon://eraser"
+                            text="{i18n>LimpiarCampos}"
+                            press="onLimpiarCampos"
+                            width="12rem"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <!-- <Button
+                            id="btnCFilasRS"
+                            type="Success"
+                            icon="sap-icon://list"
+                            text="{i18n>CantFilas}"
+                            visible="false"
+                            width="12rem"
+                        /> -->
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </HBox>
+                </l:content>
+            </l:Grid>
+            <t:Table
+                id="tblRepSolicitud"
+                rowActionCount="1"
+                rows="{local>/Solicitudes/items}"
+                selectionMode="Single"
+                enableBusyIndicator="true"
+                busy="{local>/loadingTbl}"
+                class="sapUiResponsiveMarginTop sapUiResponsiveMarginBottom"
+                rowsUpdated="onRowsUpdated"
+            >
+                <t:columns>
+                    <t:Column width="15rem">
+                        <!-- <Label text="{i18n>Solicitante}" /> -->
+                        <Text
+                            text="{i18n>Solicitante}"
+                            width="100%"
+                            textAlign="Center"
+                        />
+                        <t:template>
+                            <Text
+                                text="{local>Solicitante}"
+                                wrapping="true"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="8rem"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>OrgVentas}" />
+                        <t:template>
+                            <Text
+                                text="{local>Orgventas}"
+                                wrapping="true"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="6rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Sector"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>Sector}" />
+                        <t:template>
+                            <Text
+                                text="{local>Sector}"
+                                wrapping="true"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="8rem"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>NSolicitud}" />
+                        <t:template>
+                            <Text
+                                text="{local>Id}"
+                                wrapping="true"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="8rem"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>FechaRegistro}" />
+                        <t:template>
+                            <Text
+                                text="{
+                                    path: 'local>Fechacrea',
+                                    type: 'sap.ui.model.type.Date',
+                                    formatOptions: {
+                                        pattern: 'dd/MM/y'
+                                    }
+                                }"
+                                wrapping="true"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="10rem">
+                        <!-- <Label text="{i18n>CanalVentas}" /> -->
+                        <Text
+                            text="{i18n>CanalVentas}"
+                            width="100%"
+                            textAlign="Center"
+                        />
+                        <t:template>
+                            <Text
+                                text="{local>Canalventastxt}"
+                                wrapping="true"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="30rem">
+                        <!-- <Label text="{i18n>NombreCliente}" /> -->
+                        <Text
+                            text="{i18n>NombreCliente}"
+                            width="100%"
+                            textAlign="Center"
+                        />
+                        <t:template>
+                            <Text
+                                text="{local>Clientetxt}"
+                                wrapping="true"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="20rem">
+                        <!-- <Label text="{i18n>NombreProducto}" /> -->
+                        <Text
+                            text="{i18n>NombreProducto}"
+                            width="100%"
+                            textAlign="Center"
+                        />
+                        <t:template>
+                            <Text
+                                text="{local>Materialtxt}"
+                                wrapping="true"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="8rem"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>Moneda}" />
+                        <t:template>
+                            <Text
+                                text="{local>Moneda}"
+                                wrapping="true"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="8rem">
+                        <!-- <Label text="{i18n>PrecioSugAprob}" /> -->
+                        <Text
+                            text="{i18n>PrecioSugAprob}"
+                            width="100%"
+                            textAlign="Center"
+                        />
+                        <t:template>
+                            <Text
+                                text="{local>Preciosugerido}"
+                                wrapping="true"
+                                width="100%"
+                                textAlign="End"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="8rem"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>MargenPorc}" />
+                        <!-- <Text text="{i18n>MargenPorc}" width="100%" textAlign="Center" /> -->
+                        <t:template>
+                            <Text
+                                text="{
+                                    path: 'local>Margen',
+                                    formatter: '.formatter.agregarPorcentaje'
+                                }"
+                                wrapping="true"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="8rem"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>Estado}" />
+                        <t:template>
+                            <Text
+                                text="{
+                                    path: 'local>Estado',
+                                    formatter : '.formatter.obtenerNombreEstado'
+                                }"
+                                wrapping="true"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="20rem">
+                        <!-- <Label text="{i18n>Aprobador}" /> -->
+                        <Text
+                            text="{i18n>Aprobador}"
+                            width="100%"
+                            textAlign="Center"
+                        />
+                        <t:template>
+                            <Text
+                                text="{local>Aprobador}"
+                                wrapping="true"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="8rem"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>FechaAprobRech}" />
+                        <t:template>
+                            <Text
+                                text="{
+                                    path: 'local>Fechaaprob',
+                                    type: 'sap.ui.model.type.Date',
+                                    formatOptions: {
+                                        pattern: 'dd/MM/y'
+                                    }
+                                }"
+                                wrapping="true"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="8rem"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>FechaFin}" />
+                        <t:template>
+                            <Text
+                                text="{
+                                    path: 'local>Fechafin',
+                                    type: 'sap.ui.model.type.Date',
+                                    formatOptions: {
+                                        pattern: 'dd/MM/y'
+                                    }
+                                }"
+                                wrapping="true"
+                            />
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+            <l:Grid class="sapUiTinyMarginTop">
+                <l:content>
+                    <HBox>
+                        <Button
+                            type="Emphasized"
+                            icon="sap-icon://close-command-field"
+                            press="onFirstPress"
+                            enabled="{local>/page/PrevPageBtn}"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <Button
+                            type="Emphasized"
+                            icon="sap-icon://navigation-left-arrow"
+                            press="onPreviousPress"
+                            enabled="{local>/page/PrevPageBtn}"
+                        />
+                        <Text
+                            text="{i18n>Pagina} {local>/page/Page} de {local>/page/TotalPages}"
+                            textAlign="Center"
+                            width="120px"
+                            class="sapUiTinyMargin"
+                        />
+                        <Button
+                            type="Emphasized"
+                            icon="sap-icon://navigation-right-arrow"
+                            press="onNextPress"
+                            enabled="{local>/page/NextPageBtn}"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <Button
+                            type="Emphasized"
+                            icon="sap-icon://open-command-field"
+                            press="onLastPress"
+                            enabled="{local>/page/NextPageBtn}"
+                        />
+                    </HBox>
+                </l:content>
+            </l:Grid>
+        </content>
+    </Panel>
+
+    <!-- MOBILE -->
+    <Panel
+        accessibleRole="Region"
+        headerText="{i18n>HeaderCP04}"
+        class="custBackgroundColor"
+        visible="{=${local>/IsMobile}}"
+    >
+        <content>
+            <VBox>
+                <f:Form editable="true">
+                    <!-- <f:title>
+                        <core:Title text="{i18n>HeaderCP04}" />
+                    </f:title> -->
+                    <f:layout>
+                        <f:ColumnLayout
+                            columnsM="2"
+                            columnsL="2"
+                            columnsXL="4"
+                        />
+                    </f:layout>
+                    <f:formContainers>
+                        <f:FormContainer>
+                            <f:formElements>
+                                <!-- FECHA DESDE -->
+                                <f:FormElement label="{i18n>FechaDesdeHasta}">
+                                    <f:fields>
+                                        <DatePicker
+                                            required="true"
+                                            value="{
+                                                path: 'local>/FechaDesde',
+                                                type: 'sap.ui.model.type.Date',
+                                                formatOptions: {
+                                                pattern: 'dd/MM/y'
+                                                }
+                                            }"
+                                            maxDate="{local>/FechaHasta}"
+                                            placeholder="{i18n>FormatoFecha1}"
+                                        />
+                                        <DatePicker
+                                            value="{
+                                                path: 'local>/FechaHasta',
+                                                type: 'sap.ui.model.type.Date',
+                                                formatOptions: {
+                                                pattern: 'dd/MM/y'
+                                                }
+                                            }"
+                                            minDate="{local>/FechaDesde}"
+                                            placeholder="{i18n>FormatoFecha1}"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                                <!-- FECHA HASTA -->
+                                <!-- <f:FormElement label="{i18n>FechaHasta}">
+                            <f:fields>
+                                <DatePicker
+                                    value="{
+                                        path: 'local>/FechaHasta',
+                                        type: 'sap.ui.model.type.Date',
+                                        formatOptions: {
+                                        pattern: 'dd/MM/y'
+                                        }
+                                    }"
+                                    placeholder="{i18n>FormatoFecha1}"
+                                />
+                            </f:fields>
+                        </f:FormElement> -->
+                                <!-- NRO SOLICITUD -->
+                                <f:FormElement label="{i18n>NSolicitud}">
+                                    <f:fields>
+                                        <Input value="{local>/NroSol}" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <!-- ESTADO -->
+                                <f:FormElement label="{i18n>Estado}">
+                                    <f:fields>
+                                        <ComboBox selectedKey="{local>/Estado}">
+                                            <core:Item
+                                                key="0"
+                                                text="TODOS"
+                                            />
+                                            <core:Item
+                                                key="1"
+                                                text="APROBADO"
+                                            />
+                                            <core:Item
+                                                key="2"
+                                                text="PENDIENTE"
+                                            />
+                                            <core:Item
+                                                key="3"
+                                                text="RECHAZADO"
+                                            />
+                                            <core:Item
+                                                key="4"
+                                                text="ANULADO"
+                                            />
+                                            <core:Item
+                                                key="9"
+                                                text="ELIMINADO"
+                                            />
+                                        </ComboBox>
+                                    </f:fields>
+                                </f:FormElement>
+                                <!-- SOLICITANTE -->
+                                <f:FormElement label="{i18n>Solicitante}">
+                                    <f:fields>
+                                        <ComboBox
+                                            items="{
+                                                path: 'oDataMCSolicitante>/consulta_comerciales_nav/results'
+                                            }"
+                                            value="{local>/Solicitante}"
+                                        >
+                                            <items>
+                                                <core:Item
+                                                    key="{oDataMCSolicitante>Id}"
+                                                    text="{oDataMCSolicitante>Usuario}"
+                                                />
+                                            </items>
+                                        </ComboBox>
+                                    </f:fields>
+                                </f:FormElement>
+                                <!-- APROBADOR -->
+                                <f:FormElement label="{i18n>Aprobador}">
+                                    <f:fields>
+                                        <ComboBox
+                                            items="{
+                                                path: 'oDataMCAprobador>/consulta_gerentes_nav/results'
+                                            }"
+                                            value="{local>/Aprobador}"
+                                        >
+                                            <items>
+                                                <core:Item
+                                                    key="{oDataMCAprobador>Id}"
+                                                    text="{oDataMCAprobador>Usuario}"
+                                                />
+                                            </items>
+                                        </ComboBox>
+                                    </f:fields>
+                                </f:FormElement>
+                                <!-- ORG VENTAS -->
+                                <f:FormElement label="{i18n>OrgVentas}">
+                                    <f:fields>
+                                        <Input
+                                            value="{local>/OrgVentas}"
+                                            liveChange="onChange($event, 'OrgVentas')"
+                                            showClearIcon="true"
+                                            showValueHelp="true"
+                                            valueHelpRequest=".onMatchcodeOrgVentas"
+                                            showSuggestion="true"
+                                            suggestionItems="{oDataMCOrgVentas>/results}"
+                                            suggestionItemSelected="onSuggeItemSelected($event, 'ORGVENTAS')"
+                                            maxSuggestionWidth="350px"
+                                            startSuggestion="0"
+                                            maxLength="4"
+                                        >
+                                            <suggestionItems>
+                                                <core:ListItem
+                                                    key="{oDataMCOrgVentas>Vkorg}|{oDataMCOrgVentas>Spart}"
+                                                    text="{oDataMCOrgVentas>Vkorg}"
+                                                    additionalText="{oDataMCOrgVentas>Vtext} - {oDataMCOrgVentas>Spart}"
+                                                />
+                                            </suggestionItems>
+                                        </Input>
+                                        <Text
+                                            text="{local>/OrgVentasInfo}"
+                                            wrapping="false"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                                <!-- SECTOR -->
+                                <f:FormElement label="{i18n>Sector}">
+                                    <f:fields>
+                                        <Input
+                                            value="{local>/Sector}"
+                                            editable="false"
+                                        />
+                                        <Text
+                                            text="{local>/SectorInfo}"
+                                            wrapping="false"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                                <!-- CLIENTE -->
+                                <f:FormElement label="{i18n>Cliente}">
+                                    <f:fields>
+                                        <Input
+                                            type="Text"
+                                            value="{local>/Cliente}"
+                                            showClearIcon="true"
+                                            liveChange="onChange($event, 'Cliente')"
+                                            showValueHelp="true"
+                                            valueHelpRequest=".onMatchcodeCliente"
+                                        />
+                                        <!-- <Text
+                                    text="{local>/ClienteInfo}"
+                                    wrapping="false"
+                                /> -->
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement
+                                    visible="{= ${local>/Cliente} !== '' }"
+                                >
+                                    <f:fields>
+                                        <Text
+                                            text="{local>/ClienteInfo}"
+                                            wrapping="false"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                            </f:formElements>
+                        </f:FormContainer>
+                    </f:formContainers>
+                </f:Form>
+                <!-- BOTON AGREGAR MATERIAL Y LIMPIAR CAMPOS -->
+                <l:Grid class="sapUiTinyMarginBottom">
+                    <l:content>
+                        <HBox alignItems="Center">
+                            <items>
+                                <Button
+                                    id="btnBuscarRSMob"
+                                    type="Success"
+                                    icon="sap-icon://search"
+                                    text="{i18n>Buscar}"
+                                    press=".onBuscar"
+                                    width="100%"
+                                >
+                                    <layoutData>
+                                        <FlexItemData growFactor="1" />
+                                    </layoutData>
+                                </Button>
+                            </items>
+                            <layoutData>
+                                <l:GridData span="L6 M6 S6" />
+                            </layoutData>
+                        </HBox>
+                        <HBox alignItems="Center">
+                            <Button
+                                type="Success"
+                                icon="sap-icon://eraser"
+                                text="{i18n>LimpiarCampos}"
+                                press=".onLimpiarCampos"
+                                width="100%"
+                            >
+                                <layoutData>
+                                    <FlexItemData growFactor="1" />
+                                </layoutData>
+                            </Button>
+                            <layoutData>
+                                <l:GridData span="L6 M6 S6" />
+                            </layoutData>
+                        </HBox>
+                    </l:content>
+                </l:Grid>
+                <t:Table
+                    id="tblRepSolicitudMob"
+                    rowActionCount="1"
+                    rows="{local>/Solicitudes/items}"
+                    selectionMode="Single"
+                    enableBusyIndicator="true"
+                    busy="{local>/loadingTbl}"
+                    class="sapUiResponsiveMarginTop sapUiResponsiveMarginBottom"
+                >
+                    <t:columns>
+                        <t:Column width="15rem">
+                            <Label text="{i18n>Solicitante}" />
+                            <t:template>
+                                <Text
+                                    text="{local>Solicitante}"
+                                    wrapping="true"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="8rem"
+                            hAlign="Center"
+                        >
+                            <Label text="{i18n>OrgVentas}" />
+                            <t:template>
+                                <Text
+                                    text="{local>Orgventas}"
+                                    wrapping="true"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="6rem"
+                            showSortMenuEntry="true"
+                            sortProperty="Sector"
+                            hAlign="Center"
+                        >
+                            <Label text="{i18n>Sector}" />
+                            <t:template>
+                                <Text
+                                    text="{local>Sector}"
+                                    wrapping="true"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="8rem"
+                            hAlign="Center"
+                        >
+                            <Label text="{i18n>NSolicitud}" />
+                            <t:template>
+                                <Text
+                                    text="{local>Id}"
+                                    wrapping="true"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="8rem"
+                            hAlign="Center"
+                        >
+                            <Label text="{i18n>FechaRegistro}" />
+                            <t:template>
+                                <Text
+                                    text="{
+                                        path: 'local>Fechacrea',
+                                        type: 'sap.ui.model.type.Date',
+                                        formatOptions: {
+                                            pattern: 'dd/MM/y'
+                                        }
+                                    }"
+                                    wrapping="true"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="10rem"
+                            hAlign="Center"
+                        >
+                            <Label text="{i18n>CanalVentas}" />
+                            <t:template>
+                                <Text
+                                    text="{local>Canalventastxt}"
+                                    wrapping="true"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="30rem">
+                            <Label text="{i18n>NombreCliente}" />
+                            <t:template>
+                                <Text
+                                    text="{local>Clientetxt}"
+                                    wrapping="true"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="20rem">
+                            <Label text="{i18n>NombreProducto}" />
+                            <t:template>
+                                <Text
+                                    text="{local>Materialtxt}"
+                                    wrapping="true"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="8rem"
+                            hAlign="Center"
+                        >
+                            <Label text="{i18n>Moneda}" />
+                            <t:template>
+                                <Text
+                                    text="{local>Moneda}"
+                                    wrapping="true"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="8rem"
+                            hAlign="End"
+                        >
+                            <Label text="{i18n>PrecioSugAprob}" />
+                            <t:template>
+                                <Text
+                                    text="{local>Preciosugerido}"
+                                    wrapping="true"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="8rem"
+                            hAlign="Center"
+                        >
+                            <Label text="{i18n>MargenPorc}" />
+                            <t:template>
+                                <Text
+                                    text="{
+                                        path: 'local>Margen',
+                                        formatter: '.formatter.agregarPorcentaje'
+                                    }"
+                                    wrapping="true"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="8rem"
+                            hAlign="Center"
+                        >
+                            <Label text="{i18n>Estado}" />
+                            <t:template>
+                                <Text
+                                    text="{
+                                        path: 'local>Estado',
+                                        formatter : '.formatter.obtenerNombreEstado'
+                                    }"
+                                    wrapping="true"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="20rem">
+                            <Label text="{i18n>Aprobador}" />
+                            <t:template>
+                                <Text
+                                    text="{local>Aprobador}"
+                                    wrapping="true"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="8rem"
+                            hAlign="Center"
+                        >
+                            <Label text="{i18n>FechaAprobRech}" />
+                            <t:template>
+                                <Text
+                                    text="{
+                                        path: 'local>Fechaaprob',
+                                        type: 'sap.ui.model.type.Date',
+                                        formatOptions: {
+                                            pattern: 'dd/MM/y'
+                                        }
+                                    }"
+                                    wrapping="true"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="8rem"
+                            hAlign="Center"
+                        >
+                            <Label text="{i18n>FechaFin}" />
+                            <t:template>
+                                <Text
+                                    text="{
+                                        path: 'local>Fechafin',
+                                        type: 'sap.ui.model.type.Date',
+                                        formatOptions: {
+                                            pattern: 'dd/MM/y'
+                                        }
+                                    }"
+                                    wrapping="true"
+                                />
+                            </t:template>
+                        </t:Column>
+                    </t:columns>
+                </t:Table>
+                <!-- PAGINADO -->
+                <l:Grid class="sapUiTinyMarginTop">
+                    <l:content>
+                        <HBox
+                            alignContent="Center"
+                            alignItems="Center"
+                            justifyContent="Center"
+                        >
+                            <Button
+                                type="Emphasized"
+                                icon="sap-icon://close-command-field"
+                                press="onFirstPress"
+                                enabled="{local>/page/PrevPageBtn}"
+                                class="sapUiTinyMarginEnd"
+                            />
+                            <Button
+                                type="Emphasized"
+                                icon="sap-icon://navigation-left-arrow"
+                                press="onPreviousPress"
+                                enabled="{local>/page/PrevPageBtn}"
+                            />
+                            <Text
+                                text="{i18n>Pagina} {local>/page/Page} de {local>/page/TotalPages}"
+                                textAlign="Center"
+                                width="120px"
+                                class="sapUiTinyMargin"
+                            />
+                            <Button
+                                type="Emphasized"
+                                icon="sap-icon://navigation-right-arrow"
+                                press="onNextPress"
+                                enabled="{local>/page/NextPageBtn}"
+                                class="sapUiTinyMarginEnd"
+                            />
+                            <Button
+                                type="Emphasized"
+                                icon="sap-icon://open-command-field"
+                                press="onLastPress"
+                                enabled="{local>/page/NextPageBtn}"
+                            />
+                            <layoutData>
+                                <l:GridData span="XL12 L12 M12 S12" />
+                            </layoutData>
+                        </HBox>
+                    </l:content>
+                </l:Grid>
+            </VBox>
+        </content>
+    </Panel>
+</mvc:View>

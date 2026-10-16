@@ -1,0 +1,19 @@
+<core:FragmentDefinition
+    xmlns="sap.ui.comp.valuehelpdialog"
+    xmlns:m="sap.m"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:core="sap.ui.core"
+>
+    <ValueHelpDialog
+        id="dialogMultiCreadoElCO"
+        title="{i18n>CreadoEl}"
+        ok=".onOkPress($event, 'dialogMultiCreadoElCO')"
+        cancel=".onCancelPress($event, 'dialogMultiCreadoElCO')"
+        afterClose=".onAfterClose($event, 'dialogMultiCreadoElCO')"
+        supportRanges="true"
+        supportRangesOnly="true"
+        key="Clave"
+        descriptionKey="Denominacion"
+        draggable="true"
+    />
+</core:FragmentDefinition>

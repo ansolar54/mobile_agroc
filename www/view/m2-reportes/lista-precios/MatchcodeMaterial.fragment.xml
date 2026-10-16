@@ -1,0 +1,115 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:t="sap.ui.table"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog
+        id="dialogMaterialLP"
+        contentWidth="70%"
+        contentHeight="80%"
+        title="{i18n>Material}"
+        draggable="true"
+    >
+        <l:Grid class="sapUiTinyMargin">
+            <l:content>
+                    <VBox class="sapUiTinyMarginBottom">
+                        <Label
+                            text="{i18n>CodProducto}:"
+                            textAlign="Begin"
+                        />
+                        <Input
+                            value="{local>/mcMaterial/CodProducto}"
+                            submit="onBuscarMaterial"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL6 L6 M6 S12" />
+                        </layoutData>
+                    </VBox>
+                    <VBox class="sapUiTinyMarginBottom">
+                        <Label
+                            text="{i18n>NombreProducto}:"
+                            textAlign="Begin"
+                        />
+                        <Input
+                            value="{local>/mcMaterial/NombreProducto}"
+                            submit="onBuscarMaterial"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL6 L6 M6 S12" />
+                        </layoutData>
+                    </VBox>
+                    <VBox class="sapUiTinyMarginBottom">
+                        <Button
+                            type="Success"
+                            icon="sap-icon://search"
+                            text="{i18n>Buscar}"
+                            width="100%"
+                            press="onBuscarMaterial"
+                        />                    
+                        <layoutData>
+                            <l:GridData span="XL6 L6 M6 S6" />
+                        </layoutData>
+                    </VBox>
+                    <VBox class="sapUiTinyMarginBottom">
+                        <Button
+                            type="Success"
+                            icon="sap-icon://eraser"
+                            text="{i18n>LimpiarCampos}"
+                            width="100%"
+                            press="onLimpiarMaterial"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL6 L6 M6 S6" />
+                        </layoutData>
+                    </VBox>
+            </l:content>
+        </l:Grid>
+        <Table
+            noDataText="{i18n>NoDataFound}"
+            items="{
+                path : 'oDataMCMaterial>/matcode_materiales2_nav/results',
+                sorter : {
+                    path : 'Kunnr',
+                    descending : false
+                }
+            }"
+            enableBusyIndicator="true"
+            mode="SingleSelectMaster"
+            selectionChange=".onConfirmPress($event, 'dialogMaterialLP')"
+            includeItemInSelection="false"
+            modeAnimationOn="false"
+            inset="false"
+            growing="true"
+        >
+            <columns>
+                <Column width="10em" hAlign="Center" >
+                    <Text text="{i18n>CodProducto}" />
+                </Column>
+                <Column
+                    minScreenWidth="Desktop"
+                    demandPopin="true"
+                    hAlign="Center"
+                >
+                    <Text text="{i18n>NombreProducto}" />
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem>
+                    <cells>
+                        <ObjectIdentifier title="{oDataMCMaterial>Matnr}" />
+                        <Text text="{oDataMCMaterial>Maktx}" class="customTextLeft" />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+        <beginButton>
+            <Button
+                type="Default"
+                icon="sap-icon://decline"
+                text="{i18n>Cancelar}"
+                press=".onCancelPress($event, 'dialogMaterialLP')"
+            />
+        </beginButton>
+    </Dialog>
+</core:FragmentDefinition>

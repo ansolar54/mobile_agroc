@@ -1,0 +1,101 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:t="sap.ui.table"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog
+        id="dialogCargaCorreosEC"
+        title="{i18n>Correos}"
+        contentHeight="70%"
+        contentWidth="80%"
+        draggable="true"
+    >
+        <content>
+            <l:Grid class="sapUiTinyMarginTop sapUiTinyMarginBottom">
+                <l:content>
+                    <HBox alignItems="Center">
+                        <Label
+                            text="{i18n>Correo}"
+                            textAlign="Begin"
+                            width="80px"
+                            class="sapUiTinyMargin"
+                        />
+                        <Input
+                            id="txtAddCorreoEC"
+                            showClearIcon="false"
+                            width="20rem"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </HBox>
+                    <HBox class="sapUiTinyMarginTop sapUiTinyMarginBottom">
+                        <Button
+                            type="Success"
+                            icon="sap-icon://add"
+                            text="{i18n>AgregarCorreo}"
+                            press=".onAgregarCorreo"
+                            width="12rem"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <Button
+                            id="btnEnviarCorreoEC"
+                            type="Success"
+                            icon="sap-icon://email"
+                            text="{i18n>EnviarCorreo}"
+                            press=".onEnviarPdf"
+                            width="12rem"
+                        />
+                    </HBox>
+                </l:content>
+            </l:Grid>
+
+            <t:Table
+                id="tblCorreosEC"
+                rowActionCount="1"
+                rows="{local>/Correos}"
+                selectionMode="Single"
+                enableBusyIndicator="true"
+                class="sapUiTinyMargin"
+            >
+                <t:columns>
+                    <t:Column width="30rem">
+                        <Label text="{i18n>Correo}" />
+                        <t:template>
+                            <Text text="{local>Correo}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="5rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Action"
+                    >
+                        <Label text="{i18n>Accion}" />
+                        <t:template>
+                            <HBox justifyContent="Center">
+                                <items>
+                                    <Button
+                                        type="Reject"
+                                        icon="sap-icon://delete"
+                                        tooltip="{i18n>VerFactura}"
+                                        press=".onDeleteCorreo"
+                                    />
+                                </items>
+                            </HBox>
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+        </content>
+        <buttons>
+            <Button
+                type="Default"
+                text="{i18n>Cerrar}"
+                press=".onCloseDialog($event ,'dialogCargaCorreosEC')"
+                width="6rem"
+            />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

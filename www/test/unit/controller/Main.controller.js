@@ -1,0 +1,2 @@
+sap.ui.define(["comaxelerape/gestioncomercial/controller/Main.controller"],function(n){"use strict";QUnit.module("Main Controller");QUnit.test("I should test the Main controller",function(e){var o=new n;o.onInit();e.ok(o)})});
+//# sourceMappingURL=Main.controller.js.map

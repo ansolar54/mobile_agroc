@@ -1,0 +1,75 @@
+<mvc:View
+    controllerName="com.axelera.pe.gestioncomercial.controller.auth.Login"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    displayBlock="true"
+    xmlns:core="sap.ui.core"
+>
+    <Panel
+        height="100%"
+        class="contentGroup custLoginBackground"
+    >
+        <headerToolbar>
+            <OverflowToolbar
+                style="Clear"
+                class="sapUiTinyNegativeMarginBeginEnd sapUiTinyMarginTop"
+            >
+                <Image
+                    src="{local>/ImgLogo}"
+                    width="4rem"
+                />
+            </OverflowToolbar>
+        </headerToolbar>
+        <content>
+            <FlexBox
+                alignItems="Center"
+                justifyContent="Center"
+                height="100%"
+            >
+                <VBox class="sapUiTinyMargin sapUiTinyMarginTopBottom">
+                    <Input
+                        id="txtUsuario"
+                        value="{local>/Usuario}"
+                        placeholder="{i18n>Usuario}"
+                        valueLiveUpdate="true"
+                        class="sapUiTinyMarginBottom"
+                    />
+                    <Input
+                        id="txtClave"
+                        value="{local>/Clave}"
+                        placeholder="{i18n>ClaveAcceso}"
+                        valueLiveUpdate="true"
+                        class="sapUiTinyMarginBottom"
+                        showValueHelp="true"
+                        valueHelpIconSrc="{=${local>/IsShowEye} ? 'sap-icon://show' : 'sap-icon://hide'}"
+                        valueHelpRequest="onShowPassword"
+                        type="{=${local>/IsShowEye} ? 'Password' : 'Text'}"
+                    />
+                    <Label text="Idioma" />
+                    <Select
+                        selectedKey="{local>/Idioma}"
+                        width="100%"
+                        editable="false"
+                        class="sapUiTinyMarginBottom"
+                    >
+                        <core:Item
+                            key="ES"
+                            text="ES - Español"
+                        />
+                        <core:Item
+                            key="EN"
+                            text="EN - English"
+                        />
+                    </Select>
+                    <Button
+                        type="Default"
+                        text="Acceder al sistema"
+                        press="onLoginPress"
+                        width="100%"
+                        class="loginButton custButtonEmphasized sapUiTinyMarginBottom"
+                    />
+                </VBox>
+            </FlexBox>
+        </content>
+    </Panel>
+</mvc:View>

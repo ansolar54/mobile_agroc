@@ -1,0 +1,35 @@
+{
+  "name": "com.reporcomer.agroc.pe",
+  "displayName": "agroconexion",
+  "version": "1.0.0",
+  "description": "A sample Apache Cordova application that responds to the deviceready event.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "Apache Cordova Team",
+  "license": "Apache-2.0",
+  "cordova": {
+    "platforms": [
+      "android"
+    ],
+    "plugins": {
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-inappbrowser": {},
+      "cordova-plugin-screen-orientation": {},
+      "cordova-plugin-native-spinner": {},
+      "es6-promise-plugin": {}
+    }
+  },
+  "devDependencies": {
+    "cordova-android": "^15.1.0",
+    "cordova-plugin-inappbrowser": "^6.0.0",
+    "cordova-plugin-native-spinner": "^1.1.4",
+    "cordova-plugin-screen-orientation": "^3.0.4",
+    "cordova-plugin-splashscreen": "^6.0.1",
+    "es6-promise-plugin": "^4.2.2"
+  }
+}

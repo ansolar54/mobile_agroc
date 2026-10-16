@@ -1,0 +1,22 @@
+<core:FragmentDefinition
+    xmlns="sap.ui.comp.valuehelpdialog"
+    xmlns:m="sap.m"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+>
+    <ValueHelpDialog
+        id="dialogMultiClienteRD"
+        title="{i18n>Clientes}"
+        ok=".onOkPress($event, 'dialogMultiClienteRD')"
+        cancel=".onCancelPress($event, 'dialogMultiClienteRD')"
+        afterClose=".onAfterClose($event, 'dialogMultiClienteRD')"
+        supportRanges="true"
+        supportRangesOnly="true"
+        key="Clave"
+        descriptionKey="Denominacion"
+        draggable="true"
+    >
+    </ValueHelpDialog>
+</core:FragmentDefinition>

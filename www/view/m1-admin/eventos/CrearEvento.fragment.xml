@@ -1,0 +1,83 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog
+        id="dialogCrearEvento"
+        title="{i18n>NuevoEvento}"
+        draggable="true"
+        contentWidth="30rem"
+    >
+        <content>
+            <l:Grid class="sapUiTinyMargin">
+                <l:content>
+                    <VBox class="sapUiTinyMarginBottom">
+                        <Label
+                            text="{i18n>Modulo}:"
+                            textAlign="Begin"
+                        />
+                        <Select
+                            id="selModulo"
+                            items="{oDataMCModulos>/}"
+                            selectedKey="{local>/IdModulo}"
+                            required="true"
+                            change=".onChangeModulo"
+                            width="100%"
+                        >
+                            <core:Item
+                                key="{oDataMCModulos>IdModulo}"
+                                text="{oDataMCModulos>NameModul}"
+                            />
+                        </Select>
+                        <layoutData>
+                            <l:GridData span="XL6 L6 M12 S12" />
+                        </layoutData>
+                    </VBox>
+                    <VBox class="sapUiTinyMarginBottom">
+                        <Label
+                            text="{i18n>Evento}:"
+                            textAlign="Begin"
+                        />
+                        <Select
+                            id="selAccion"
+                            items="{oDataMCDefEventos>/}"
+                            selectedKey="{local>/IdAccion}"
+                            required="true"
+                            change=".onChangeAccion"
+                            width="100%"
+                            enabled="{= ${local>/TieneAcciones} }"
+                        >
+                            <core:Item
+                                key="{oDataMCDefEventos>IdAccion}"
+                                text="{oDataMCDefEventos>Descripcion}"
+                            />
+                        </Select>
+                        <layoutData>
+                            <l:GridData span="XL6 L6 M12 S12" />
+                        </layoutData>
+                    </VBox>
+                </l:content>
+            </l:Grid>
+        </content>
+        <beginButton>
+            <Button
+                type="Default"
+                icon="sap-icon://decline"
+                text="{i18n>Cancelar}"
+                press=".onCloseDialog($event ,'dialogCrearEvento')"
+                width="6rem"
+            />
+        </beginButton>
+        <endButton>
+            <Button
+                type="Success"
+                icon="sap-icon://save"
+                text="{i18n>Guardar}"
+                press=".onSaveCrearEvento"
+                width="6rem"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,125 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:t="sap.ui.table"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog
+        id="dialogComercialCO"
+        title="{i18n>Comercial}"
+        contentWidth="70%"
+        contentHeight="80%"
+        draggable="true"
+    >
+        <l:Grid class="sapUiTinyMarginTop">
+            <l:content>
+                <VBox class="sapUiTinyMarginBottom">
+                    <Label
+                        text="{i18n>Codigo}:"
+                        textAlign="Begin"
+                    />
+                    <Input
+                        value="{local>/mcComercial/CodComercial}"
+                        submit="onBuscarComercial"
+                    />
+                    <layoutData>
+                        <l:GridData span="XL3 L3 M4 S12" />
+                    </layoutData>
+                </VBox>
+                <VBox class="sapUiTinyMarginBottom">
+                    <Label
+                        text="{i18n>Denominacion}:"
+                        textAlign="Begin"
+                    />
+                    <Input
+                        value="{local>/mcComercial/NombreComercial}"
+                        submit="onBuscarComercial"
+                    />
+                    <layoutData>
+                        <l:GridData span="XL9 L9 M4 S12" />
+                    </layoutData>
+                </VBox>
+                <!-- BOTONES -->
+                <VBox class="sapUiTinyMarginBottom">
+                    <Button
+                        type="Success"
+                        icon="sap-icon://search"
+                        text="{i18n>Buscar}"
+                        press="onBuscarComercial"
+                        width="100%"
+                    >
+                        <layoutData>
+                            <FlexItemData growFactor="1" />
+                        </layoutData>
+                    </Button>
+                    <layoutData>
+                        <l:GridData span="XL6 L6 M6 S6" />
+                    </layoutData>
+                </VBox>
+                <VBox class="sapUiTinyMarginBottom">
+                    <Button
+                        type="Success"
+                        icon="sap-icon://eraser"
+                        text="{i18n>LimpiarCampos}"
+                        press="onLimpiarComercial"
+                        width="100%"
+                    >
+                        <layoutData>
+                            <FlexItemData growFactor="1" />
+                        </layoutData>
+                    </Button>
+                    <layoutData>
+                        <l:GridData span="XL6 L6 M6 S6" />
+                    </layoutData>
+                </VBox>
+            </l:content>
+        </l:Grid>
+        <Table
+            noDataText="{i18n>NoDataFound}"
+            items="{
+                path : 'oDataMCComercial>/consulta_comerciales_nav/results',
+                sorter : {
+                    path : 'Codigo',
+                    descending : false
+                }
+            }"
+            enableBusyIndicator="true"
+            mode="SingleSelectMaster"
+            selectionChange=".onConfirmPress($event, 'dialogComercialCO')"
+            includeItemInSelection="false"
+            modeAnimationOn="false"
+            inset="false"
+            growing="true"
+            class="sapUiResponsiveMarginTop"
+        >
+            <columns>
+                <Column width="12em" hAlign="Center" >
+                    <Text text="{i18n>CodProducto}" />
+                </Column>
+                <Column
+                    minScreenWidth="Desktop"
+                    demandPopin="true"
+                    hAlign="Center"
+                >
+                    <Text text="{i18n>NombreProducto}" />
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem>
+                    <cells>
+                        <ObjectIdentifier title="{oDataMCComercial>Codigo}" />
+                        <Text text="{oDataMCComercial>Name}" class="customTextLeft" />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+        <beginButton>
+            <Button
+                type="Default"
+                icon="sap-icon://decline"
+                text="{i18n>Cancelar}"
+                press=".onCancelPress($event, 'dialogComercialCO')"
+            />
+        </beginButton>
+    </Dialog>
+</core:FragmentDefinition>

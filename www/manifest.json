@@ -1,0 +1,251 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "com.axelera.pe.gestioncomercial",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.13.6",
+      "toolsId": "2fd6d684-d771-4c12-b21b-1ce83fc182e2"
+    },
+    "dataSources": {
+      "adminService": {
+        "uri": "/sap/opu/odata/sap/ZSD_RC_ADMIN_SRV/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "reportesService": {
+        "uri": "/sap/opu/odata/SAP/ZSD_RC_REPORTES_SRV/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "pedidosService": {
+        "uri": "/sap/opu/odata/sap/ZSD_RC_PEDIDOS_SRV/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "cambiopService": {
+        "uri": "/sap/opu/odata/sap/ZSD_RC_CAMBIOP_SRV/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "fullWidth": true,
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.120.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {},
+        "sap.tnt": {},
+        "sap.ui.layout": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.axelera.pe.gestioncomercial.i18n.i18n"
+        }
+      },
+      "AdminService": {
+        "dataSource": "adminService",
+        "preload": true,
+        "settings": {
+          "useBatch": false
+        }
+      },
+      "ReportesService": {
+        "dataSource": "reportesService",
+        "preload": true,
+        "settings": {
+          "useBatch": false
+        }
+      },
+      "PedidosService": {
+        "dataSource": "pedidosService",
+        "preload": true,
+        "settings": {
+          "useBatch": false
+        }
+      },
+      "CambiopService": {
+        "dataSource": "cambiopService",
+        "preload": true,
+        "settings": {
+          "useBatch": false
+        }
+      }      
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style-mob.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "com.axelera.pe.gestioncomercial.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "RouteLogin",
+          "pattern": "login",
+          "target": [
+            "TargetLogin"
+          ]
+        },
+        {
+          "name": "RouteMain",
+          "pattern": "",
+          "target": [
+            "TargetMain"
+          ]
+        },
+        {
+          "name": "Login",
+          "pattern": "login",
+          "target": [
+            "TargetLogin"
+          ]
+        },
+        {
+          "name": "RouteConsultaPedidos",
+          "pattern": "",
+          "target": [
+            "TargetConsultaPedidos"
+          ]
+        },
+        {
+          "name": "RouteModifPed",
+          "pattern": "ModificarPedido/{detailPath}",
+          "target": [
+            "TargetModificarPedido"
+          ]
+        },
+        {
+          "name": "RouteVerPedido",
+          "pattern": "VerPedido/{nroPedido},{claseDoc},{tipoNota},{motivo}",
+          "target": [
+            "TargetVerPedido"
+          ]
+        }
+      ],
+      "targets": {
+        "TargetMain": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Main",
+          "viewName": "Main"
+        },
+        "TargetSmartTable": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "SmartTable",
+          "viewName": "SmartTable"
+        },
+        "TargetM1Usuarios": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Usuarios",
+          "viewName": "Usuarios"
+        },
+        "TargetLogin": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Login",
+          "viewName": "auth.Login"
+        },
+        "TargetConsultaPedidos": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "ConsultaPedidos",
+          "viewName": "m4-pedidos.consulta-pedidos.ConsultaPedidos"
+        },
+        "TargetModificarPedido": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "ModificarPedido",
+          "viewName": "m4-pedidos.consulta-pedidos.ModificarPedido"
+        },
+        "TargetVerPedido": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "VerPedido",
+          "viewName": "m4-pedidos.consulta-pedidos.VerPedido"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "com.axelera.pe.gestioncomercial.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  }
+}

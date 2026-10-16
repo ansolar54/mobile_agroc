@@ -1,0 +1,22 @@
+<core:FragmentDefinition
+    xmlns="sap.ui.comp.valuehelpdialog"
+    xmlns:m="sap.m"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+>
+    <ValueHelpDialog
+        id="dialogMultiNroPedidoRD"
+        title="{i18n>NroPedidos}"
+        ok=".onOkPress($event, 'dialogMultiNroPedidoRD')"
+        cancel=".onCancelPress($event, 'dialogMultiNroPedidoRD')"
+        afterClose=".onAfterClose($event, 'dialogMultiNroPedidoRD')"
+        supportRanges="true"
+        supportRangesOnly="true"
+        key="Clave"
+        descriptionKey="Denominacion"
+        draggable="true"
+    >
+    </ValueHelpDialog>
+</core:FragmentDefinition>

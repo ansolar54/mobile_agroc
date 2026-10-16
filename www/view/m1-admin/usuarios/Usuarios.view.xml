@@ -1,0 +1,543 @@
+<mvc:View
+    controllerName="com.axelera.pe.gestioncomercial.controller.m1-admin.Usuarios"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:t="sap.ui.table"
+    xmlns:core="sap.ui.core"
+>
+    <!-- <VBox class="sapUiTinyMargin">
+        <f:Form id="FormChangeColumn_oneGroup"
+            editable="true">
+            <f:title>
+                <core:Title text="{i18n>HeaderAD01}" />
+            </f:title>
+            <f:layout>
+                <f:ColumnLayout />            
+            </f:layout>
+            <f:formContainers>
+                <f:FormContainer>
+                    <f:formElements>
+                        <f:FormElement label="{i18n>Buscar}">
+                            <f:fields>
+                                <Input value="{local>/Buscar}"
+                                    liveChange="onBuscar"
+                                    placeholder="{i18n>MsgBusquedaUsuario}" />
+
+                                
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement class="sapUiSmallMarginTop">
+                            <f:fields>
+                                <Button type="Success"
+                                    icon="sap-icon://add"
+                                    text="{i18n>NuevoUsuario}"
+                                    tooltip="{i18n>NuevoUsuario}"
+                                    press=".onCrearUsuario"
+                                >
+                                    <layoutData>
+                                        <f:ColumnElementData cellsSmall="6" cellsLarge="5" />
+                                    </layoutData>
+                                </Button>
+                                <Button
+                                    type="Default"
+                                    icon="sap-icon://refresh"
+                                    tooltip="{i18n>Refrescar}"
+                                    press=".onRefreshTable"
+                                >
+                                    <layoutData>
+                                        <f:ColumnElementData cellsSmall="2" cellsLarge="1" />
+                                    </layoutData>
+                                </Button>
+                            </f:fields>
+                        </f:FormElement>
+                    </f:formElements>
+                </f:FormContainer>
+            </f:formContainers>
+        </f:Form>
+    </VBox> -->
+    <!-- WEB -->
+    <Panel
+        accessibleRole="Region"
+        headerText="{i18n>HeaderAD01}"
+        class="custBackgroundColor"
+        visible="{=!${local>/IsMobile}}"
+    >
+        <content>
+            <l:Grid class="sapUiTinyMarginBottom">
+                <l:content>
+                    <HBox alignItems="Center">
+                        <Label
+                            text="{i18n>Buscar}:"
+                            textAlign="Begin"
+                            width="80px"
+                            class="sapUiTinyMargin"
+                        />
+                        <Input
+                            value="{local>/Buscar}"
+                            liveChange="onBuscar"
+                            placeholder="{i18n>MsgBusquedaUsuario}"
+                            showClearIcon="true"
+                            width="15rem"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL6 L6 M12 S12" />
+                        </layoutData>
+                    </HBox>
+                    <HBox
+                        alignContent="Center"
+                        alignItems="End"
+                        justifyContent="End"
+                    >
+                        <Button
+                            type="Success"
+                            icon="sap-icon://add"
+                            text="{i18n>NuevoUsuario}"
+                            tooltip="{i18n>NuevoUsuario}"
+                            press=".onCrearUsuario"
+                            width="12rem"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <Button
+                            type="Default"
+                            icon="sap-icon://refresh"
+                            tooltip="{i18n>Refrescar}"
+                            press=".onRefreshTable"
+                            class="sapUiTinyMarginEnd btnRefreshUser btnIconLaunchpad borderBtnRefresh"
+                        />
+                        <layoutData>
+                            <l:GridData span="XL6 L6 M12 S12" />
+                        </layoutData>
+                    </HBox>
+                </l:content>
+            </l:Grid>
+            <t:Table
+                rowActionCount="1"
+                rows="{oDataUsuarios>/}"
+                selectionMode="None"
+                enableBusyIndicator="true"
+                busy="{local>/loadingTbl}"
+                class="sapUiResponsiveMarginTop sapUiResponsiveMarginBottom"
+            >
+                <t:columns>
+                    <t:Column
+                        width="4rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Id"
+                    >
+                        <!-- <Label text="{i18n>Id}" /> -->
+                        <Text
+                            text="{i18n>Id}"
+                            width="100%"
+                            textAlign="Center"
+                        />
+                        <t:template>
+                            <Text
+                                text="{oDataUsuarios>Id}"
+                                wrapping="true"
+                                width="100%"
+                                textAlign="Center"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="16rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Nombre"
+                        filterProperty="Nombre"
+                    >
+                        <!-- <Label text="{i18n>Nombres}" /> -->
+                        <Text
+                            text="{i18n>Nombres}"
+                            width="100%"
+                            textAlign="Center"
+                        />
+                        <t:template>
+                            <Text
+                                text="{oDataUsuarios>Nombre} {oDataUsuarios>Apepat} {oDataUsuarios>Apemat}"
+                                wrapping="true"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="10rem"
+                        showSortMenuEntry="true"
+                        sortProperty="User"
+                        filterProperty="Usuario"
+                    >
+                        <!-- <Label text="{i18n>Usuario}" /> -->
+                        <Text
+                            text="{i18n>Usuario}"
+                            width="100%"
+                            textAlign="Center"
+                        />
+                        <t:template>
+                            <Text
+                                text="{oDataUsuarios>Usuario}"
+                                wrapping="true"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="12rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Rol"
+                    >
+                        <!-- <Label text="{i18n>Rol}" /> -->
+                        <Text
+                            text="{i18n>Rol}"
+                            width="100%"
+                            textAlign="Center"
+                        />
+                        <t:template>
+                            <Text
+                                text="{oDataUsuarios>Rol}"
+                                wrapping="true"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="15rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Correo"
+                    >
+                        <!-- <Label text="{i18n>Correo}" /> -->
+                        <Text
+                            text="{i18n>Correo}"
+                            width="100%"
+                            textAlign="Center"
+                        />
+                        <t:template>
+                            <Text
+                                text="{oDataUsuarios>Correo}"
+                                wrapping="true"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="6rem"
+                        hAlign="Center"
+                        showSortMenuEntry="true"
+                        sortProperty="Estado"
+                    >
+                        <Label text="{i18n>Estado}" />
+                        <t:template>
+                            <Switch
+                                type="AcceptReject"
+                                state="{oDataUsuarios>Estado}"
+                                change=".onSwitchEstado"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="8rem"
+                        hAlign="Center"
+                        showSortMenuEntry="true"
+                        sortProperty="CreateAt"
+                    >
+                        <Label text="{i18n>Accion}" />
+                        <t:template>
+                            <HBox justifyContent="Center">
+                                <items>
+                                    <Button
+                                        type="Transparent"
+                                        icon="sap-icon://edit"
+                                        tooltip="{i18n>EditarUsuario}"
+                                        press=".onEditarUsuario"
+                                    />
+                                    <Button
+                                        type="Transparent"
+                                        icon="sap-icon://delete"
+                                        tooltip="{i18n>EliminarUsu}"
+                                        press=".onEliminarUsuario"
+                                    />
+                                </items>
+                            </HBox>
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+            <l:Grid class="sapUiTinyMarginTop">
+                <l:content>
+                    <HBox>
+                        <Button
+                            type="Emphasized"
+                            icon="sap-icon://close-command-field"
+                            press="onFirstPress"
+                            enabled="{local>/page/PrevPageBtn}"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <Button
+                            type="Emphasized"
+                            icon="sap-icon://navigation-left-arrow"
+                            press="onPreviousPress"
+                            enabled="{local>/page/PrevPageBtn}"
+                        />
+                        <Text
+                            text="{i18n>Pagina} {local>/page/Page} de {local>/page/TotalPages}"
+                            textAlign="Center"
+                            width="120px"
+                            class="sapUiTinyMargin"
+                        />
+                        <Button
+                            type="Emphasized"
+                            icon="sap-icon://navigation-right-arrow"
+                            press="onNextPress"
+                            enabled="{local>/page/NextPageBtn}"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <Button
+                            type="Emphasized"
+                            icon="sap-icon://open-command-field"
+                            press="onLastPress"
+                            enabled="{local>/page/NextPageBtn}"
+                        />
+                    </HBox>
+                </l:content>
+            </l:Grid>
+        </content>
+    </Panel>
+    
+    <!-- MOBILE -->
+    <Panel
+        accessibleRole="Region"
+        headerText="{i18n>HeaderAD01}"
+        class="custBackgroundColor"
+        visible="{=${local>/IsMobile}}"
+    >
+        <content>
+            <VBox class="sapUiTinyMarginBottom">
+                <f:Form editable="true">
+                    <f:layout>
+                        <f:ColumnLayout
+                            columnsM="2"
+                            columnsL="2"
+                            columnsXL="4"
+                        />
+                    </f:layout>
+                    <f:formContainers>
+                        <f:FormContainer>
+                            <f:formElements>
+                                <f:FormElement label="{i18n>Buscar}">
+                                    <f:fields>
+                                        <Input
+                                            value="{local>/Buscar}"
+                                            liveChange="onBuscar"
+                                            placeholder="{i18n>MsgBusquedaUsuario}"
+                                            showClearIcon="true"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement>
+                                    <f:fields>
+                                        <Button
+                                            type="Success"
+                                            icon="sap-icon://add"
+                                            text="{i18n>NuevoUsuario}"
+                                            tooltip="{i18n>NuevoUsuario}"
+                                            press=".onCrearUsuario"
+                                            class="sapUiTinyMarginEnd"
+                                        />
+                                        <Button
+                                            type="Default"
+                                            icon="sap-icon://refresh"
+                                            tooltip="{i18n>Refrescar}"
+                                            press=".onRefreshTable"
+                                            class="sapUiTinyMarginEnd btnRefreshUser btnIconLaunchpad borderBtnRefresh"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                            </f:formElements>
+                        </f:FormContainer>
+                    </f:formContainers>
+                </f:Form>
+            </VBox>
+            <t:Table
+                rowActionCount="1"
+                rows="{oDataUsuarios>/}"
+                selectionMode="None"
+                enableBusyIndicator="true"
+                busy="{local>/loadingTbl}"
+                class="sapUiResponsiveMarginTop sapUiResponsiveMarginBottom"
+            >
+                <t:columns>
+                    <t:Column
+                        width="4rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Id"
+                    >
+                        <!-- <Label text="{i18n>Id}" /> -->
+                        <Text
+                            text="{i18n>Id}"
+                            width="100%"
+                            textAlign="Center"
+                        />
+                        <t:template>
+                            <Text
+                                text="{oDataUsuarios>Id}"
+                                wrapping="true"
+                                width="100%"
+                                textAlign="Center"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="16rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Nombre"
+                        filterProperty="Nombre"
+                    >
+                        <!-- <Label text="{i18n>Nombres}" /> -->
+                        <Text
+                            text="{i18n>Nombres}"
+                            width="100%"
+                            textAlign="Center"
+                        />
+                        <t:template>
+                            <Text
+                                text="{oDataUsuarios>Nombre} {oDataUsuarios>Apepat} {oDataUsuarios>Apemat}"
+                                wrapping="true"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="10rem"
+                        showSortMenuEntry="true"
+                        sortProperty="User"
+                        filterProperty="Usuario"
+                    >
+                        <!-- <Label text="{i18n>Usuario}" /> -->
+                        <Text
+                            text="{i18n>Usuario}"
+                            width="100%"
+                            textAlign="Center"
+                        />
+                        <t:template>
+                            <Text
+                                text="{oDataUsuarios>Usuario}"
+                                wrapping="true"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="12rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Rol"
+                    >
+                        <!-- <Label text="{i18n>Rol}" /> -->
+                        <Text
+                            text="{i18n>Rol}"
+                            width="100%"
+                            textAlign="Center"
+                        />
+                        <t:template>
+                            <Text
+                                text="{oDataUsuarios>Rol}"
+                                wrapping="true"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="15rem"
+                        showSortMenuEntry="true"
+                        sortProperty="Correo"
+                    >
+                        <!-- <Label text="{i18n>Correo}" /> -->
+                        <Text
+                            text="{i18n>Correo}"
+                            width="100%"
+                            textAlign="Center"
+                        />
+                        <t:template>
+                            <Text
+                                text="{oDataUsuarios>Correo}"
+                                wrapping="true"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="6rem"
+                        hAlign="Center"
+                        showSortMenuEntry="true"
+                        sortProperty="Estado"
+                    >
+                        <Label text="{i18n>Estado}" />
+                        <t:template>
+                            <Switch
+                                type="AcceptReject"
+                                state="{oDataUsuarios>Estado}"
+                                change=".onSwitchEstado"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="8rem"
+                        hAlign="Center"
+                        showSortMenuEntry="true"
+                        sortProperty="CreateAt"
+                    >
+                        <Label text="{i18n>Accion}" />
+                        <t:template>
+                            <HBox justifyContent="Center">
+                                <items>
+                                    <Button
+                                        type="Transparent"
+                                        icon="sap-icon://edit"
+                                        tooltip="{i18n>EditarUsuario}"
+                                        press=".onEditarUsuario"
+                                    />
+                                    <Button
+                                        type="Transparent"
+                                        icon="sap-icon://delete"
+                                        tooltip="{i18n>EliminarUsu}"
+                                        press=".onEliminarUsuario"
+                                    />
+                                </items>
+                            </HBox>
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+            <l:Grid class="sapUiTinyMarginTop">
+                <l:content>
+                    <HBox>
+                        <Button
+                            type="Emphasized"
+                            icon="sap-icon://close-command-field"
+                            press="onFirstPress"
+                            enabled="{local>/page/PrevPageBtn}"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <Button
+                            type="Emphasized"
+                            icon="sap-icon://navigation-left-arrow"
+                            press="onPreviousPress"
+                            enabled="{local>/page/PrevPageBtn}"
+                        />
+                        <Text
+                            text="{i18n>Pagina} {local>/page/Page} de {local>/page/TotalPages}"
+                            textAlign="Center"
+                            width="120px"
+                            class="sapUiTinyMargin"
+                        />
+                        <Button
+                            type="Emphasized"
+                            icon="sap-icon://navigation-right-arrow"
+                            press="onNextPress"
+                            enabled="{local>/page/NextPageBtn}"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <Button
+                            type="Emphasized"
+                            icon="sap-icon://open-command-field"
+                            press="onLastPress"
+                            enabled="{local>/page/NextPageBtn}"
+                        />
+                    </HBox>
+                </l:content>
+            </l:Grid>
+        </content>
+    </Panel>
+</mvc:View>

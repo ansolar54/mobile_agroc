@@ -1,0 +1,21 @@
+<core:FragmentDefinition
+    xmlns="sap.ui.comp.valuehelpdialog"
+    xmlns:m="sap.m"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+>
+    <ValueHelpDialog
+        id="dialogMultiOfiVentasCO"
+        title="{i18n>OfiVentas1}"
+        ok=".onOkPress($event, 'dialogMultiOfiVentasCO')"
+        cancel=".onCancelPress($event, 'dialogMultiOfiVentasCO')"
+        afterClose=".onAfterClose($event, 'dialogMultiOfiVentasCO')"
+        supportRanges="true"
+        supportRangesOnly="true"
+        key="Vkbur"
+        descriptionKey="Denominacion"
+        draggable="true"
+    />
+</core:FragmentDefinition>

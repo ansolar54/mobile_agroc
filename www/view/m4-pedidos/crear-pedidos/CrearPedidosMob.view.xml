@@ -1,0 +1,839 @@
+<mvc:View
+    controllerName="com.axelera.pe.gestioncomercial.controller.m4-pedidos.CrearPedidosMob"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:t="sap.ui.table"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+>
+    <Panel
+        accessibleRole="Region"
+        headerText="{i18n>HeaderGP01}"
+        class="custBackgroundColor"
+    >
+        <content>
+            <VBox>
+                <l:VerticalLayout
+                    id="panelMsgStripCPMob"
+                    visible="{local>/visible/Panel}"
+                    class="sapUiResponsiveMargin sapUiNoMarginTop sapUiNoMarginBegin"
+                />
+                <f:Form editable="true">
+                    <!-- <f:title>
+                        <core:Title text="{i18n>HeaderGP01}" />
+                    </f:title> -->
+                    <f:layout>
+                        <f:ColumnLayout
+                            columnsM="2"
+                            columnsL="2"
+                            columnsXL="4"
+                        />
+                    </f:layout>
+                    <f:formContainers>
+                        <!-- CONTAINER 1 -->
+                        <f:FormContainer>
+                            <f:formElements>
+                                <!-- ORG.VENTAS -->
+                                <f:FormElement label="{i18n>OrgVentas}">
+                                    <Input
+                                        id="txtOrgVentasCPMob"
+                                        value="{local>/OrgVentas}"
+                                        liveChange="onChange($event, 'OrgVentas')"
+                                        submit="onPress($event, 'OrgVentas')"
+                                        change=".onEvaluarPos"
+                                        showClearIcon="true"
+                                        showValueHelp="true"
+                                        valueHelpRequest=".onMatchcodeOrgVentas"
+                                        showSuggestion="true"
+                                        suggestionItems="{oDataMCOrgVentas>/results}"
+                                        suggestionItemSelected="onSuggeItemSelected($event, 'ORGVENTAS')"
+                                        maxSuggestionWidth="350px"
+                                        valueStateText="{i18n>ValorInvalido}"
+                                        startSuggestion="0"
+                                        maxLength="4"
+                                    >
+                                        <suggestionItems>
+                                            <core:ListItem
+                                                key="{oDataMCOrgVentas>Vkorg}|{oDataMCOrgVentas>Spart}"
+                                                text="{oDataMCOrgVentas>Vkorg}"
+                                                additionalText="{oDataMCOrgVentas>Vtext} - {oDataMCOrgVentas>Spart}"
+                                            />
+                                        </suggestionItems>
+                                    </Input>
+                                    <Text
+                                        id="txtOrgVentasCPInfoMob"
+                                        text="{local>/OrgVentasInfo}"
+                                        wrapping="false"
+                                    />
+                                </f:FormElement>
+                                <!-- SOLICITANTE -->
+                                <f:FormElement label="{i18n>Solicitante}">
+                                    <Input
+                                        id="txtSolicitanteCPMob"
+                                        value="{local>/Solicitante}"
+                                        submit="onPress($event, 'Solicitante')"
+                                        change=".onEvaluarPos"
+                                        showValueHelp="true"
+                                        valueHelpRequest=".onMatchcodeSolicitante"
+                                        valueStateText="{i18n>ValorInvalido}"
+                                    />
+                                    <Text
+                                        id="txtSolicCPInfoMob"
+                                        text="{local>/SolicInfo}"
+                                        wrapping="false"
+                                    />
+                                </f:FormElement>
+                                <!-- DEST. MERCANCIA -->
+                                <f:FormElement label="{i18n>DestMercancia}">
+                                    <Input
+                                        id="txtDestMercCPMob"
+                                        value="{local>/DestMerc}"
+                                        submit="onPress($event, 'DestMerc')"
+                                        change=".onEvaluarPos"
+                                        showValueHelp="true"
+                                        valueHelpRequest=".onMatchcodeDestMerc"
+                                        showSuggestion="true"
+                                        suggest="onSuggest($event, 'DESTMERCANCIA')"
+                                        suggestionItems="{oDataMCDestMerc>/creapedi_destinatarios_nav/results}"
+                                        suggestionItemSelected="onSuggeItemSelected($event, 'DESTMERCANCIA')"
+                                        maxSuggestionWidth="500px"
+                                        startSuggestion="0"
+                                        valueStateText="{i18n>ValorInvalido}"
+                                        editable="{local>/editable/DestMerc}"
+                                    >
+                                        <suggestionItems>
+                                            <core:ListItem
+                                                key="{oDataMCDestMerc>Kunnr}"
+                                                text="{oDataMCDestMerc>Kunnr}"
+                                                additionalText="{oDataMCDestMerc>Name1}"
+                                            />
+                                        </suggestionItems>
+                                    </Input>
+                                    <Text
+                                        id="txtDestMercCPInfoMob"
+                                        text="{local>/DestMercInfo}"
+                                        wrapping="false"
+                                    />
+                                </f:FormElement>
+                                <!-- NRO. PEDIDO CLIENTE -->
+                                <f:FormElement label="{i18n>OCCliente}">
+                                    <Input
+                                        id="txtNroPedClienteCPMob"
+                                        value="{local>/NroPedCliente}"
+                                        editable="{local>/editable/NroPedCliente}"
+                                    />
+                                </f:FormElement>
+                                <!-- TRANSPORTISTA -->
+                                <f:FormElement label="{i18n>Transportista}">
+                                    <Input
+                                        id="txtTranspCPMob"
+                                        value="{local>/Transportista}"
+                                        submit="onPress($event, 'Transportista')"
+                                        showValueHelp="true"
+                                        valueHelpRequest=".onMatchcodeTransportista"
+                                        showSuggestion="true"
+                                        suggest="onSuggest($event, 'TRANSPORTISTA')"
+                                        suggestionItems="{oDataMCTransportista>/creapedi_transportistas_nav/results}"
+                                        suggestionItemSelected="onSuggeItemSelected($event, 'TRANSPORTISTA')"
+                                        maxSuggestionWidth="500px"
+                                        startSuggestion="0"
+                                        valueStateText="{i18n>ValorInvalido}"
+                                        editable="{local>/editable/Transp}"
+                                    >
+                                        <suggestionItems>
+                                            <core:ListItem
+                                                key="{oDataMCTransportista>Lifnr}"
+                                                text="{oDataMCTransportista>Lifnr}"
+                                                additionalText="{oDataMCTransportista>Name1}"
+                                            />
+                                        </suggestionItems>
+                                    </Input>
+                                    <Text
+                                        id="txtTranspCPInfoMob"
+                                        text="{local>/TranspInfo}"
+                                        wrapping="false"
+                                    />
+                                </f:FormElement>
+                                <!-- OBS GUIA -->
+                                <f:FormElement label="{i18n>ObservGuia}">
+                                    <Input
+                                        id="txtObsGuiaCPMob"
+                                        value="{local>/ObsGuia}"
+                                        editable="{local>/editable/ObsGuia}"
+                                    />
+                                </f:FormElement>
+                                <!-- OBS FACTURA -->
+                                <f:FormElement label="{i18n>ObservFactura}">
+                                    <Input
+                                        id="txtObsFacturaCPMob"
+                                        value="{local>/ObsFactura}"
+                                        editable="false"
+                                    />
+                                </f:FormElement>
+                                <!-- COND. PAGO -->
+                                <f:FormElement label="{i18n>CondPago}">
+                                    <Input
+                                        id="txtCondPagoCPMob"
+                                        value="{local>/CondPago}"
+                                        editable="false"
+                                    />
+                                    <Button
+                                        icon="sap-icon://value-help"
+                                        press=".onMatchcodeCondPago"
+                                        class="btnRefreshUser btnIconLaunchpad borderBtnRefresh"
+                                    />
+                                    <Text
+                                        id="txtCondPagoCPInfoMob"
+                                        text="{local>/CondPagoInfo}"
+                                        wrapping="false"
+                                    />
+                                </f:FormElement>
+                            </f:formElements>
+                        </f:FormContainer>
+                        <!-- CONTAINER 2 -->
+                        <f:FormContainer
+                            title="{i18n>Informacion}"
+                            expandable="true"
+                            expanded="false"
+                        >
+                            <f:formElements>
+                                <!-- CANAL DISTRIB. -->
+                                <f:FormElement label="{i18n>CanalDistrib}">
+                                    <Input
+                                        id="txtCanalDistCPMob"
+                                        value="{local>/CanalDist}"
+                                        editable="false"
+                                    />
+                                    <Text
+                                        id="txtCanalDistCPInfoMob"
+                                        text="{local>/CanalDistInfo}"
+                                        wrapping="false"
+                                    />
+                                </f:FormElement>
+                                <!-- SECTOR -->
+                                <f:FormElement label="{i18n>Sector}">
+                                    <Input
+                                        value="{local>/Sector}"
+                                        editable="false"
+                                    />
+                                    <Text
+                                        text="{local>/SectorInfo}"
+                                        wrapping="false"
+                                    />
+                                </f:FormElement>
+                                <!-- OFICINA -->
+                                <f:FormElement label="{i18n>Oficina}">
+                                    <Input
+                                        value="{local>/OfiVentasInfo}"
+                                        tooltip="{local>/OfiVentasInfo}"
+                                        editable="false"
+                                    />
+                                </f:FormElement>
+                                <!-- GRUPO VEND. -->
+                                <f:FormElement label="{i18n>GpoVend}">
+                                    <Input
+                                        value="{local>/GrupoVendInfo}"
+                                        tooltip="{local>/GrupoVendInfo}"
+                                        editable="false"
+                                    />
+                                </f:FormElement>
+                                <!-- COMERCIAL -->
+                                <f:FormElement label="{i18n>Comercial}">
+                                    <Input
+                                        value="{local>/Comercial}"
+                                        tooltip="{local>/Comercial}"
+                                        editable="false"
+                                    />
+                                </f:FormElement>
+                                <!-- LISTA DE PRECIOS -->
+                                <f:FormElement label="{i18n>ListaPrecios}">
+                                    <Input
+                                        value="{local>/ListaPreciosInfo}"
+                                        tooltip="{local>/ListaPreciosInfo}"
+                                        editable="false"
+                                    />
+                                </f:FormElement>
+                                <!-- MONEDA -->
+                                <f:FormElement label="{i18n>Moneda}">
+                                    <RadioButtonGroup
+                                        id="rbtnMonedaCPMob"
+                                        valueState="Information"
+                                        columns="2"
+                                        editable="false"
+                                    >
+                                        <RadioButton text="{i18n>Soles}" />
+                                        <RadioButton text="{i18n>Dolares}" />
+                                    </RadioButtonGroup>
+                                </f:FormElement>
+                                <!-- CLASE DOC. -->
+                                <f:FormElement label="{i18n>ClaseDoc}">
+                                    <RadioButtonGroup
+                                        id="rbtnClaseDocCPMob"
+                                        valueState="Information"
+                                        columns="2"
+                                        editable="false"
+                                    >
+                                        <RadioButton 
+                                            text="{i18n>Boleta}"
+                                            visible="{= ${local>/Sociedad} === '1000' ? true : false }"
+                                        />
+                                        <RadioButton text="{i18n>Factura}" />
+                                    </RadioButtonGroup>
+                                </f:FormElement>
+                                <!-- CHECK ASUME FLETE -->
+                                <f:FormElement>
+                                    <CheckBox
+                                        id="chkFleteCPMob"
+                                        text="{local>/LblAsumeFlete}"
+                                        editable="false"
+                                    />
+                                </f:FormElement>
+                                <!-- COND. PAGO -->
+                                <!-- <f:FormElement label="{i18n>CondPago}">
+                            <Input
+                                id="txtCondPagoCPMob"
+                                value="{local>/CondPago}"
+                                editable="false"
+                            />
+                            <Button
+                                icon="sap-icon://value-help"
+                                press=".onMatchcodeCondPago"
+                            />
+                            <Text
+                                id="txtCondPagoCPInfoMob"
+                                text="{local>/CondPagoInfo}"
+                                wrapping="false"
+                            />
+                        </f:FormElement> -->
+                                <!-- CALCULAR PLAZO -->
+                                <!-- <f:FormElement>
+                            <Button
+                                type="Success"
+                                icon="sap-icon://simulate"
+                                text="{i18n>CalcularPlazo}"
+                                press="onCalcularPlazo"
+                                width="12rem"
+                            />
+                        </f:FormElement> -->
+                            </f:formElements>
+                        </f:FormContainer>
+                        <!-- BOTONES -->
+                        <f:FormContainer>
+                            <!-- CALCULAR PLAZO -->
+                            <f:FormElement>
+                                <Button
+                                    type="Success"
+                                    icon="sap-icon://simulate"
+                                    text="{i18n>CalcularPlazo}"
+                                    press="onCalcularPlazo"
+                                />
+                            </f:FormElement>
+                            <f:FormElement>
+                                <Button
+                                    type="Success"
+                                    icon="sap-icon://clear-all"
+                                    text="{i18n>Limpiar}"
+                                    press="onLimpiarCampos"
+                                />
+                                <Button
+                                    id="btnCrearPedidoMob"
+                                    type="Success"
+                                    icon="sap-icon://create"
+                                    text="{i18n>CrearPedido}"
+                                    press="onCrearPedido"
+                                />
+                            </f:FormElement>
+                            <f:FormElement>
+                                <Button
+                                    id="btnBorrarProdCPMob"
+                                    type="Success"
+                                    icon="sap-icon://sys-minus"
+                                    text="{i18n>BorrarProd}"
+                                    press="onPressBorrarProducto"
+                                />
+                            </f:FormElement>
+                        </f:FormContainer>
+                    </f:formContainers>
+                </f:Form>
+                <!-- TABLA -->
+                <t:Table
+                    id="tblCrearPedidosMob"
+                    rowActionCount="1"
+                    rows="{local>/PosPedidos/Tabla}"
+                    selectionMode="Single"
+                    enableBusyIndicator="true"
+                    showNoData="false"
+                    rowSelectionChange="onRowSelectionChange"
+                    class="sapUiTinyMarginTop sapUiTinyMarginBottom"
+                >
+                    <t:columns>
+                        <t:Column
+                            width="4rem"
+                            visible="false"
+                        >
+                            <Label text="{i18n>Pos}" />
+                            <t:template>
+                                <Input
+                                    value=""
+                                    editable="false"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <!-- CENTRO -->
+                        <t:Column width="6rem">
+                            <!-- <Label text="{i18n>Centro}" /> -->
+                            <Text
+                                text="{i18n>Centro}"
+                                width="100%"
+                                textAlign="Center"
+                            />
+                            <t:template>
+                                <ComboBox
+                                    id="cboCentroCPMob"
+                                    selectedKey="{local>Werks}"
+                                    selectionChange="onChangeCentro"
+                                    items="{
+                                    path: 'local>Centros',
+                                    sorter: { path: 'centro' }
+                                }"
+                                    enabled="{local>itemActive}"
+                                >
+                                    <core:Item
+                                        key="{local>centro}"
+                                        text="{local>centro}"
+                                    />
+                                </ComboBox>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="5rem"
+                            visible="false"
+                        >
+                            <!-- <Label text="{i18n>Centro}" /> -->
+                            <Text
+                                text="{i18n>Centro}"
+                                width="100%"
+                                textAlign="Center"
+                            />
+                            <t:template>
+                                <Input
+                                    value="{local>Werks}"
+                                    submit="onPressCantidad"
+                                    maxLength="4"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <!-- ALMACEN -->
+                        <t:Column width="5rem">
+                            <!-- <Label text="{i18n>Almacen}" /> -->
+                            <Text
+                                text="{i18n>Almacen}"
+                                width="100%"
+                                textAlign="Center"
+                            />
+                            <t:template>
+                                <Input
+                                    value="{local>Lgort}"
+                                    maxLength="4"
+                                    enabled="{local>itemActive}"
+                                    textAlign="Center"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <!-- MATERIAL -->
+                        <t:Column width="10rem">
+                            <!-- <Label text="{i18n>Material}" /> -->
+                            <Text
+                                text="{i18n>Material}"
+                                width="100%"
+                                textAlign="Center"
+                            />
+                            <t:template>
+                                <Input
+                                    id="txtItemMaterialCPMob"
+                                    value="{local>Matnr}"
+                                    showValueHelp="true"
+                                    valueHelpRequest=".onMatchcodeMaterial"
+                                    submit="onPressMaterial"
+                                    change="onPressMaterial"
+                                    enabled="{local>itemActive}"
+                                    editable="{local>PosBonif}"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <!-- DENOMINACION -->
+                        <t:Column width="25rem">
+                            <!-- <Label text="{i18n>Denominacion}" /> -->
+                            <Text
+                                text="{i18n>Denominacion}"
+                                width="100%"
+                                textAlign="Center"
+                            />
+                            <t:template>
+                                <Input
+                                    value="{local>Maktx}"
+                                    enabled="{local>itemActive}"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <!-- STOCK DISP. -->
+                        <t:Column width="7rem">
+                            <!-- <Label text="{i18n>StockDisp}" /> -->
+                            <Text
+                                text="{i18n>StockDisp}"
+                                width="100%"
+                                textAlign="Center"
+                            />
+                            <t:template>
+                                <Text
+                                    text="{
+                                    path: 'local>Labst',
+                                    type: 'sap.ui.model.type.Float',
+                                    formatOptions: {
+                                        minFractionDigits: 2,
+                                        maxFractionDigits: 2,
+                                        groupingSeparator: ',',
+                                        decimalSeparator: '.',
+                                        groupingEnabled: true
+                                    },
+                                    constraints: {
+                                        precision: 11,
+                                        scale: 2
+                                    }
+                                }"
+                                    width="100%"
+                                    textAlign="End"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <!-- UM -->
+                        <t:Column width="4rem">
+                            <!-- <Label text="{i18n>UM}" /> -->
+                            <Text
+                                text="{i18n>UM}"
+                                width="100%"
+                                textAlign="Center"
+                            />
+                            <t:template>
+                                <Input
+                                    value="{local>Vrkme}"
+                                    enabled="{local>itemActive}"
+                                    textAlign="Center"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <!-- CANTIDAD -->
+                        <t:Column width="6rem">
+                            <!-- <Label text="{i18n>Cantidad}" /> -->
+                            <Text
+                                text="{i18n>Cantidad}"
+                                width="100%"
+                                textAlign="Center"
+                            />
+                            <t:template>
+                                <Input
+                                    value="{local>Zmeng}"
+                                    liveChange="onLiveChange($event,'ZMENG')"
+                                    submit="onPressCantidad($event,'ZMENG')"
+                                    change="onPressCantidad($event,'ZMENG')"
+                                    enabled="{local>itemActive1}"
+                                    editable="{local>PosBonif}"
+                                    textAlign="End"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <!-- PRECIO LISTA -->
+                        <t:Column width="6rem">
+                            <!-- <Label text="{i18n>PrecioLista}" /> -->
+                            <Text
+                                text="{i18n>PrecioLista}"
+                                width="100%"
+                                textAlign="Center"
+                            />
+                            <t:template>
+                                <Text
+                                    text="{
+                                    path: 'local>Precio',
+                                    type: 'sap.ui.model.type.Float',
+                                    formatOptions: {
+                                        minFractionDigits: 2,
+                                        maxFractionDigits: 2,
+                                        groupingSeparator: ',',
+                                        decimalSeparator: '.',
+                                        groupingEnabled: true
+                                    },
+                                    constraints: {
+                                        precision: 11,
+                                        scale: 2
+                                    }
+                                }"
+                                    width="100%"
+                                    textAlign="End"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <!-- % DESCUENTO -->
+                        <!-- <t:Column
+                        width="6rem"
+                        hAlign="End"
+                    >
+                        <Label text="{i18n>DescPorc}" />
+                        <t:template>
+                            <Text
+                                text="{
+                                    path: 'local>Desc',
+                                    type: 'sap.ui.model.type.Float',
+                                    formatOptions: {
+                                        minFractionDigits: 2,
+                                        maxFractionDigits: 2,
+                                        groupingSeparator: ',',
+                                        decimalSeparator: '.',
+                                        groupingEnabled: true
+                                    },
+                                    constraints: {
+                                        precision: 11,
+                                        scale: 2
+                                    }
+                                }"
+                            />
+                        </t:template>
+                    </t:Column> -->
+                        <!-- PRECIO CON DESCUENTO -->
+                        <t:Column width="6rem">
+                            <!-- <Label text="{i18n>PrecioDesc}" /> -->
+                            <!-- <Label text="{i18n>PrecioFinal}" /> -->
+                            <Text
+                                text="{i18n>PrecioFinal}"
+                                width="100%"
+                                textAlign="Center"
+                            />
+                            <t:template>
+                                <Input
+                                    value="{
+                                    path: 'local>PrecioDesc',
+                                    type: 'sap.ui.model.type.Float',
+                                    formatOptions: {
+                                        minFractionDigits: 2,
+                                        maxFractionDigits: 2,
+                                        groupingSeparator: ',',
+                                        decimalSeparator: '.',
+                                        groupingEnabled: true
+                                    },
+                                    constraints: {
+                                        precision: 11,
+                                        scale: 2
+                                    }
+                                }"
+                                    liveChange="onLiveChange($event,'PRECFIN')"
+                                    submit="onPressCantidad($event,'PRECFIN')"
+                                    change="onPressCantidad($event,'PRECFIN')"
+                                    textAlign="End"
+                                    enabled="{local>itemActive2}"
+                                    editable="{local>PosBonif}"
+                                />
+                                <!-- <Input
+                                value="{
+                                    path: 'local>PrecioDesc',
+                                    type: 'sap.ui.model.type.Float',
+                                    formatOptions: {
+                                        minFractionDigits: 2,
+                                        maxFractionDigits: 2,
+                                        groupingSeparator: ',',
+                                        decimalSeparator: '.',
+                                        groupingEnabled: true
+                                    },
+                                    constraints: {
+                                        precision: 11,
+                                        scale: 2
+                                    }
+                                }"
+                                liveChange="onLiveChange($event,'PRECFIN')"
+                                submit="onPressCantidad"
+                                textAlign="End"
+                                enabled="{local>itemActive2}"
+                                editable="{local>PosBonif}"
+                            /> -->
+                            </t:template>
+                        </t:Column>
+                        <!-- <t:Column>
+                        <Label text="{i18n>PrecioMin}" />
+                        <t:template>
+                            <Input value="{local>PrecioMin}" type="Number" />
+                        </t:template>
+                    </t:Column> -->
+                        <!-- <t:Column
+                        width="5rem"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>Flete}" />
+                        <t:template>
+                            <Input
+                                value="{
+                                    path: 'local>Flete',
+                                    type: 'sap.ui.model.type.Float',
+                                    formatOptions: {
+                                        minFractionDigits: 2,
+                                        maxFractionDigits: 2,
+                                        groupingSeparator: ',',
+                                        decimalSeparator: '.',
+                                        groupingEnabled: true
+                                    },
+                                    constraints: {
+                                        precision: 11,
+                                        scale: 2
+                                    }
+                                }"
+                                textAlign="End"
+                                editable="{local>PosBonif}"
+                            />
+                        </t:template>
+                    </t:Column> -->
+                        <!-- SUB TOTAL -->
+                        <t:Column width="6rem">
+                            <!-- <Label text="{i18n>SubTotal}" /> -->
+                            <Text
+                                text="{i18n>SubTotal}"
+                                width="100%"
+                                textAlign="Center"
+                            />
+                            <t:template>
+                                <Text
+                                    text="{
+                                    path: 'local>Subtotal',
+                                    type: 'sap.ui.model.type.Float',
+                                    formatOptions: {
+                                        minFractionDigits: 2,
+                                        maxFractionDigits: 2,
+                                        groupingSeparator: ',',
+                                        decimalSeparator: '.',
+                                        groupingEnabled: true
+                                    },
+                                    constraints: {
+                                        precision: 11,
+                                        scale: 2
+                                    }
+                                }"
+                                    width="100%"
+                                    textAlign="End"
+                                />
+                            </t:template>
+                        </t:Column>
+                    </t:columns>
+                </t:Table>
+                <!-- TOTALES -->
+                <l:Grid class="sapUiTinyMarginTop">
+                    <l:content>
+                        <HBox justifyContent="Center">
+                            <layoutData>
+                                <l:GridData span="XL6 L6 M12 S12" />
+                            </layoutData>
+                        </HBox>
+                        <HBox justifyContent="Center">
+                            <VBox>
+                                <HBox>
+                                    <Label
+                                        text="{i18n>SubTotal}:"
+                                        textAlign="End"
+                                        width="110px"
+                                        class="sapUiTinyMargin"
+                                    />
+                                    <Input
+                                        value="{
+                                        path: 'local>/Footer/SubTotal',
+                                        type: 'sap.ui.model.type.Float',
+                                        formatOptions: {
+                                            minFractionDigits: 2,
+                                            maxFractionDigits: 2,
+                                            groupingSeparator: ',',
+                                            decimalSeparator: '.',
+                                            groupingEnabled: true
+                                        },
+                                        constraints: {
+                                            precision: 11,
+                                            scale: 2
+                                        }
+                                    }"
+                                        textAlign="End"
+                                        editable="false"
+                                    />
+                                    <layoutData>
+                                        <l:GridData span="XL6 L6 M12 S12" />
+                                    </layoutData>
+                                </HBox>
+                                <HBox>
+                                    <Label
+                                        text="{i18n>IGV1}:"
+                                        textAlign="End"
+                                        width="110px"
+                                        class="sapUiTinyMargin"
+                                    />
+                                    <Input
+                                        value="{
+                                        path: 'local>/Footer/IGV',
+                                        type: 'sap.ui.model.type.Float',
+                                        formatOptions: {
+                                            minFractionDigits: 2,
+                                            maxFractionDigits: 2,
+                                            groupingSeparator: ',',
+                                            decimalSeparator: '.',
+                                            groupingEnabled: true
+                                        },
+                                        constraints: {
+                                            precision: 11,
+                                            scale: 2
+                                        }
+                                    }"
+                                        textAlign="End"
+                                        editable="false"
+                                    />
+                                    <layoutData>
+                                        <l:GridData span="XL6 L6 M12 S12" />
+                                    </layoutData>
+                                </HBox>
+                                <HBox>
+                                    <Label
+                                        text="{i18n>Total}:"
+                                        textAlign="End"
+                                        width="110px"
+                                        class="sapUiTinyMargin"
+                                    />
+                                    <Input
+                                        value="{
+                                        path: 'local>/Footer/Total',
+                                        type: 'sap.ui.model.type.Float',
+                                        formatOptions: {
+                                            minFractionDigits: 2,
+                                            maxFractionDigits: 2,
+                                            groupingSeparator: ',',
+                                            decimalSeparator: '.',
+                                            groupingEnabled: true
+                                        },
+                                        constraints: {
+                                            precision: 11,
+                                            scale: 2
+                                        }
+                                    }"
+                                        textAlign="End"
+                                        editable="false"
+                                    />
+                                    <!-- <Text
+                                text="{local>/MonedaDesc}"
+                                class="sapUiTinyMargin"
+                            /> -->
+                                    <layoutData>
+                                        <l:GridData span="XL6 L6 M12 S12" />
+                                    </layoutData>
+                                </HBox>
+                            </VBox>
+                            <layoutData>
+                                <l:GridData span="XL6 L6 M12 S12" />
+                            </layoutData>
+                        </HBox>
+                    </l:content>
+                </l:Grid>
+            </VBox>
+        </content>
+    </Panel>
+</mvc:View>

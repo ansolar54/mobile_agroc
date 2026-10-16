@@ -1,0 +1,385 @@
+<mvc:View
+    controllerName="com.axelera.pe.gestioncomercial.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:tnt="sap.tnt"
+    xmlns:core="sap.ui.core"
+    height="100%"
+>
+    <tnt:ToolPage id="toolPage">
+        <!-- <tnt:header>
+            <tnt:ToolHeader>
+                <Title text="Gestión Comercial" class="sapUiTinyMarginBegin" />
+            </tnt:ToolHeader>
+        </tnt:header> -->
+        <tnt:header>
+            <tnt:ToolHeader>
+                <Button
+                    id="sideNavigationToggleButton"
+                    type="Transparent"
+                    icon="sap-icon://menu2"
+                    press=".onSideNavBtnPress"
+                />
+                <Text text="Bienvenido {local>/Usuario}" visible="{=!${local>/IsMobile} ? true : false}"/>
+                <ToolbarSpacer>
+                    <layoutData>
+                        <OverflowToolbarLayoutData
+                            priority="NeverOverflow"
+                            minWidth="20px"
+                        />
+                    </layoutData>
+                </ToolbarSpacer>
+                <!-- <Title text="{i18n>title}" class="sapUiTinyMarginBegin" level="H6" visible="{=!${local>/IsMobile} ? true : false}" /> -->
+                <Title text="{local>/Title}" class="sapUiTinyMarginBegin" level="H6" visible="{=!${local>/IsMobile} ? true : false}" />
+                <ToolbarSpacer>
+                    <layoutData>
+                        <OverflowToolbarLayoutData
+                            priority="NeverOverflow"
+                            minWidth="20px"
+                        />
+                    </layoutData>
+                </ToolbarSpacer>
+
+                <Switch 
+                    id="switchTheme" 
+                    state="{local>/IsLightTheme}" 
+                    customTextOn="." 
+                    customTextOff="." 
+                    change="onChangeTheme"
+                    visible="{=${local>/IsMobile} ? false : true}"
+                >
+                    <layoutData>
+                        <FlexItemData growFactor="1" />
+                    </layoutData>
+                </Switch>
+                <!-- icon="{=${local>/IsLightTheme} ? 'sap-icon://dark-mode' : 'sap-icon://light-mode'}"  -->
+                <!-- <Button 
+                    icon="sap-icon://palette" 
+                    type="Transparent"
+                    press="onChangeTheme"
+                    tooltip="{local>/MsgTheme}" 
+                    class="sapUiTinyMarginEnd"
+                    visible="{=${local>/IsMobile} ? false : true}"
+                /> -->
+                <!-- <SegmentedButton >
+                    <items>
+                        <SegmentedButtonItem icon="sap-icon://taxi" press="onChangeTheme" enabled="{=!${local>/IsLightTheme}}"  />
+                        <SegmentedButtonItem icon="sap-icon://taxi" press="onChangeTheme" enabled="{=${local>/IsLightTheme}}" />
+                    </items>
+                </SegmentedButton> -->
+
+                <!-- <Label text="{i18n>Fecha}:" visible="{=${local>/IsMobile} ? true : false}"/> -->
+                <!-- <core:Icon src="sap-icon://appointment" visible="{=!${local>/IsMobile} ? true : false}" /> -->
+                <core:Icon src="sap-icon://appointment" />
+                <Text id="txtFechaActual" text="{local>/FechaActual}" />
+                <!-- <Text
+                    id="txtFechaActual"
+                    text="{local>/FechaActual}"
+                    visible="{=!${local>/IsMobile} ? true : false}"
+                /> -->
+                <ToolbarSpacer width="10px" />
+                <!-- <Label text="{i18n>TipoCambio}:" visible="{=${local>/IsMobile} ? true : false}" /> -->
+                <!-- <core:Icon src="sap-icon://lead" visible="{=!${local>/IsMobile} ? true : false}" /> -->
+                <core:Icon src="sap-icon://lead" />
+                <Text id="txtTipoCambio" text="{local>/TipoCambio}" class="sapUiTinyMarginEnd" />
+                <ToolbarSpacer width="10px" visible="{=${local>/IsMobile} ? false : true}" />
+                <!-- <Text
+                    id="txtTipoCambio"
+                    text="{local>/TipoCambio}"
+                    visible="{=!${local>/IsMobile} ? true : false}"
+                /> -->
+                <Avatar
+                    id="myAvatar"
+                    src=""
+                    displaySize="XS"
+                    showBorder="true"
+                    class="sapUiTinyMargin"
+                    press="onPressAvatar"
+                    visible="{=${local>/IsMobile} ? true : false}"
+                />
+            </tnt:ToolHeader>
+        </tnt:header>
+        <tnt:sideContent>
+            <tnt:SideNavigation
+                id="sideNavigation"
+                expanded="true"
+                selectedKey="{/selectedKey}"
+                itemSelect=".onItemSelect"
+            >
+                <tnt:NavigationList
+                    items="{path: '/navigation', templateShareable:false}"
+                >
+                    <tnt:NavigationListItem
+                        icon="{icon}"
+                        text="{title}"
+                        items="{path: 'items', templateShareable:false}"
+                        key="{key}"
+                        enabled="{enabled}"
+                        expanded="{expanded}"
+                    >
+                        <tnt:NavigationListItem
+                            text="{title}"
+                            key="{key}"
+                            enabled="{enabled}"
+                        />
+                    </tnt:NavigationListItem>
+                </tnt:NavigationList>
+                <tnt:fixedItem>
+                    <tnt:NavigationList
+                        items="{path: '/fixedNavigation', templateShareable:false}"
+                    >
+                        <tnt:NavigationListItem
+                            icon="{icon}"
+                            key="{key}"
+                            text="{title}"
+                            href="{href}"
+                            target="_blank"
+                            visible="false"
+                        />
+                    </tnt:NavigationList>
+                </tnt:fixedItem>
+            </tnt:SideNavigation>
+        </tnt:sideContent>
+        <tnt:mainContents>
+            <NavContainer
+                id="pageContainer"
+                initialPage="Dashboard"
+                navigate="onNavigate"
+            >
+                <!-- afterNavigate="onNavFinished" -->
+                <!-- navigationFinished="onNavFinished" -->
+                <pages>
+                    <ScrollContainer
+                        id="Dashboard"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <mvc:XMLView
+                            viewName="com.axelera.pe.gestioncomercial.view.dashboard.Dashboard"
+                        />
+                    </ScrollContainer>
+                    <ScrollContainer
+                        id="AD01"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <mvc:XMLView
+                            viewName="com.axelera.pe.gestioncomercial.view.m1-admin.usuarios.Usuarios"
+                        />
+                    </ScrollContainer>
+                    <ScrollContainer
+                        id="AD02"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <mvc:XMLView
+                            viewName="com.axelera.pe.gestioncomercial.view.m1-admin.roles.Roles"
+                        />
+                    </ScrollContainer>
+                    <ScrollContainer
+                        id="AD03"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <mvc:XMLView
+                            viewName="com.axelera.pe.gestioncomercial.view.m1-admin.eventos.Eventos"
+                        />
+                    </ScrollContainer>
+                    <ScrollContainer
+                        id="AD04"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <mvc:XMLView
+                            viewName="com.axelera.pe.gestioncomercial.view.m1-admin.auditoria.Auditoria"
+                        />
+                    </ScrollContainer>
+                    <!-- <ScrollContainer
+                        id="AD05"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <mvc:XMLView
+                            viewName="com.axelera.pe.gestioncomercial.view.m1-admin.Configuracion"
+                        />
+                    </ScrollContainer> -->
+                    <!-- M2 -->
+                    <ScrollContainer
+                        id="R02"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <mvc:XMLView
+                            viewName="com.axelera.pe.gestioncomercial.view.m2-reportes.consulta-stock.ConsultaStock"
+                        />
+                    </ScrollContainer>
+                    <ScrollContainer
+                        id="R03"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <mvc:XMLView
+                            viewName="com.axelera.pe.gestioncomercial.view.m2-reportes.promociones.Promociones"
+                        />
+                    </ScrollContainer>
+                    <ScrollContainer
+                        id="R04"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <mvc:XMLView
+                            viewName="com.axelera.pe.gestioncomercial.view.m2-reportes.info-cliente.InfoCliente"
+                        />
+                    </ScrollContainer>
+                    <ScrollContainer
+                        id="R05"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <mvc:XMLView
+                            viewName="com.axelera.pe.gestioncomercial.view.m2-reportes.estado-cuenta.EstadoCuenta"
+                        />
+                    </ScrollContainer>
+                    <ScrollContainer
+                        id="R06"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <mvc:XMLView
+                            viewName="com.axelera.pe.gestioncomercial.view.m2-reportes.reporte-despacho.ReporteDespacho"
+                        />
+                    </ScrollContainer>
+                    <ScrollContainer
+                        id="R07"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <mvc:XMLView
+                            viewName="com.axelera.pe.gestioncomercial.view.m2-reportes.lista-precios.ListaPrecios"
+                        />
+                    </ScrollContainer>
+                    <ScrollContainer
+                        id="R08"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <mvc:XMLView
+                            viewName="com.axelera.pe.gestioncomercial.view.m2-reportes.prom-precio-por-vol.PromocionesPrecioPorVol"
+                        />
+                    </ScrollContainer>
+                    <!-- M3 -->
+                    <ScrollContainer
+                        id="CP01"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <mvc:XMLView
+                            viewName="com.axelera.pe.gestioncomercial.view.m3-cambio-precio.generar-solicitud.GenerarSolicitud"
+                        />
+                    </ScrollContainer>
+                    <ScrollContainer
+                        id="CP02"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <mvc:XMLView
+                            viewName="com.axelera.pe.gestioncomercial.view.m3-cambio-precio.mis-solicitudes.MisSolicitudes"
+                        />
+                    </ScrollContainer>
+                    <ScrollContainer
+                        id="CP03"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <mvc:XMLView
+                            viewName="com.axelera.pe.gestioncomercial.view.m3-cambio-precio.mis-aprobaciones.MisAprobaciones"
+                        />
+                    </ScrollContainer>
+                    <ScrollContainer
+                        id="CP04"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <mvc:XMLView
+                            viewName="com.axelera.pe.gestioncomercial.view.m3-cambio-precio.reporte-solicitud.ReporteSolicitud"
+                        />
+                    </ScrollContainer>
+                    <!-- M04 -->
+                    <ScrollContainer
+                        id="GP01"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <!-- WEB -->
+                        <mvc:XMLView visible="{=!${local>/IsMobile}}"
+                            viewName="com.axelera.pe.gestioncomercial.view.m4-pedidos.crear-pedidos.CrearPedidos"
+                        />
+                        <!-- MOBILE -->
+                        <mvc:XMLView visible="{=${local>/IsMobile}}"
+                            viewName="com.axelera.pe.gestioncomercial.view.m4-pedidos.crear-pedidos.CrearPedidosMob"
+                        />
+                    </ScrollContainer>
+                    <ScrollContainer
+                        id="GP02"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <mvc:XMLView
+                            viewName="com.axelera.pe.gestioncomercial.view.m4-pedidos.consulta-pedidos.ConsultaPedidos"
+                        />
+                    </ScrollContainer>
+                    <!-- <ScrollContainer
+                        id="GP03"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <mvc:XMLView
+                            viewName="com.axelera.pe.gestioncomercial.view.m4-pedidos.consulta-pedidos.ModificarPedido"
+                        />
+                    </ScrollContainer> -->
+                </pages>
+            </NavContainer>
+        </tnt:mainContents>
+    </tnt:ToolPage>
+</mvc:View>

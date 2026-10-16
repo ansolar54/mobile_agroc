@@ -1,0 +1,45 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <TableSelectDialog
+        noDataText="{i18n>NoDataFound}"
+        title="{i18n>ClasePed}"
+        confirm=".onConfirmPress($event, 'dialogClasePedidoCO')"
+        cancel=".onCancelPress"
+        showClearButton="false"
+        items="{
+			path : 'oDataMCClasePedido>/consulta_clasespedido_nav/results',
+			sorter : {
+				path : 'Auart',
+				descending : false
+			}
+		}"
+        contentWidth="50%"
+        contentHeight="50%"
+        draggable="true"
+    >
+        <ColumnListItem vAlign="Middle">
+            <cells>
+                <ObjectIdentifier title="{oDataMCClasePedido>Auart}" />
+                <Text text="{oDataMCClasePedido>Bezei}" class="customTextLeft" />
+            </cells>
+        </ColumnListItem>
+        <columns>
+            <Column hAlign="Center" width="12em" >
+                <header>
+                    <Text text="{i18n>ClasePed}" />
+                </header>
+            </Column>
+            <Column
+                minScreenWidth="Desktop"
+                demandPopin="true"
+                hAlign="Center"
+            >
+                <header>
+                    <Text text="{i18n>Denominacion}" />
+                </header>
+            </Column>
+        </columns>
+    </TableSelectDialog>
+</core:FragmentDefinition>
