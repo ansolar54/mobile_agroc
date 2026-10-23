@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "942095421508",
+    "project_id": "notificaciones-push-fmx-agroc",
+    "storage_bucket": "notificaciones-push-fmx-agroc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:942095421508:android:1e9326b806d10771892c11",
+        "android_client_info": {
+          "package_name": "com.reporcomer.agroc.pe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxx9sOJ3XoDEXipeLebXJg_i6WufH-FNI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

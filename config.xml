@@ -23,7 +23,7 @@
 
     <platform name="android">
         <preference name="AndroidInsecureFileModeEnabled" value="true" />
-        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/redim-farmex-splash.png" />
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/splash-agroconexion.png" />
         <preference name="AndroidWindowSplashScreenBackground" value="#FFFFFF" />
         <preference name="AndroidWindowSplashScreenDuration" value="3000" />
         <preference name="AndroidWindowSplashScreenScaleType" value="FIT_CENTER" />
@@ -36,8 +36,14 @@
             <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
             <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
         </config-file>
+
+        <!-- Icono app -->
+        <icon density="ldpi" src="res/icon/legacy-ldpi.png" foreground="res/icon/foreground-ldpi.png" background="res/icon/background-ldpi.png" />
+        <icon density="mdpi" src="res/icon/legacy-mdpi.png" foreground="res/icon/foreground-mdpi.png" background="res/icon/background-mdpi.png" />
+        <icon density="hdpi" src="res/icon/legacy-hdpi.png" foreground="res/icon/foreground-hdpi.png" background="res/icon/background-hdpi.png" />
+        <icon density="xhdpi" src="res/icon/legacy-xhdpi.png" foreground="res/icon/foreground-xhdpi.png" background="res/icon/background-xhdpi.png" />
+        <icon density="xxhdpi" src="res/icon/legacy-xxhdpi.png" foreground="res/icon/foreground-xxhdpi.png" background="res/icon/background-xxhdpi.png" />
+        <icon density="xxxhdpi" src="res/icon/legacy-xxxhdpi.png" foreground="res/icon/foreground-xxxhdpi.png" background="res/icon/background-xxxhdpi.png" />
     </platform>
 
-    <!-- <icon src="res/farmex.png" /> -->
-    <icon src="www/img/logo.png" />
 </widget>
